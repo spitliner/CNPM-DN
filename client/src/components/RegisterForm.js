@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Form from "../common/form";
 import Joi from "joi-browser";
+import Register from "../pages/Register";
 
-class RegisterForm extends Form {
+class RegisterForm extends React.Component {
   state = {
     data: { username: "", password: "" },
     errors: {},
@@ -22,13 +22,7 @@ class RegisterForm extends Form {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSumbit}>
-          {this.renderInput("email", "Email")}
-          {this.renderInput("username", "Username")}
-          {this.renderInput("password", "Password", "password")}
-          {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}
-          {this.renderButton("Register")}
-        </form>
+        <h1>Register Page</h1>
       </div>
     );
   }
