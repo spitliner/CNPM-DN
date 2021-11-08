@@ -2,16 +2,14 @@ import React, { Component } from "react";
 import RegisterForm from "../components/RegisterForm";
 
 class Register extends React.Component {
-  state = {
-    data: { username: "", password: "" },
-    errors: {},
-  };
+  state = {};
 
   render() {
+    const { registerUser } = this.props;
+
     return (
       <React.Fragment>
-        <h1>Register</h1>
-        <RegisterForm />
+        <RegisterForm onUserRegister={this.props.registerUser} />
       </React.Fragment>
     );
   }

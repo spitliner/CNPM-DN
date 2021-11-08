@@ -1,8 +1,14 @@
 import React, { Component } from "react";
+import LoginForm from "../components/LoginForm";
 
 class Login extends React.Component {
   render() {
-    return <h1>Login</h1>;
+    const { loginUser } = this.props;
+    return (
+      <React.Fragment>
+        <LoginForm onUserLogin={loginUser} />
+      </React.Fragment>
+    );
   }
 }
 

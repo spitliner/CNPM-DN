@@ -13,18 +13,17 @@ import Footer from "./components/Footer";
 
 class App extends Component {
   state = {
-    user: [],
-    product: [
-      {
-        id: 1,
-        name: "Fishball",
-        imgUrl: "",
-        price: "",
-        quantity: 0,
-      },
-      {},
-      {},
-    ],
+    user: {},
+    product: [{}, {}, {}],
+  };
+
+  loginUser = (message) => {
+    console.log(message);
+    // this.setState({ user: userInfo });
+  };
+
+  registerUser = (message) => {
+    console.log(message);
   };
 
   render = () => {
@@ -35,27 +34,33 @@ class App extends Component {
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
           <Switch>
-            <Route path="/menu/:id">
-              <MenuDetail />
-            </Route>
-            <Route path="/menu">
-              <Menu />
-            </Route>
-            <Route path="/account">
-              <AccountInfo />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/register">
-              <Register />
-            </Route>
-            <Route path="/order">
-              <Order />
-            </Route>
-            <Route path="/reservation">
-              <Reservation />
-            </Route>
+            <Route
+              path="/menu/:id"
+              render={(props) => <MenuDetail {...props} />}
+            />
+            <Route path="/menu" render={(props) => <Menu {...props} />} />
+            <Route
+              path="/account"
+              render={(props) => <AccountInfo {...props} />}
+            />
+            <Route
+              path="/login"
+              render={(props) => (
+                <Login {...props} loginUser={this.loginUser} />
+              )}
+            />
+            <Route
+              path="/register"
+              render={(props) => (
+                <Register {...props} registerUser={this.registerUser} />
+              )}
+            />
+            <Route path="/order" render={(props) => <Order {...props} />} />
+
+            <Route
+              path="/reservation"
+              render={(props) => <Reservation {...props} />}
+            />
           </Switch>
           <Footer />
         </div>

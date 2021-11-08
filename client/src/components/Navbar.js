@@ -1,46 +1,70 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Reservation from "../pages/Reservation";
+import "./Navbar.css";
 
 class Navbar extends React.Component {
   render() {
     return (
       <div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#"><i class="bi bi-cart3"></i></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <nav className="navbar py-3 navbar-expand-lg navbar-dark bg-dark">
+          <a className="navbar-brand" href="#">
+            Restaurant
+          </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
+              <li>
+                <Link className="nav-link" to="/order">
+                  <i className="bi bi-cart3"></i>
+                </Link>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+              <li>
+                <Link className="nav-link" to="/menu">
+                  Menu
+                </Link>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
+              <li>
+                <Link className="nav-link" to="/reservation">
+                  Reservation
+                </Link>
               </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
+            </ul>
+          </div>
+
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav ml-auto">
+              <li>
+                <Link className="nav-link" to="/login">
+                  Login
+                </Link>
+              </li>
+              <li>
+                <Link className="nav-link" to="/register">
+                  Register
+                </Link>
               </li>
             </ul>
           </div>
         </nav>
 
         <nav>
-          <ul>
+          {/* <ul>
             <li>
-              <Link to="/menu/1">Menu Detail</Link>
+              <Link to="/menu/1">
+                Menu Detail
+              </Link>
             </li>
             <li>
               <Link to="/menu">Menu</Link>
@@ -60,7 +84,7 @@ class Navbar extends React.Component {
             <li>
               <Link to="/reservation">Reservation</Link>
             </li>
-          </ul>
+          </ul> */}
         </nav>
       </div>
     );
