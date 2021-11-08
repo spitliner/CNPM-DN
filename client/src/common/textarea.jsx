@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import "./input.css";
+import "./textarea.css";
 
-const Input = (props) => {
+const Textarea = (props) => {
   const { name, label, error, ...rest } = props;
 
   return (
     <div className="form-group">
       {/* <label htmlFor={name}>{label}</label> */}
-      <input
+      <textarea
         id={name}
         name={name}
         {...rest}
@@ -19,4 +19,4 @@ const Input = (props) => {
   );
 };
 
-export default Input;
+export default Textarea;

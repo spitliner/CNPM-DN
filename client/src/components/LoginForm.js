@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import Form from "../common/form";
-import Joi from "joi-browser";
 import "./LoginForm.css";
+import JoiBase from "joi";
+import JoiDate from "@hapi/joi-date";
+
+const Joi = JoiBase.extend(JoiDate); // extend Joi with Joi Date
 
 class LoginForm extends Form {
   constructor(props) {
@@ -12,17 +15,19 @@ class LoginForm extends Form {
     };
   }
 
-  schema = {
-    email: Joi.string().required().email().label("Email"),
+  schema = Joi.object({
+    email: Joi.string()
+      .required()
+      .email({ tlds: { allow: false } })
+      .label("Email"),
     password: Joi.string().required().min(5).label("Password"),
-  };
+  });
 
   doSubmit = () => {
     // Call the server, axios to backend
     // success: update global account name
     this.props.onUserLogin(this.state);
     // console.log(this.state);
-    alert("Register");
   };
 
   render() {
@@ -33,7 +38,7 @@ class LoginForm extends Form {
           {this.renderInput("email", "Email")}
           {this.renderInput("password", "Password", "password")}
           {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}
-          {this.renderButton("Register")}
+          {this.renderButton("Login")}
         </form>
       </div>
     );

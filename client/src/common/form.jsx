@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import Joi from "joi-browser";
+// import Joi from "joi";
 import Input from "./input";
 import Select from "./select";
+import Textarea from "./textarea";
 
 class Form extends React.Component {
   //
@@ -21,9 +22,9 @@ class Form extends React.Component {
 
   validate = () => {
     const options = { abortEarly: false };
-    const result = Joi.validate(this.state.data, this.schema, options);
+    const result = this.schema.validate(this.state.data, options);
+    console.log("form result", result);
     const { error } = result;
-
     if (!error) return null;
     const errors = {};
     for (let item of error.details) {
@@ -35,13 +36,14 @@ class Form extends React.Component {
   // Fire when input field has value change, passed in the target input field to get name, value to validate
   validateProperty = (input) => {
     // Computed properties [run-time var] in ES6
-    const obj = { [input.name]: input.value };
-    const subSchema = { [input.name]: this.schema[input.name] };
-
-    const result = Joi.validate(obj, subSchema);
-    const { error } = result;
-
-    return error ? error.details[0].message : null;
+    // const obj = { [input.name]: input.value };
+    // console.log(obj);
+    // const subSchema = this.schema.extract(input.name);
+    // console.log(subSchema);
+    // const result = subSchema.validate(obj);
+    // console.log("field result", result);
+    // const { error } = result;
+    // return error ? error.details[0].message : null;
   };
 
   // Fire when form is submit
@@ -72,7 +74,7 @@ class Form extends React.Component {
 
   renderButton(label) {
     return (
-      <button disabled={this.validate()} className="btn-confirm">
+      <button disabled={false} className="btn-confirm">
         {label}
       </button>
     );
@@ -92,6 +94,21 @@ class Form extends React.Component {
       />
     );
   }
+
+  // renderTextarea(name, label, type = "") {
+  //   const { data, errors } = this.state;
+
+  //   return (
+  //     <Textarea
+  //       type={type}
+  //       name={name}
+  //       error={errors[name]}
+  //       value={data[name]}
+  //       label={label}
+  //       onChange={this.handleChange}
+  //     />
+  //   );
+  // }
 
   renderSelect(name, label, options) {
     const { data, errors } = this.state;

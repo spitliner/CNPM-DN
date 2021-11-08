@@ -1,8 +1,13 @@
 import React, { Component } from "react";
+import ReservationForm from "../components/ReservationForm";
 
 class Reservation extends React.Component {
   render() {
-    return <h1>Reservation</h1>;
+    return (
+      <React.Fragment>
+        <ReservationForm onReservation={this.props.onReservation} />
+      </React.Fragment>
+    );
   }
 }
 

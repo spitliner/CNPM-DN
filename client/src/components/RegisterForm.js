@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import Form from "../common/form";
-import Joi from "joi-browser";
 import "./RegisterForm.css";
+import JoiBase from "joi";
+import JoiDate from "@hapi/joi-date";
+
+const Joi = JoiBase.extend(JoiDate); // extend Joi with Joi Date
 
 class RegisterForm extends Form {
   constructor(props) {
@@ -12,21 +15,26 @@ class RegisterForm extends Form {
     };
   }
 
-  schema = {
-    email: Joi.string().required().email().label("Email"),
+  schema = Joi.object({
+    email: Joi.string()
+      .required()
+      .email({ tlds: { allow: false } })
+      .label("Email"),
     username: Joi.string().required().label("Username"),
     password: Joi.string().required().min(5).label("Password"),
     phone: Joi.string()
       .regex(/^[0-9]{10}$/)
       .required()
-      .label("Phone Number"),
+      .label("Phone Number")
+      .messages({
+        "string.pattern.base": "Phone number must be of 10 digits",
+      }),
     address: Joi.string().required().label("Address"),
-  };
+  });
 
   doSubmit = () => {
     // Call the server
     this.props.onUserRegister(this.state);
-    alert("Register");
   };
 
   render() {
