@@ -23,11 +23,15 @@ class LoginForm extends Form {
     password: Joi.string().required().min(5).label("Password"),
   });
 
-  doSubmit = () => {
-    // Call the server, axios to backend
-    // success: update global account name
-    this.props.onUserLogin(this.state);
-    // console.log(this.state);
+  doSubmit = async () => {
+    const response = await this.props.onUserLogin(this.state);
+    console.log("Login response", response);
+    if (response.message === "Login success") {
+      this.props.history.replace("/menu");
+    } else if (response.message === "Login failed") {
+    } else {
+      alert("Unknown error message");
+    }
   };
 
   render() {

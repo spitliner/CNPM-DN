@@ -10,6 +10,7 @@ import Menu from "./pages/Menu";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { UserContext } from "./context/User";
 
 class App extends Component {
   state = {
@@ -258,48 +259,51 @@ class App extends Component {
 
   render = () => {
     return (
-      <Router>
-        <div>
-          <Navbar />
-          {/* A <Switch> looks through its children <Route>s and
+      <div>
+        <UserContext.Consumer>
+          {({ currentLoginUser, logoutUser }) => {
+            return (
+              <Navbar
+                currentLoginUser={currentLoginUser}
+                logoutUser={logoutUser}
+                history={this.props.history}
+              />
+            );
+          }}
+        </UserContext.Consumer>
+        {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-          <Switch>
-            <Route
-              path="/menu/:id"
-              render={(props) => <MenuDetail {...props} />}
-            />
-            <Route path="/menu" render={(props) => <Menu {...props} />} />
-            <Route
-              path="/account"
-              render={(props) => <AccountInfo {...props} />}
-            />
-            <Route
-              path="/login"
-              render={(props) => (
-                <Login {...props} loginUser={this.loginUser} />
-              )}
-            />
-            <Route
-              path="/register"
-              render={(props) => (
-                <Register {...props} registerUser={this.registerUser} />
-              )}
-            />
-            <Route path="/order" render={(props) => <Order {...props} />} />
+        <Switch>
+          <Route
+            path="/menu/:id"
+            render={(props) => <MenuDetail {...props} />}
+          />
+          <Route path="/menu" render={(props) => <Menu {...props} />} />
+          <Route
+            path="/account"
+            render={(props) => <AccountInfo {...props} />}
+          />
+          <Route
+            path="/login"
+            render={(props) => <Login {...props} loginUser={this.loginUser} />}
+          />
+          <Route
+            path="/register"
+            render={(props) => (
+              <Register {...props} registerUser={this.registerUser} />
+            )}
+          />
+          <Route path="/order" render={(props) => <Order {...props} />} />
 
-            <Route
-              path="/reservation"
-              render={(props) => (
-                <Reservation
-                  {...props}
-                  onReservation={this.handleReservation}
-                />
-              )}
-            />
-          </Switch>
-          <Footer />
-        </div>
-      </Router>
+          <Route
+            path="/reservation"
+            render={(props) => (
+              <Reservation {...props} onReservation={this.handleReservation} />
+            )}
+          />
+        </Switch>
+        <Footer />
+      </div>
     );
   };
 }

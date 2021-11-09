@@ -23,7 +23,6 @@ class Form extends React.Component {
   validate = () => {
     const options = { abortEarly: false };
     const result = this.schema.validate(this.state.data, options);
-    console.log("form result", result);
     const { error } = result;
     if (!error) return null;
     const errors = {};
