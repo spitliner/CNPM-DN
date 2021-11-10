@@ -3,10 +3,10 @@ import Form from "../common/form";
 import "./LoginForm.css";
 import JoiBase from "joi";
 import JoiDate from "@hapi/joi-date";
+import Axios from "axios";
 
 const Joi = JoiBase.extend(JoiDate); // extend Joi with Joi Date
 
-import Axios from "axios";
 class LoginForm extends Form {
   constructor(props) {
     super(props);
