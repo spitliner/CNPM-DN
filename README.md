@@ -10,3 +10,4 @@ Mở 2 terminal một cái cd vô client, một cái vô server, cùng chạy l�
 yarn install
 yarn start
 ```
+Cài trước mongodb và enable mongodb trước khi chạy: [Link install guide](https://docs.mongodb.com/manual/installation/)
