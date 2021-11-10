@@ -19,7 +19,6 @@ class LoginForm extends Form {
 
   doSubmit = async () => {
     // POST to server by axios call
-    console.log(this.state.data.email, this.state.data.password);
     var response = await Axios({
       method: "POST",
       data: {
@@ -30,6 +29,7 @@ class LoginForm extends Form {
       url: "http://localhost:4000/api/login", // Should set to .ENV or DEFINE CONST
     });
     if (response.data.user == null) alert("Fail");
+    else alert("OK");
     // Check status code:
     // 404 fail, data = []
     // 200 success, data =
