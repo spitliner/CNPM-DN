@@ -1,16 +1,22 @@
 import React, { Component } from "react";
 import RegisterForm from "../components/RegisterForm";
+import { UserContext } from "../context/User";
 
 class Register extends React.Component {
   state = {};
 
   render() {
-    const { registerUser } = this.props;
-
     return (
-      <React.Fragment>
-        <RegisterForm onUserRegister={this.props.registerUser} />
-      </React.Fragment>
+      <UserContext.Consumer>
+        {({ registerUser }) => {
+          return (
+            <RegisterForm
+              history={this.props.history}
+              onUserRegister={registerUser}
+            />
+          );
+        }}
+      </UserContext.Consumer>
     );
   }
 }

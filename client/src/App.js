@@ -11,10 +11,10 @@ import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { UserContext } from "./context/User";
+import { Axios } from "axios";
 
 class App extends Component {
   state = {
-    user: {},
     menuItems: [
       {
         id: 1,
@@ -244,15 +244,6 @@ class App extends Component {
     ],
   };
 
-  loginUser = (message) => {
-    console.log(message);
-    // this.setState({ user: userInfo });
-  };
-
-  registerUser = (message) => {
-    console.log(message);
-  };
-
   handleReservation = (message) => {
     console.log(message);
   };
@@ -287,12 +278,7 @@ class App extends Component {
             path="/login"
             render={(props) => <Login {...props} loginUser={this.loginUser} />}
           />
-          <Route
-            path="/register"
-            render={(props) => (
-              <Register {...props} registerUser={this.registerUser} />
-            )}
-          />
+          <Route path="/register" render={(props) => <Register {...props} />} />
           <Route path="/order" render={(props) => <Order {...props} />} />
 
           <Route

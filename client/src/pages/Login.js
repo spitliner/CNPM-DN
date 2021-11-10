@@ -4,7 +4,6 @@ import { UserContext } from "../context/User";
 
 class Login extends React.Component {
   render() {
-    // const { loginUser } = this.props;
     return (
       <UserContext.Consumer>
         {({ loginUser }) => {
@@ -13,7 +12,6 @@ class Login extends React.Component {
           );
         }}
       </UserContext.Consumer>
-      // <LoginForm onUserLogin={loginUser} />
     );
   }
 }

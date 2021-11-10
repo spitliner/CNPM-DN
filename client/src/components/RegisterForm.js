@@ -34,22 +34,16 @@ class RegisterForm extends Form {
   });
 
   doSubmit = async () => {
-    // Call the server
-
-    // var response = await Axios({
-    //   method: "POST",
-    //   data: {
-    //     email: this.state.data.email,
-    //     password: this.state.data.password,
-    //     username: this.state.data.username,
-    //     address: this.state.data.address,
-    //     phone: this.state.data.phone,
-    //   },
-    //   withCredentials: true,
-    //   url: "http://localhost:4000/api/register", // Should set to .ENV or DEFINE CONST
-    // });
-    // alert(response.data.message);
-    this.props.onUserRegister(this.state);
+    const response = await this.props.onUserRegister(this.state);
+    console.log("Register response", response);
+    if (response.message === "Register success") {
+      alert("Register success. Please login!");
+      this.props.history.replace("/login");
+    } else if (response.message === "Register failed") {
+      alert("Register failed some error occur in backend!");
+    } else {
+      alert("Unknown error message");
+    }
   };
 
   render() {

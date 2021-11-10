@@ -2,6 +2,7 @@ import { data } from "jquery";
 import { createContext, Component } from "react";
 import _ from "lodash";
 import { BrowserRouter as Router } from "react-router-dom";
+import Axios from "axios";
 
 export const UserContext = createContext();
 
@@ -11,7 +12,10 @@ const emptyUser = {
   userId: "",
   phone: "",
   token: "",
+  address: "12",
 };
+
+const url = "http://localhost:4000";
 
 class UserProvider extends Component {
   constructor(props) {
@@ -23,33 +27,69 @@ class UserProvider extends Component {
         userId: "",
         phone: "",
         token: "",
+        address: "",
       },
     };
   }
 
   componentDidUpdate = () => {
-    console.log(this.state.currentLoginUser);
+    console.log("Current global user variable: ", this.state.currentLoginUser);
+  };
+
+  registerUser = async ({ data }) => {
+    console.log("Context register user function", data);
+    // Call the server
+    let response = await Axios({
+      method: "POST",
+      data: {
+        email: data.email,
+        password: data.password,
+        username: data.username,
+        address: data.address,
+        phone: data.phone,
+      },
+      withCredentials: true,
+      url: url + "/api/register", // Should set to .ENV or DEFINE CONST
+    });
+    console.log("Register axios response", response);
+    alert(response.data.message);
+    console.log("Register axios complete");
+
+    if (response.data.success) {
+      return { message: "Register success" };
+    } else {
+      return { message: "Register failed" };
+    }
   };
 
   /**
    * loginInfo : {data: {}, errors: {}}
    */
-  loginUser = async ({ data, errors }) => {
+  loginUser = async ({ data }) => {
     console.log("Context login user function", data);
-    if (!_.isEmpty(errors)) {
-      console.log("Validation form error, recheck your login input");
-    }
 
-    // const loginResponse = await fetch();
-    // const data = await loginResponse.json();
-
-    if (true) {
-      const user = {
-        username: "Thinh123",
+    // POST to server by axios call
+    let response = await Axios({
+      method: "POST",
+      data: {
         email: data.email,
-        userId: 1,
-        phone: "0909090909",
-        token: "abcabcabc",
+        password: data.password,
+      },
+      withCredentials: true,
+      url: url + "/api/login", // Should set to .ENV or DEFINE CONST
+    });
+
+    console.log(response);
+
+    if (response.data.success) {
+      const { data, status } = response;
+      const user = {
+        username: data.user.username,
+        email: data.user.email,
+        userId: data.user._id,
+        phone: data.user.phone,
+        token: data.user.password,
+        address: data.user.address,
       };
       this.setState({ currentLoginUser: user });
       return { message: "Login success" };
@@ -74,6 +114,7 @@ class UserProvider extends Component {
             currentLoginUser: this.state.currentLoginUser,
             loginUser: this.loginUser,
             logoutUser: this.logoutUser,
+            registerUser: this.registerUser,
           }}
         >
           {this.props.children}
