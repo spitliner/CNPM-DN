@@ -4,7 +4,7 @@ var bcrypt = require('bcrypt-nodejs');
 // định nghĩ cấu trúc user model
 var Schema = mongoose.Schema;
 var schema = new Schema({
-    name: { type: String, require: true },
+    username: { type: String, require: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
     address: { type: String, required: true },
