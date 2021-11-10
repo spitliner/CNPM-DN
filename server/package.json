@@ -1,0 +1,28 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "description": "server",
+  "author": {
+    "name": ""
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.0",
+    "cors": "^2.8.5",
+    "debug": "^2.2.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.14.0",
+    "express-session": "^1.17.2",
+    "mongoose": "^6.0.12",
+    "morgan": "^1.7.0",
+    "passport": "^0.5.0",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.0-beta6",
+    "serve-favicon": "^2.3.0"
+  }
+}
