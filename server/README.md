@@ -67,10 +67,9 @@
 - Request:
 
   - method: GET
-
-    - url: server_url/api/logout
-    - data: {}
-    - withCredentials: true
+  - url: server_url/api/logout
+  - data: {}
+  - withCredentials: true
 
 - Response:
   - status: 200
@@ -84,14 +83,12 @@
 - Request:
 
   - method: POST
-
-    - url: server_url/api/change_password
-    - data: {
-      oldPassword,
-      newPassword
-      }
-
-    - withCredentials: true
+  - url: server_url/api/change_password
+  - data: {
+    oldPassword,
+    newPassword
+    }
+  - withCredentials: true
 
 - Response:
   - status: 200
@@ -112,19 +109,17 @@
 - Request:
 
   - method: POST
-
-    - url: server_url/api/change_user_info
-    - data: {
-      newUsername,
-      newAddress,
-      newPhone,
-      }
-
-    - withCredentials: true
+  - url: server_url/api/change_user_info
+  - data: {
+    newUsername,
+    newAddress,
+    newPhone,
+    }
+  - withCredentials: true
 
 - Response:
   - status: 200
-    data: {
+  - data: {
     success: true/false,
     message: mô tả chi tiết
     }
