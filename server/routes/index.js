@@ -3,7 +3,7 @@ var express = require('express');
 const passport = require('passport');
 var router = express.Router();
 var User = require('../models/user.model.js');
-
+var Reservation = require('../models/reservation.model');
 router.post("/api/login", (req, res, next) => {
     passport.authenticate("local.login", (err, user, info) => {
         if (err) {
@@ -57,6 +57,8 @@ router.get("/logout", (req, res) => {
     }
 });
 router.post("/change_password", (req, res) => {
+    if (!req.isAuthenticated())
+        return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" })
     var email = req.user.email;
     User.findOne({ 'email': email }, function(err, user) {
         if (err) return res.status(200).json({ success: false, message: err });
@@ -71,6 +73,8 @@ router.post("/change_password", (req, res) => {
     })
 });
 router.post("/change_user_info", (req, res) => {
+    if (!req.isAuthenticated())
+        return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" })
     var email = req.user.email;
     User.findOne({ 'email': email }, function(err, user) {
         if (err) return res.status(200).json({ success: false, message: err });
@@ -84,5 +88,19 @@ router.post("/change_user_info", (req, res) => {
     })
 })
 
-
+router.post("/reservation", (req, res) => {
+    if (!req.isAuthenticated())
+        return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" })
+    var email = req.user.email;
+    var reservation = new Reservation();
+    reservation.email = email;
+    reservation.numberOfPersons = req.body.numberOfPersons;
+    reservation.date = req.body.date;
+    reservation.time = req.body.time;
+    reservation.message = req.body.message;
+    reservation.save((err, result) => {
+        if (err) res.status(200).json({ success: false, message: err });
+        else res.status(200).json({ success: true, message: "Successfully table reservation!" });
+    })
+});
 module.exports = router;

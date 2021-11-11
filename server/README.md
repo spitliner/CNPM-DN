@@ -123,3 +123,22 @@
     success: true/false,
     message: mô tả chi tiết
     }
+
+# reservation
+
+- Note: database lưu thêm email để có gì phân biệt được
+- Request:
+
+  - method: POST
+  - url: server_url/api/reservation
+  - data: {
+    numberOfPersons: number of persons, date: date, time: time, message: user message
+    }
+  - withCredentials: true
+
+- Response:
+  - status: 200
+  - data: {
+    success: true/false,
+    message: mô tả chi tiết
+    }
