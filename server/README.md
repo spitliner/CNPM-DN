@@ -12,7 +12,7 @@
   - Response:
     - status: 200
     - data: {
-      loggedIn: true/false
+      loggedIn: true/false,
       message: mô tả chi tiết
       }
 
@@ -23,7 +23,7 @@
     - method: POST
     - url: server_url/api/login
     - data: {
-      email: email
+      email: email,
       password: password
       }
     - withCredentials: true
@@ -31,9 +31,9 @@
   - Response:
     - status: 200
     - data: {
-      success: true/false ứng với đăng nhập thành công hay thất bại
-      message: mô tả chi tiết
-      user: thông tin full về user, thất bại thì null
+      success: true/false ứng với đăng nhập thành công hay thất bại,
+      message: mô tả chi tiết,
+      user: thông tin full về user, thất bại thì null,
       }
 
 # register:
@@ -48,17 +48,17 @@
     - url: server_url/api/register
     - data: {
       email: email
-      password: password
-      username: username
-      address: address
-      phone: phone
+      password: password,
+      username: username,
+      address: address,
+      phone: phone,
       }
     - withCredentials: true
 
   - Response:
     - status: 200
     - data: {
-      success: true/false
+      success: true/false,
       message: Mô tả chi tiết
       }
 
@@ -75,7 +75,7 @@
 - Response:
   - status: 200
   - data: {
-    success: true/false
+    success: true/false,
     message: mô tả chi tiết
     }
 
@@ -87,7 +87,7 @@
 
     - url: server_url/api/change_password
     - data: {
-      oldPassword
+      oldPassword,
       newPassword
       }
 
@@ -96,7 +96,7 @@
 - Response:
   - status: 200
   - data: {
-    success: true/false
+    success: true/false,
     message: mô tả chi tiết
     }
 - Note:
@@ -115,9 +115,9 @@
 
     - url: server_url/api/change_user_info
     - data: {
-      newUsername
-      newAddress
-      newPhone
+      newUsername,
+      newAddress,
+      newPhone,
       }
 
     - withCredentials: true
@@ -125,6 +125,6 @@
 - Response:
   - status: 200
     data: {
-    success: true/false
+    success: true/false,
     message: mô tả chi tiết
     }
