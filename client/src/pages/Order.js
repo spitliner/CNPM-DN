@@ -199,6 +199,134 @@ const menuItems = [
   },
 ];
 
+const exampleCartItems = [
+  {
+    id: 23,
+    imgUrl:
+      "https://jandatri.com/wp-content/uploads/2019/02/Black-Forest-Cake-Slice-500x281.jpg",
+    name: "TIRAMISU CAKE",
+    category: "OTHER",
+    pricePU: 4.8,
+    quantity: 2,
+  },
+  {
+    id: 24,
+    imgUrl:
+      "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
+    name: "STRAWBERRY ICE-DREAM",
+    category: "OTHER",
+    pricePU: 4.8,
+    quantity: 1,
+  },
+  {
+    id: 25,
+    imgUrl:
+      "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
+    name: "STRAWBERRY ICE-DREAM",
+    category: "OTHER",
+    pricePU: 4.8,
+    quantity: 3,
+  },
+];
+
+var orderList = [
+  {
+    id: 23,
+    imgUrl:
+      "https://jandatri.com/wp-content/uploads/2019/02/Black-Forest-Cake-Slice-500x281.jpg",
+    name: "TIRAMISU CAKE",
+    category: "OTHER",
+    pricePU: 4.8,
+    quantity: 2,
+  },
+  {
+    id: 24,
+    imgUrl:
+      "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
+    name: "STRAWBERRY ICE-DREAM",
+    category: "OTHER",
+    pricePU: 4.8,
+    quantity: 1,
+  },
+  {
+    id: 25,
+    imgUrl:
+      "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
+    name: "STRAWBERRY ICE-DREAM",
+    category: "OTHER",
+    pricePU: 4.8,
+    quantity: 3,
+  },
+];
+
+class DisplayOrderDish extends React.Component{
+  render() {
+    return (
+      <div class='dish_display_box'>
+        <div class='dish_image_display'>
+          <image class="dish_image" source={this.props.dishOrder.imgUrl} />
+        </div>
+        <div class='dish_name'>
+          <p>{this.props.dishOrder.name}</p>
+        </div>
+        <div class='dish_quanity'>
+          <p>{this.props.dishOrder.quantity}</p>
+        </div>
+        <div class='dish_price'>
+          <p>{this.props.dishOrder.pricePU}</p>
+        </div>
+      </div>
+    );
+  }
+}
+
+class OrderDish extends React.Component {
+  render() {
+    return (
+      <>
+      {orderList.map((dish) => {
+        return <DisplayOrderDish dishOrder={dish}/>;
+      })}
+      </>
+    )  
+  }
+}
+
+function getTotal(FoodOrder)
+{
+  var total = 0;
+  for (var i in FoodOrder)
+  {
+    total = FoodOrder[i].pricePU*FoodOrder[i].quantity + total;
+  }
+  return total;
+}
+
+class OrderMain extends React.Component {
+  render() {
+    return (
+      <div class="order">
+        <h1>Your Current Order</h1>
+        <div class="order_main">
+          <div class="order_header">
+            <div class='dish_image_display'></div>
+            <div class='dish_name'>Food Name</div>
+            <div class='dish_quanity'>Quantities</div>
+            <div class='dish_price'>Price Per Unit</div>
+          </div>
+          <OrderDish list={orderList} />
+          <div class="order_header">
+            <div class='dish_image_display'></div>
+            <div class='dish_name'></div>
+            <div class='dish_quanity'>Totals Cost</div>
+            <div class='dish_price'>{getTotal(orderList).toFixed(2)}</div>
+          </div>
+        </div>
+        </div>
+    );
+  }
+}
+
 class Order extends React.Component {
   render() {
     return (
