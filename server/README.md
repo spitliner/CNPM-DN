@@ -47,7 +47,7 @@
     - method: GET
     - url: server_url/api/register
     - data: {
-      email: email
+      email: email,
       password: password,
       username: username,
       address: address,
