@@ -1,6 +1,6 @@
-### login:
+# login:
 
-- Kiểm tra đăng nhập chưa:
+- Kiểm tra đăng nhập chưa: (giai đoạn sau)
 
   - Request:
 
@@ -104,9 +104,10 @@
 
 # change user info:
 
-## Tạm thời thì không cho đổi email, nếu muốn thì cũng có thể làm
+- Note:
 
-## Nếu mà không nhập thì gởi "" coi như không đổi
+  - Tạm thời thì không cho đổi email, nếu muốn thì cũng có thể làm
+  - Nếu mà không nhập thì gởi "" coi như không đổi
 
 - Request:
 
