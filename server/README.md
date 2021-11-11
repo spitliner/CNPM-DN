@@ -1,3 +1,9 @@
+# Note: Mọi cái t viết đều có check đã xác thực chưa:
+
+if (!req.isAuthenticated())
+return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" })
+Đảm bảo đừng flow sai
+
 # login:
 
 - Kiểm tra đăng nhập chưa: (giai đoạn sau)
