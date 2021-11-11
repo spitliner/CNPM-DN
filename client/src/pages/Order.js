@@ -264,7 +264,7 @@ class DisplayOrderDish extends React.Component{
     return (
       <div class='dish_display_box'>
         <div class='dish_image_display'>
-          <image class="dish_image" source={this.props.dishOrder.imgUrl} />
+          <img class="dish_image" source={this.props.dishOrder.imgUrl} />
         </div>
         <div class='dish_name'>
           <p>{this.props.dishOrder.name}</p>
