@@ -321,8 +321,16 @@ class OrderMain extends React.Component {
             <div class='dish_quanity'>Totals Cost</div>
             <div class='dish_price'>{getTotal(orderList).toFixed(2)}</div>
           </div>
+          <div class="payment">
+            <div class="payment_text">
+              <h1>Finish Online Payment</h1>
+            </div>
+            <div class="btn_width">
+            <div class="btn">Proceed Payment</div>
+            </div>
+          </div>
         </div>
-        </div>
+      </div>
     );
   }
 }
