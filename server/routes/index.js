@@ -46,7 +46,7 @@ router.post("/api/register", (req, res) => {
         }
     });
 });
-router.get("/logout", (req, res) => {
+router.get("/api/logout", (req, res) => {
     if (!req.isAuthenticated()) {
         res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" })
     } else {
@@ -56,7 +56,7 @@ router.get("/logout", (req, res) => {
         res.status(200).json({ success: false, message: "Logout successfully!" })
     }
 });
-router.post("/change_password", (req, res) => {
+router.post("/api/change_password", (req, res) => {
     if (!req.isAuthenticated())
         return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" })
     var email = req.user.email;
@@ -72,7 +72,7 @@ router.post("/change_password", (req, res) => {
         })
     })
 });
-router.post("/change_user_info", (req, res) => {
+router.post("/api/change_user_info", (req, res) => {
     if (!req.isAuthenticated())
         return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" })
     var email = req.user.email;
@@ -88,7 +88,7 @@ router.post("/change_user_info", (req, res) => {
     })
 })
 
-router.post("/reservation", (req, res) => {
+router.post("/api/reservation", (req, res) => {
     if (!req.isAuthenticated())
         return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" })
     var email = req.user.email;
