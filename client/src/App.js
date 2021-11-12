@@ -13,6 +13,7 @@ import Footer from "./components/Footer";
 import { UserContext } from "./context/User";
 import { Axios } from "axios";
 import CartProvider from "./context/Cart";
+import "./icons/fontawesome";
 
 class App extends Component {
   state = {

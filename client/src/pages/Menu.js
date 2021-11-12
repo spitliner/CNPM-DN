@@ -8,7 +8,7 @@ class Menu extends React.Component {
 
 export default Menu;
 
-export const FoodDetail= [
+export const FoodDetail = [
   {
     id: 21,
     imgUrl:
@@ -18,4 +18,3 @@ export const FoodDetail= [
     pricePU: 4.8,
   },
 ];
-

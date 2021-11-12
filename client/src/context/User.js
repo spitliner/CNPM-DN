@@ -12,7 +12,7 @@ const emptyUser = {
   userId: "",
   phone: "",
   token: "",
-  address: "12",
+  address: "",
 };
 
 const url = "http://localhost:4000";

@@ -121,6 +121,14 @@ class CartProvider extends Component {
     });
   };
 
+  getTotal = () => {
+    var total = 0;
+    for (let foodItem of this.state.cartItems) {
+      total = foodItem.pricePU * foodItem.quantity + total;
+    }
+    return total;
+  };
+
   submitCart = () => {
     console.log(this.state.cartItems);
   };
@@ -133,6 +141,7 @@ class CartProvider extends Component {
           addItemToCart: this.addItemToCart,
           reduceItemFromCart: this.reduceItemFromCart,
           removeItemFromCart: this.removeItemFromCart,
+          totalCost: this.getTotal(),
         }}
       >
         {this.props.children}
