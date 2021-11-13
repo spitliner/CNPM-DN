@@ -301,7 +301,18 @@ class Order extends React.Component {
           return (
             <div>
               <OrderMain cartItems={cartItems} />
-              <button
+            </div>
+          );
+        }}
+      </CartContext.Consumer>
+    );
+  }
+}
+
+export default Order;
+
+{
+  /* <button
                 onClick={() => {
                   addItemToCart(menuItems[0]);
                 }}
@@ -343,13 +354,5 @@ class Order extends React.Component {
               >
                 Remove Item 2
               </button>
-              <h1>Your Order</h1>
-            </div>
-          );
-        }}
-      </CartContext.Consumer>
-    );
-  }
+              <h1>Your Order</h1> */
 }
-
-export default Order;

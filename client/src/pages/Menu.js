@@ -1,10 +1,41 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
+import MenuList from "../components/MenuList";
+import Categories from "../components/Categories";
+import "./Menu.css";
 
-class Menu extends React.Component {
-  render() {
-    return <h1>Menu</h1>;
-  }
-}
+const Menu = ({ items, history }) => {
+  const allCategories = ["all", ...new Set(items.map((item) => item.category))];
+
+  const [menuItems, setMenuItems] = useState(items);
+  const [activeCategory, setActiveCategory] = useState("");
+  const [categories, setCategories] = useState(allCategories);
+
+  const filterItems = (category) => {
+    setActiveCategory(category);
+    if (category === "all") {
+      setMenuItems(items);
+      console.log("MenuItem", menuItems);
+      return;
+    }
+    const newItems = items.filter((item) => item.category === category);
+    setMenuItems(newItems);
+  };
+  return (
+    <main>
+      <section className="menu section">
+        <div className="title">
+          <h2> Menu List </h2> <div className="underline"> </div>{" "}
+        </div>{" "}
+        <Categories
+          categories={categories}
+          activeCategory={activeCategory}
+          filterItems={filterItems}
+        />{" "}
+        <MenuList history={history} items={menuItems} />{" "}
+      </section>{" "}
+    </main>
+  );
+};
 
 export default Menu;
 
