@@ -6,6 +6,7 @@ var User = require('../models/user.model.js');
 var Reservation = require('../models/reservation.model');
 var ResetToken = require('../models/reset-token.model');
 var sendMail = require('../config/email-config');
+const sendEmail = require('../config/email-config');
 router.post("/api/login", (req, res, next) => {
     passport.authenticate("local.login", (err, user, info) => {
         if (err) {
@@ -116,9 +117,12 @@ router.post("/api/get_reset_code", (req, res) => {
             var resetToken = new ResetToken();
             resetToken.email = req.body.email;
             resetToken.code = code;
-            resetToken.save((err, result) => {
+            resetToken.save(async(err, result) => {
                 if (err) res.status(200).json({ success: false, message: err });
-                else res.status(200).json({ success: true, message: "Success! Reset code has been sent to your email, please input your reset code in 3 minutes!" });
+                else {
+                    await sendEmail(req.body.email, code);
+                    res.status(200).json({ success: true, message: "Success! Reset code has been sent to your email, please input your reset code in 3 minutes!" });
+                }
             });
         });
     });
