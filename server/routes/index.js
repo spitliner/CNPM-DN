@@ -4,6 +4,8 @@ const passport = require('passport');
 var router = express.Router();
 var User = require('../models/user.model.js');
 var Reservation = require('../models/reservation.model');
+var ResetToken = require('../models/reset-token.model');
+var sendMail = require('../config/email-config');
 router.post("/api/login", (req, res, next) => {
     passport.authenticate("local.login", (err, user, info) => {
         if (err) {
@@ -87,7 +89,6 @@ router.post("/api/change_user_info", (req, res) => {
         })
     })
 })
-
 router.post("/api/reservation", (req, res) => {
     if (!req.isAuthenticated())
         return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" })
@@ -103,4 +104,43 @@ router.post("/api/reservation", (req, res) => {
         else res.status(200).json({ success: true, message: "Successfully table reservation!" });
     })
 });
+router.post("/api/get_reset_code", (req, res) => {
+    User.findOne({ 'email': req.body.email }, function(err, user) {
+        if (err) return res.status(200).json({ success: false, message: err });
+        if (!user) return res.status(200).json({ success: false, message: "Email not found!" });
+        ResetToken.findOne({ 'email': req.body.email }, function(err, resetToken) {
+            if (err) return res.status(200).json({ success: false, message: err });
+            if (resetToken) return res.status(200).json({ success: true, message: "Success! Reset code has been sent to your email, please input your reset code in 3 minutes!" });
+            // No reset token --> create one
+            var code = Math.floor(Math.random() * (999999 - 100000) + 10000);
+            var resetToken = new ResetToken();
+            resetToken.email = req.body.email;
+            resetToken.code = code;
+            resetToken.save((err, result) => {
+                if (err) res.status(200).json({ success: false, message: err });
+                else res.status(200).json({ success: true, message: "Success! Reset code has been sent to your email, please input your reset code in 3 minutes!" });
+            });
+        });
+    });
+});
+
+router.post("/api/check_reset_code", (req, res) => {
+    ResetToken.findOne({ 'email': req.body.email }, function(err, resetToken) {
+        if (err) return res.status(200).json({ success: false, message: err });
+        if (!resetToken) return res.status(200).json({ success: false, message: "Reset code not found, please get a new or another code!" });
+        if (req.body.code != resetToken.code) return res.status(200).json({ success: false, message: "Incorrect reset code!" });
+        // Else set new password
+        resetToken.delete(); // delete current token
+        User.findOne({ 'email': req.body.email }, function(err, user) {
+            if (err) return res.status(200).json({ success: false, message: err });
+            if (!user) return res.status(200).json({ success: false, message: "Something wrong! User not found!" })
+            user.password = user.encryptPassword(req.body.password);
+            user.save(function(err, result) {
+                if (err) res.status(200).json({ success: false, message: err });
+                else res.status(200).json({ success: true, message: "Successfully reset passwod!" });
+            })
+        })
+    });
+});
+
 module.exports = router;

@@ -147,3 +147,39 @@ if (!req.isAuthenticated()) return res.status(200).json({ success: false, messag
     success: true/false,
     message: mô tả chi tiết
     }
+
+# reset passowrd:
+
+T nghĩ là 1 trang cho 3 cái này thôi. Có ô nhập email rồi lấy mã khôi phục. Ở dưới có ô nhập cái mã đã lấy với mật khẩu mới. Chuyển trang thứ nhất là flow nó khó chịu thứ 2 nó bị lỗi bảo mật (api reset password nếu mà nằm riêng với check code thì đúng là hơi ngu, bị cái lỗi gọi thẳng api đó)
+
+## Gởi email
+
+- Request:
+
+  - method: POST
+  - url: server_url/api/get_reset_code
+  - data: {email: email nhập ở textbox}
+  - withCredentials: true
+
+- Response:
+  - status: 200
+  - data: {
+    success: false/true,
+    message: mô tả chi tiết
+    }
+
+## Gởi code và password:
+
+- Request:
+
+  - method: POST
+  - url: server_url/api/check_reset_code
+  - data: {code: code nhập ở textbox, email: email nhập, password: password mới}
+  - withCredentials: true
+
+- Response:
+  - status: 200
+  - data: {
+    success: false/true,
+    message: mô tả chi tiết
+    }
