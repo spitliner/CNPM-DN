@@ -27,12 +27,10 @@ class LoginForm extends Form {
   doSubmit = async () => {
     const response = await this.props.onUserLogin(this.state);
     console.log("Login response", response);
-    if (response.message === "Login success") {
+    if (response.success) {
       this.props.history.replace("/menu");
-    } else if (response.message === "Login failed") {
-      alert("Login failed some error occur in backend!");
     } else {
-      alert("Unknown error message");
+      alert(response.message);
     }
   };
 

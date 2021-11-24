@@ -36,13 +36,11 @@ class RegisterForm extends Form {
   doSubmit = async () => {
     const response = await this.props.onUserRegister(this.state);
     console.log("Register response", response);
-    if (response.message === "Register success") {
+    if (response.success) {
       alert("Register success. Please login!");
       this.props.history.replace("/login");
-    } else if (response.message === "Register failed") {
-      alert("Register failed some error occur in backend!");
     } else {
-      alert("Unknown error message");
+      alert(response.message);
     }
   };
 

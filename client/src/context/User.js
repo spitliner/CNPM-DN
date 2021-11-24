@@ -52,14 +52,8 @@ class UserProvider extends Component {
       url: url + "/api/register", // Should set to .ENV or DEFINE CONST
     });
     console.log("Register axios response", response);
-    alert(response.data.message);
     console.log("Register axios complete");
-
-    if (response.data.success) {
-      return { message: "Register success" };
-    } else {
-      return { message: "Register failed" };
-    }
+    return { message: response.data.message, success: response.data.success };
   };
 
   /**
@@ -92,13 +86,9 @@ class UserProvider extends Component {
         address: data.user.address,
       };
       this.setState({ currentLoginUser: user });
-      return { message: "Login success" };
-    } else {
-      alert("Login failed. Something happen in our server");
-      return { message: "Login failed" };
     }
+    return { message: response.data.message, success: response.data.success };
   };
-
   logoutUser = async () => {
     // const logoutResponse = await fetch();
     this.setState({ currentLoginUser: emptyUser });
