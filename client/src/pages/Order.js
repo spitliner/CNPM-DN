@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { CartContext } from "../context/Cart";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "./Order.css";
+import "../icons/fontawesome";
 
 const menuItems = [
   {
@@ -199,130 +202,93 @@ const menuItems = [
   },
 ];
 
-const exampleCartItems = [
-  {
-    id: 23,
-    imgUrl:
-      "https://jandatri.com/wp-content/uploads/2019/02/Black-Forest-Cake-Slice-500x281.jpg",
-    name: "TIRAMISU CAKE",
-    category: "OTHER",
-    pricePU: 4.8,
-    quantity: 2,
-  },
-  {
-    id: 24,
-    imgUrl:
-      "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
-    name: "STRAWBERRY ICE-DREAM",
-    category: "OTHER",
-    pricePU: 4.8,
-    quantity: 1,
-  },
-  {
-    id: 25,
-    imgUrl:
-      "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
-    name: "STRAWBERRY ICE-DREAM",
-    category: "OTHER",
-    pricePU: 4.8,
-    quantity: 3,
-  },
-];
-
-var orderList = [
-  {
-    id: 23,
-    imgUrl:
-      "https://jandatri.com/wp-content/uploads/2019/02/Black-Forest-Cake-Slice-500x281.jpg",
-    name: "TIRAMISU CAKE",
-    category: "OTHER",
-    pricePU: 4.8,
-    quantity: 2,
-  },
-  {
-    id: 24,
-    imgUrl:
-      "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
-    name: "STRAWBERRY ICE-DREAM",
-    category: "OTHER",
-    pricePU: 4.8,
-    quantity: 1,
-  },
-  {
-    id: 25,
-    imgUrl:
-      "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
-    name: "STRAWBERRY ICE-DREAM",
-    category: "OTHER",
-    pricePU: 4.8,
-    quantity: 3,
-  },
-];
-
-class DisplayOrderDish extends React.Component{
+class OrderDish extends React.Component {
   render() {
+    const { cartItems, addItemToCart, reduceItemFromCart } = this.props;
     return (
-      <div class='dish_display_box'>
-        <div class='dish_image_display'>
-          <img class="dish_image" source={this.props.dishOrder.imgUrl} />
-        </div>
-        <div class='dish_name'>
-          <p>{this.props.dishOrder.name}</p>
-        </div>
-        <div class='dish_quanity'>
-          <p>{this.props.dishOrder.quantity}</p>
-        </div>
-        <div class='dish_price'>
-          <p>{this.props.dishOrder.pricePU}</p>
-        </div>
+      <div>
+        {cartItems.map((dish) => {
+          return (
+            <div key={dish.id} className="dish_display_box">
+              <div className="dish_id">
+                <p>{dish.id}</p>
+              </div>
+              <div className="dish_image_display">
+                <img className="dish_image" source={dish.imgUrl} />
+              </div>
+              <div className="dish_name">
+                <p>{dish.name}</p>
+              </div>
+              <div className="dish_btn">
+                <FontAwesomeIcon
+                  icon="plus-circle"
+                  onClick={() => addItemToCart(dish)}
+                />
+              </div>
+              <div className="dish_quanity">
+                <p>{dish.quantity}</p>
+              </div>
+              <div className="dish_btn">
+                <FontAwesomeIcon
+                  icon="minus-circle"
+                  onClick={() => reduceItemFromCart(dish)}
+                />
+              </div>
+              <div className="dish_price">
+                <p>{dish.pricePU}</p>
+              </div>
+            </div>
+          );
+        })}
       </div>
     );
   }
 }
 
-class OrderDish extends React.Component {
-  render() {
-    return (
-      <>
-      {orderList.map((dish) => {
-        return <DisplayOrderDish dishOrder={dish}/>;
-      })}
-      </>
-    )  
-  }
-}
-
-function getTotal(FoodOrder)
-{
-  var total = 0;
-  for (var i in FoodOrder)
-  {
-    total = FoodOrder[i].pricePU*FoodOrder[i].quantity + total;
-  }
-  return total;
-}
-
 class OrderMain extends React.Component {
   render() {
+    const { cartItems } = this.props;
+
     return (
-      <div class="order">
-        <h1>Your Current Order</h1>
-        <div class="order_main">
-          <div class="order_header">
-            <div class='dish_image_display'></div>
-            <div class='dish_name'>Food Name</div>
-            <div class='dish_quanity'>Quantities</div>
-            <div class='dish_price'>Price Per Unit</div>
-          </div>
-          <OrderDish list={orderList} />
-          <div class="order_header">
-            <div class='dish_image_display'></div>
-            <div class='dish_name'></div>
-            <div class='dish_quanity'>Totals Cost</div>
-            <div class='dish_price'>{getTotal(orderList).toFixed(2)}</div>
-          </div>
-        </div>
-        </div>
+      <CartContext.Consumer>
+        {({ cartItems, addItemToCart, reduceItemFromCart, totalCost }) => {
+          return (
+            totalCost !== 0 && (
+              <div className="order">
+                <h1>Your Current Order</h1>
+                <div className="order_main">
+                  <div className="order_header">
+                    <div className="dish_id">Food Id</div>
+                    <div className="dish_image_display"></div>
+                    <div className="dish_name">Food Name</div>
+                    <div className="dish_btn"></div>
+                    <div className="dish_quanity">Quantities</div>
+                    <div className="dish_btn"></div>
+                    <div className="dish_price">Price Per Unit</div>
+                  </div>
+                  <OrderDish
+                    addItemToCart={addItemToCart}
+                    reduceItemFromCart={reduceItemFromCart}
+                    cartItems={cartItems}
+                  />
+                  <div className="order_header">
+                    <div className="dish_image_display"></div>
+                    <div className="dish_name"></div>
+                    <div className="dish_quanity">Totals Cost</div>
+                    <div className="dish_price">{totalCost.toFixed(2)}</div>
+                  </div>
+                  <div className="payment">
+                    <div className="payment_text">
+                      <h1>Finish Online Payment</h1>
+                    </div>
+                    <button className="btn btn_width">Proceed Payment</button>
+                  </div>
+                </div>
+              </div>
+            )
+          );
+        }}
+      </CartContext.Consumer>
     );
   }
 }
@@ -334,7 +300,19 @@ class Order extends React.Component {
         {({ cartItems, addItemToCart, reduceItemFromCart }) => {
           return (
             <div>
-              <button
+              <OrderMain cartItems={cartItems} />
+            </div>
+          );
+        }}
+      </CartContext.Consumer>
+    );
+  }
+}
+
+export default Order;
+
+{
+  /* <button
                 onClick={() => {
                   addItemToCart(menuItems[0]);
                 }}
@@ -376,13 +354,5 @@ class Order extends React.Component {
               >
                 Remove Item 2
               </button>
-              <h1>Your Order</h1>
-            </div>
-          );
-        }}
-      </CartContext.Consumer>
-    );
-  }
+              <h1>Your Order</h1> */
 }
-
-export default Order;

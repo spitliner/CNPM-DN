@@ -13,6 +13,7 @@ import Footer from "./components/Footer";
 import { UserContext } from "./context/User";
 import { Axios } from "axios";
 import CartProvider from "./context/Cart";
+import "./icons/fontawesome";
 
 class App extends Component {
   state = {
@@ -24,6 +25,7 @@ class App extends Component {
         name: "PIZZA MIXED",
         category: "PIZZA",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 2,
@@ -32,6 +34,7 @@ class App extends Component {
         name: "PIZZA MIXED",
         category: "PIZZA",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 3,
@@ -40,6 +43,7 @@ class App extends Component {
         name: "PIZZA MIXED",
         category: "PIZZA",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 4,
@@ -48,6 +52,7 @@ class App extends Component {
         name: "PIZZA MIXED",
         category: "PIZZA",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 5,
@@ -56,6 +61,7 @@ class App extends Component {
         name: "PIZZA MIXED",
         category: "PIZZA",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 6,
@@ -63,6 +69,7 @@ class App extends Component {
         name: "BURGER MIXED",
         category: "BURGER",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 7,
@@ -70,6 +77,7 @@ class App extends Component {
         name: "BURGER MIXED",
         category: "BURGER",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 8,
@@ -77,6 +85,7 @@ class App extends Component {
         name: "BURGER MIXED",
         category: "BURGER",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 9,
@@ -84,6 +93,7 @@ class App extends Component {
         name: "BURGER MIXED",
         category: "BURGER",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 10,
@@ -91,6 +101,7 @@ class App extends Component {
         name: "BURGER MIXED",
         category: "BURGER",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 11,
@@ -99,6 +110,7 @@ class App extends Component {
         name: "SOUP MIXED",
         category: "SOUP",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 12,
@@ -107,6 +119,7 @@ class App extends Component {
         name: "SOUP MIXED",
         category: "SOUP",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 13,
@@ -115,6 +128,7 @@ class App extends Component {
         name: "SOUP MIXED",
         category: "SOUP",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 14,
@@ -123,6 +137,7 @@ class App extends Component {
         name: "SOUP MIXED",
         category: "SOUP",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 15,
@@ -131,6 +146,7 @@ class App extends Component {
         name: "SOUP MIXED",
         category: "SOUP",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 16,
@@ -139,6 +155,7 @@ class App extends Component {
         name: "PEACH TEA",
         category: "TEA",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 17,
@@ -147,6 +164,7 @@ class App extends Component {
         name: "PEACH TEA",
         category: "TEA",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 18,
@@ -155,6 +173,7 @@ class App extends Component {
         name: "PEACH TEA",
         category: "TEA",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 19,
@@ -163,6 +182,7 @@ class App extends Component {
         name: "PEACH TEA",
         category: "TEA",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 20,
@@ -171,6 +191,7 @@ class App extends Component {
         name: "PEACH TEA",
         category: "TEA",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 21,
@@ -179,6 +200,7 @@ class App extends Component {
         name: "CAKE",
         category: "OTHER",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 22,
@@ -187,6 +209,7 @@ class App extends Component {
         name: "COFFEE CAKE",
         category: "OTHER",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 23,
@@ -195,6 +218,7 @@ class App extends Component {
         name: "TIRAMISU CAKE",
         category: "OTHER",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 24,
@@ -203,6 +227,7 @@ class App extends Component {
         name: "STRAWBERRY ICE-DREAM",
         category: "OTHER",
         pricePU: 4.8,
+        description: "DESSERT",
       },
       {
         id: 25,
@@ -211,6 +236,7 @@ class App extends Component {
         name: "STRAWBERRY ICE-DREAM",
         category: "OTHER",
         pricePU: 4.8,
+        description: "DESSERT",
       },
     ],
 
@@ -271,7 +297,12 @@ class App extends Component {
               path="/menu/:id"
               render={(props) => <MenuDetail {...props} />}
             />
-            <Route path="/menu" render={(props) => <Menu {...props} />} />
+            <Route
+              path="/menu"
+              render={(props) => (
+                <Menu items={this.state.menuItems} {...props} />
+              )}
+            />
             <Route
               path="/account"
               render={(props) => <AccountInfo {...props} />}

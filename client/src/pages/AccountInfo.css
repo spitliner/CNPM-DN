@@ -1,0 +1,25 @@
+.account-info-wrapper {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.account-info-wrapper li,
+.account-info-wrapper h1 {
+  width: 100%;
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 150%;
+  margin: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.account-info-wrapper h1 {
+  font-family: "Oleo Script Swash Caps", cursive;
+  font-weight: 400;
+  font-size: 48px;
+  margin: 30px 0 20px 0;
+}
