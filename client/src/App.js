@@ -11,7 +11,7 @@ import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { UserContext } from "./context/User";
-import { Axios } from "axios";
+//import Axios from "axios";
 import CartProvider from "./context/Cart";
 import "./icons/fontawesome";
 
