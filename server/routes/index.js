@@ -13,7 +13,7 @@ router.post("/api/login", (req, res, next) => {
             res.status(200).json({ message: err, success: false, user: null });
         }
         if (!user) {
-            res.status(200).json({ message: "No user found!", success: false, user: null })
+            res.status(200).json({ message: "Incorrect email or password!", success: false, user: null })
         } else {
             req.logIn(user, (err) => {
                 if (err) {
