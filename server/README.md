@@ -168,7 +168,7 @@ T nghĩ là 1 trang cho 3 cái này thôi. Có ô nhập email rồi lấy mã k
     message: mô tả chi tiết
     }
 
-## Gởi code và password:
+## Gởi code và password mới:
 
 - Request:
 
