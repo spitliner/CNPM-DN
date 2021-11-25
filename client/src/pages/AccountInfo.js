@@ -21,7 +21,7 @@ class AccountInfo extends React.Component {
                     <li>
                       <h1>Your account info</h1>
                     </li>
-                    <li>Username: {currentLoginUser.username}</li>
+                    <li>Name: {currentLoginUser.username}</li>
                     <li>Email: {currentLoginUser.email}</li>
                     <li>Phone number: {currentLoginUser.phone}</li>
                     <li>Address: {currentLoginUser.address}</li>
