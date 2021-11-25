@@ -15,6 +15,8 @@ import { UserContext } from "./context/User";
 import CartProvider from "./context/Cart";
 import "./icons/fontawesome";
 import ForgetPassword from "./pages/ForgerPassword";
+import ChangePassword from "./pages/ChangePassword";
+import ChangeInformation from "./pages/ChangeInformation";
 
 class App extends Component {
   state = {
@@ -331,6 +333,14 @@ class App extends Component {
             <Route
               path="/forget_password"
               render={(props) => <ForgetPassword {...props} />}
+            />
+            <Route
+              path="/change_password"
+              render={(props) => <ChangePassword {...props} />}
+            />
+            <Route
+              path="/change_information"
+              render={(props) => <ChangeInformation {...props} />}
             />
           </Switch>
           <Footer />

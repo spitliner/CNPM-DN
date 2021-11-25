@@ -26,6 +26,7 @@ class ForgetPasswordForm extends Form {
       .label("Email"),
     code: Joi.string().required().min(6).label("Code"),
     password: Joi.string().required().min(5).label("Password"),
+    confirmPassword: Joi.string().required().min(5).label("Password"),
   });
   schemaEmail = Joi.object({
     email: Joi.string()
@@ -65,6 +66,12 @@ class ForgetPasswordForm extends Form {
     this.setState({ notification: response.data.message });
   };
   doSubmit = async () => {
+    if (this.state.data.password != this.state.data.confirmPassword) {
+      var error = {};
+      error["confirmPassword"] = "Two passwords do not match!";
+      this.setState({ errors: error });
+      return;
+    }
     let response = await Axios({
       method: "POST",
       data: {
@@ -75,7 +82,6 @@ class ForgetPasswordForm extends Form {
       withCredentials: true,
       url: url + "/api/check_reset_code", // Should set to .ENV or DEFINE CONST
     });
-    console.log(response);
     if (response.data.success) {
       alert(response.data.message);
       this.props.history.replace("/login");
@@ -104,6 +110,11 @@ class ForgetPasswordForm extends Form {
             {" "}
             {this.renderInput("code", "Code")}{" "}
             {this.renderInput("password", "Password", "password")}{" "}
+            {this.renderInput(
+              "confirmPassword",
+              "Confirm Password",
+              "password"
+            )}{" "}
             {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
             {this.renderButton("Confirm")}{" "}
           </form>{" "}

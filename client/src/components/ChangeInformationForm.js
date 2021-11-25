@@ -6,25 +6,19 @@ import JoiDate from "@hapi/joi-date";
 import Axios from "axios";
 
 const Joi = JoiBase.extend(JoiDate); // extend Joi with Joi Date
-
-class RegisterForm extends Form {
+const url = "http://localhost:4000";
+class ChangeInformationForm extends Form {
   constructor(props) {
     super(props);
     this.state = {
-      data: { username: "", email: "", password: "", phone: "", address: "" },
+      data: { username: "", phone: "", address: "" },
       errors: {},
       notification: "",
     };
   }
 
   schema = Joi.object({
-    email: Joi.string()
-      .required()
-      .email({ tlds: { allow: false } })
-      .label("Email"),
     username: Joi.string().required().label("Username"),
-    password: Joi.string().required().min(5).label("Password"),
-    confirmPassword: Joi.string().required().min(5).label("Password"),
     phone: Joi.string()
       .regex(/^[0-9]{10}$/)
       .required()
@@ -36,20 +30,20 @@ class RegisterForm extends Form {
   });
 
   doSubmit = async () => {
-    if (this.state.data.password != this.state.data.confirmPassword) {
-      var error = {};
-      error["confirmPassword"] = "Two passwords do not match!";
-      this.setState({ errors: error });
-      return;
-    }
-    const response = await this.props.onUserRegister(this.state);
-    console.log("Register response", response);
-    if (response.success) {
-      alert("Register success. Please login!");
-      this.props.history.replace("/login");
-    } else {
-      this.setState({ notification: response.message });
-    }
+    let response = await Axios({
+      method: "POST",
+      data: {
+        newUsername: this.state.data.username,
+        newPhone: this.state.data.phone,
+        newAddress: this.state.data.address,
+      },
+      withCredentials: true,
+      url: url + "/api/change_information", // Should set to .ENV or DEFINE CONST
+    });
+    if (response.data.success) {
+      alert(response.data.message);
+      this.props.history.push("/account");
+    } else this.setState({ notification: response.data.message });
   };
 
   render() {
@@ -57,22 +51,19 @@ class RegisterForm extends Form {
 
     return (
       <div className="form-wrapper">
-        <h1 className="form-title"> Member Register Page </h1>{" "}
+        <h1 className="form-title"> Change Information Page </h1>{" "}
         <p className="notification">{this.state.notification}</p>
         <form className="form-body" onSubmit={this.handleSumbit}>
           {" "}
-          {this.renderInput("email", "Email")}{" "}
           {this.renderInput("username", "Name")}{" "}
-          {this.renderInput("password", "Password", "password")}{" "}
-          {this.renderInput("confirmPassword", "Confirm Password", "password")}{" "}
           {this.renderInput("phone", "Phone")}{" "}
           {this.renderInput("address", "Address")}{" "}
           {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
-          {this.renderButton("Register")}{" "}
+          {this.renderButton("Confirm")}{" "}
         </form>{" "}
       </div>
     );
   }
 }
 
-export default RegisterForm;
+export default ChangeInformationForm;
