@@ -39,11 +39,19 @@ class LoginForm extends Form {
       <div className="form-wrapper">
         <h1 className="form-title"> Member Login Page </h1>{" "}
         <form className="form-body" onSubmit={this.handleSumbit}>
-          {this.renderInput("email", "Email")}
-          {this.renderInput("password", "Password", "password")}
-          {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}
-          {this.renderButton("Login")}
-        </form>
+          {" "}
+          {this.renderInput("email", "Email")}{" "}
+          {this.renderInput("password", "Password", "password")}{" "}
+          {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
+          {this.renderButton("Login")}{" "}
+        </form>{" "}
+        <div>
+          <center>
+            <button disabled={false} className="btn-confirm">
+              Forget password
+            </button>
+          </center>
+        </div>
       </div>
     );
   }
