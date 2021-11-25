@@ -3,14 +3,14 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Reservation from "../pages/Reservation";
 import "./Navbar.css";
 import { withRouter } from "react-router-dom";
-
+import Axios from "axios";
 class Navbar extends React.Component {
   handleLogoutUser = async () => {
     const response = await this.props.logoutUser();
     console.log(response);
-    if (response.message === "Logout success") {
+    if (response.data.success) {
       this.props.history.replace("/login");
-    }
+    } else alert(response.data.message);
   };
 
   render() {

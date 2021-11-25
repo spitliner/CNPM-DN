@@ -111,7 +111,13 @@ class UserProvider extends Component {
   logoutUser = async () => {
     // const logoutResponse = await fetch();
     this.setState({ currentLoginUser: emptyUser });
-    return { message: "Logout success" };
+    let response = await Axios({
+      method: "GET",
+      data: {},
+      withCredentials: true,
+      url: url + "/api/logout", // Should set to .ENV or DEFINE CONST
+    });
+    return response;
   };
 
   render = () => {

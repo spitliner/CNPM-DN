@@ -61,7 +61,7 @@ router.get("/api/logout", (req, res) => {
         req.session.destroy(() => {
             req.logout();
         });
-        res.status(200).json({ success: false, message: "Logout successfully!" })
+        res.status(200).json({ success: true, message: "Logout successfully!" })
     }
 });
 router.post("/api/change_password", (req, res) => {

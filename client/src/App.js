@@ -1,6 +1,12 @@
 import "./App.css";
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
 import Register from "./pages/Register";
 import Reservation from "./pages/Reservation";
 import MenuDetail from "./pages/MenuDetail";
@@ -302,40 +308,65 @@ class App extends Component {
                   <Switch>
                     <Route
                       path="/menu/:id"
-                      render={(props) => <MenuDetail {...props} />}
+                      render={(props) => {
+                        if (currentLoginUser.email)
+                          return <MenuDetail {...props} />;
+                        return <Redirect to="/login" />;
+                      }}
                     />
                     <Route
                       path="/menu"
-                      render={(props) => (
-                        <Menu items={this.state.menuItems} {...props} />
-                      )}
+                      render={(props) => {
+                        if (currentLoginUser.email)
+                          return (
+                            <Menu items={this.state.menuItems} {...props} />
+                          );
+                        return <Redirect to="/login" />;
+                      }}
                     />
                     <Route
                       path="/account"
-                      render={(props) => <AccountInfo {...props} />}
+                      render={(props) => {
+                        if (currentLoginUser.email)
+                          return <AccountInfo {...props} />;
+                        return <Redirect to="/login" />;
+                      }}
                     />
                     <Route
                       path="/login"
-                      render={(props) => (
-                        <Login {...props} loginUser={this.loginUser} />
-                      )}
+                      render={(props) => {
+                        if (currentLoginUser.email)
+                          return <Redirect to="/menu" />;
+                        return <Login {...props} loginUser={this.loginUser} />;
+                      }}
                     />
                     <Route
                       path="/register"
-                      render={(props) => <Register {...props} />}
+                      render={(props) => {
+                        if (currentLoginUser.email)
+                          return <Redirect to="/menu" />;
+                        return <Register {...props} />;
+                      }}
                     />
                     <Route
                       path="/order"
-                      render={(props) => <Order {...props} />}
+                      render={(props) => {
+                        if (currentLoginUser.email) return <Order {...props} />;
+                        return <Redirect to="/login" />;
+                      }}
                     />
                     <Route
                       path="/reservation"
-                      render={(props) => (
-                        <Reservation
-                          {...props}
-                          onReservation={this.handleReservation}
-                        />
-                      )}
+                      render={(props) => {
+                        if (currentLoginUser.email)
+                          return (
+                            <Reservation
+                              {...props}
+                              onReservation={this.handleReservation}
+                            />
+                          );
+                        return <Redirect to="/login" />;
+                      }}
                     />
                     <Route
                       path="/forget_password"
@@ -343,12 +374,21 @@ class App extends Component {
                     />
                     <Route
                       path="/change_password"
-                      render={(props) => <ChangePassword {...props} />}
+                      render={(props) => {
+                        if (currentLoginUser.email)
+                          return <ChangePassword {...props} />;
+                        return <Redirect to="/login" />;
+                      }}
                     />
                     <Route
                       path="/change_information"
-                      render={(props) => <ChangeInformation {...props} />}
+                      render={(props) => {
+                        if (currentLoginUser.email)
+                          return <ChangeInformation {...props} />;
+                        return <Redirect to="/login" />;
+                      }}
                     />
+                    <Redirect to="/menu" /> {/*Otherwise redirect to menu*/}
                   </Switch>
                   <Footer />
                 </div>
