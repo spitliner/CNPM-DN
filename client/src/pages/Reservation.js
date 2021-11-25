@@ -5,7 +5,10 @@ class Reservation extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <ReservationForm onReservation={this.props.onReservation} />
+        <ReservationForm
+          onReservation={this.props.onReservation}
+          history={this.props.history}
+        />
       </React.Fragment>
     );
   }

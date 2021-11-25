@@ -2,15 +2,17 @@ import React, { Component } from "react";
 import Form from "../common/form";
 import JoiBase from "joi";
 import JoiDate from "@hapi/joi-date";
-
+import "./RegisterForm.css";
+import Axios from "axios";
 const Joi = JoiBase.extend(JoiDate); // extend Joi with Joi Date
-
+const url = "http://localhost:4000";
 class ReservationForm extends Form {
   constructor(props) {
     super(props);
     this.state = {
       data: { nop: "", date: "", time: "", message: "" },
       errors: {},
+      notification: "",
     };
   }
 
@@ -27,9 +29,24 @@ class ReservationForm extends Form {
     message: Joi.string().required().label("Message"),
   });
 
-  doSubmit = () => {
+  doSubmit = async () => {
     // Call the server
-    this.props.onReservation(this.state);
+    // /this.props.onReservation(this.state);
+    let response = await Axios({
+      method: "POST",
+      data: {
+        numberOfPersons: this.state.data.nop,
+        date: this.state.data.date,
+        time: this.state.data.time,
+        message: this.state.data.message,
+      },
+      withCredentials: true,
+      url: url + "/api/reservation", // Should set to .ENV or DEFINE CONST
+    });
+    if (response.data.success) {
+      alert(response.data.message);
+      this.props.history.push("/menu");
+    } else this.setState({ notification: response.data.message });
   };
 
   render() {
@@ -38,6 +55,7 @@ class ReservationForm extends Form {
     return (
       <div className="form-wrapper">
         <h1 className="form-title">Make Your Reservation</h1>
+        <p className="notification">{this.state.notification}</p>
         <form className="form-body" onSubmit={this.handleSumbit}>
           {this.renderInput("nop", "Number of persons")}
           {this.renderInput("date", "Date (YYYY/MM/DD)")}
