@@ -365,7 +365,11 @@ class App extends Component {
                     />
                     <Route
                       path="/forget_password"
-                      render={(props) => <ForgetPassword {...props} />}
+                      render={(props) => {
+                        if (currentLoginUser.email)
+                          return <ForgetPassword {...props} />;
+                        return <Redirect to="/menu" />;
+                      }}
                     />
                     <Route
                       path="/change_password"
