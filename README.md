@@ -30,8 +30,10 @@ Cài trước mongodb và enable mongodb trước khi chạy: [Link install guid
 - Form quên mật khẩu, đổi info (2 nút nằm trong account route sang 2 trang)
 - Order bấm submit --> Payment 2 nút: (Lưu thêm trong order paymentType)
 
-* pay online
+* Giao hàng hay trực tiếp
+* pay online --> Trang payment
 * pay trực tiếp --> Submit
+* (Thêm address nếu có thể)
 
 - Thêm trang payment (Minh hoạ) (Nếu pay online, không thì route về menu):
 
