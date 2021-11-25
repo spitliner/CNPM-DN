@@ -19,7 +19,7 @@ class AccountInfo extends React.Component {
                 <div className="account-info-wrapper">
                   <ul>
                     <li>
-                      <h1>Your account info</h1>
+                      <h1>Your information</h1>
                     </li>
                     <li>Name: {currentLoginUser.username}</li>
                     <li>Email: {currentLoginUser.email}</li>

@@ -5,8 +5,7 @@ var router = express.Router();
 var User = require('../models/user.model.js');
 var Reservation = require('../models/reservation.model');
 var ResetToken = require('../models/reset-token.model');
-var sendMail = require('../config/email-config');
-const sendEmail = require('../config/email-config');
+var sendEmail = require('../config/email-config');
 router.post("/api/login", (req, res, next) => {
     passport.authenticate("local.login", (err, user, info) => {
         if (err) {
