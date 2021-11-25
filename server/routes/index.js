@@ -111,7 +111,7 @@ router.post("/api/get_reset_code", (req, res) => {
         if (!user) return res.status(200).json({ success: false, message: "Email not found!" });
         ResetToken.findOne({ 'email': req.body.email }, function(err, resetToken) {
             if (err) return res.status(200).json({ success: false, message: err });
-            if (resetToken) return res.status(200).json({ success: true, message: "Success! Reset code has been sent to your email, please input your reset code in 3 minutes!" });
+            if (resetToken) return res.status(200).json({ success: true, message: "Reset code has been sent and will expire in 3 minutes, please check your mail box!" });
             // No reset token --> create one
             var code = Math.floor(Math.random() * (999999 - 100000) + 10000);
             var resetToken = new ResetToken();
