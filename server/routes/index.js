@@ -81,7 +81,7 @@ router.post("/api/change_user_info", (req, res) => {
     var email = req.user.email;
     User.findOne({ 'email': email }, function(err, user) {
         if (err) return res.status(200).json({ success: false, message: err });
-        if (req.body.newEmail) user.email = req.body.newEmail;
+        if (req.body.newUsername) user.username = req.body.newUsername;
         if (req.body.newAddress) user.address = req.body.newAddress;
         if (req.body.newPhone) user.phone = req.body.newPhone;
         user.save(function(err, result) {
