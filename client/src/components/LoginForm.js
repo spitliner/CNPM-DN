@@ -13,6 +13,7 @@ class LoginForm extends Form {
     this.state = {
       data: { email: "", password: "" },
       errors: {},
+      notification: "",
     };
   }
 
@@ -30,14 +31,17 @@ class LoginForm extends Form {
     if (response.success) {
       this.props.history.replace("/menu");
     } else {
-      alert(response.message);
+      this.setState({ notification: response.message });
     }
   };
-
+  handleForgetPassword = () => {
+    this.props.history.push("/forget_password");
+  };
   render() {
     return (
       <div className="form-wrapper">
-        <h1 className="form-title"> Member Login Page </h1>{" "}
+        <h1 className="form-title"> Member Login Page </h1>
+        <p className="notification">{this.state.notification}</p>
         <form className="form-body" onSubmit={this.handleSumbit}>
           {" "}
           {this.renderInput("email", "Email")}{" "}
@@ -47,11 +51,15 @@ class LoginForm extends Form {
         </form>{" "}
         <div>
           <center>
-            <button disabled={false} className="btn-confirm">
-              Forget password
-            </button>
-          </center>
-        </div>
+            <button
+              disabled={false}
+              className="btn-confirm"
+              onClick={this.handleForgetPassword}
+            >
+              Forget password{" "}
+            </button>{" "}
+          </center>{" "}
+        </div>{" "}
       </div>
     );
   }

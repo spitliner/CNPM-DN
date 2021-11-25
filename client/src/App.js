@@ -14,6 +14,7 @@ import { UserContext } from "./context/User";
 //import Axios from "axios";
 import CartProvider from "./context/Cart";
 import "./icons/fontawesome";
+import ForgetPassword from "./pages/ForgerPassword";
 
 class App extends Component {
   state = {
@@ -318,7 +319,6 @@ class App extends Component {
               render={(props) => <Register {...props} />}
             />
             <Route path="/order" render={(props) => <Order {...props} />} />
-
             <Route
               path="/reservation"
               render={(props) => (
@@ -327,6 +327,10 @@ class App extends Component {
                   onReservation={this.handleReservation}
                 />
               )}
+            />
+            <Route
+              path="/forget_password"
+              render={(props) => <ForgetPassword {...props} />}
             />
           </Switch>
           <Footer />

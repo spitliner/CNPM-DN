@@ -13,6 +13,7 @@ class RegisterForm extends Form {
     this.state = {
       data: { username: "", email: "", password: "", phone: "", address: "" },
       errors: {},
+      notification: "",
     };
   }
 
@@ -40,7 +41,7 @@ class RegisterForm extends Form {
       alert("Register success. Please login!");
       this.props.history.replace("/login");
     } else {
-      alert(response.message);
+      this.setState({ notification: response.message });
     }
   };
 
@@ -50,6 +51,7 @@ class RegisterForm extends Form {
     return (
       <div className="form-wrapper">
         <h1 className="form-title"> Member Register Page </h1>{" "}
+        <p className="notification">{this.state.notification}</p>
         <form className="form-body" onSubmit={this.handleSumbit}>
           {" "}
           {this.renderInput("email", "Email")}{" "}
