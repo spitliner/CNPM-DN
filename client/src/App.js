@@ -289,20 +289,15 @@ class App extends Component {
       <UserProvider>
         <CartProvider>
           <UserContext.Consumer>
-            {({ currentLoginUser }) => {
+            {({ currentLoginUser, logoutUser }) => {
               return (
                 <div>
-                  <UserContext.Consumer>
-                    {({ currentLoginUser, logoutUser }) => {
-                      return (
-                        <Navbar
-                          currentLoginUser={currentLoginUser}
-                          logoutUser={logoutUser}
-                          history={this.props.history}
-                        />
-                      );
-                    }}
-                  </UserContext.Consumer>
+                  <Navbar
+                    currentLoginUser={currentLoginUser}
+                    logoutUser={logoutUser}
+                    history={this.props.history}
+                  />
+                  );
                   {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
                   <Switch>

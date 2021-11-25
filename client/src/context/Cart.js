@@ -45,9 +45,9 @@ class CartProvider extends Component {
     };
   }
 
-  componentDidUpdate = () => {
+  /*componentDidUpdate = () => {
     console.log("Current Cart Context: ", this.state.cartItems);
-  };
+  };*/
 
   addItemToCart = (menuItem) => {
     let isItemExist = false;

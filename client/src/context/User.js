@@ -49,11 +49,10 @@ class UserProvider extends Component {
         },
       });
     }
-    console.log(this.state.currentLoginUser);
   };
-  componentDidUpdate = () => {
+  /*componentDidUpdate = () => {
     console.log("Current global user variable: ", this.state.currentLoginUser);
-  };
+  };*/
 
   registerUser = async ({ data }) => {
     console.log("Context register user function", data);
