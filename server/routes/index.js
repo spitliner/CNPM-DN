@@ -175,5 +175,13 @@ router.post("/api/check_reset_code", (req, res) => {
         return res.status(200).json({ success: false, message: err });
     }
 });
-
+router.get("/api/check_login", (req, res) => {
+    try {
+        if (req.isAuthenticated())
+            return res.status(200).json({ success: true, message: req.user })
+        return res.status(200).json({ success: false, message: {} })
+    } catch (err) {
+        return res.status(200).json({ success: false, message: err });
+    }
+});
 module.exports = router;

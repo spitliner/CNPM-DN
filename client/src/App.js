@@ -10,7 +10,7 @@ import Menu from "./pages/Menu";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { UserContext } from "./context/User";
+import UserProvider, { UserContext } from "./context/User";
 //import Axios from "axios";
 import CartProvider from "./context/Cart";
 import "./icons/fontawesome";
@@ -280,72 +280,83 @@ class App extends Component {
 
   render = () => {
     return (
-      <CartProvider>
-        <div>
+      <UserProvider>
+        <CartProvider>
           <UserContext.Consumer>
-            {({ currentLoginUser, logoutUser }) => {
+            {({ currentLoginUser }) => {
               return (
-                <Navbar
-                  currentLoginUser={currentLoginUser}
-                  logoutUser={logoutUser}
-                  history={this.props.history}
-                />
+                <div>
+                  <UserContext.Consumer>
+                    {({ currentLoginUser, logoutUser }) => {
+                      return (
+                        <Navbar
+                          currentLoginUser={currentLoginUser}
+                          logoutUser={logoutUser}
+                          history={this.props.history}
+                        />
+                      );
+                    }}
+                  </UserContext.Consumer>
+                  {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+                  <Switch>
+                    <Route
+                      path="/menu/:id"
+                      render={(props) => <MenuDetail {...props} />}
+                    />
+                    <Route
+                      path="/menu"
+                      render={(props) => (
+                        <Menu items={this.state.menuItems} {...props} />
+                      )}
+                    />
+                    <Route
+                      path="/account"
+                      render={(props) => <AccountInfo {...props} />}
+                    />
+                    <Route
+                      path="/login"
+                      render={(props) => (
+                        <Login {...props} loginUser={this.loginUser} />
+                      )}
+                    />
+                    <Route
+                      path="/register"
+                      render={(props) => <Register {...props} />}
+                    />
+                    <Route
+                      path="/order"
+                      render={(props) => <Order {...props} />}
+                    />
+                    <Route
+                      path="/reservation"
+                      render={(props) => (
+                        <Reservation
+                          {...props}
+                          onReservation={this.handleReservation}
+                        />
+                      )}
+                    />
+                    <Route
+                      path="/forget_password"
+                      render={(props) => <ForgetPassword {...props} />}
+                    />
+                    <Route
+                      path="/change_password"
+                      render={(props) => <ChangePassword {...props} />}
+                    />
+                    <Route
+                      path="/change_information"
+                      render={(props) => <ChangeInformation {...props} />}
+                    />
+                  </Switch>
+                  <Footer />
+                </div>
               );
             }}
           </UserContext.Consumer>
-          {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-          <Switch>
-            <Route
-              path="/menu/:id"
-              render={(props) => <MenuDetail {...props} />}
-            />
-            <Route
-              path="/menu"
-              render={(props) => (
-                <Menu items={this.state.menuItems} {...props} />
-              )}
-            />
-            <Route
-              path="/account"
-              render={(props) => <AccountInfo {...props} />}
-            />
-            <Route
-              path="/login"
-              render={(props) => (
-                <Login {...props} loginUser={this.loginUser} />
-              )}
-            />
-            <Route
-              path="/register"
-              render={(props) => <Register {...props} />}
-            />
-            <Route path="/order" render={(props) => <Order {...props} />} />
-            <Route
-              path="/reservation"
-              render={(props) => (
-                <Reservation
-                  {...props}
-                  onReservation={this.handleReservation}
-                />
-              )}
-            />
-            <Route
-              path="/forget_password"
-              render={(props) => <ForgetPassword {...props} />}
-            />
-            <Route
-              path="/change_password"
-              render={(props) => <ChangePassword {...props} />}
-            />
-            <Route
-              path="/change_information"
-              render={(props) => <ChangeInformation {...props} />}
-            />
-          </Switch>
-          <Footer />
-        </div>
-      </CartProvider>
+        </CartProvider>
+      </UserProvider>
     );
   };
 }

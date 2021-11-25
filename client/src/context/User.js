@@ -31,7 +31,26 @@ class UserProvider extends Component {
       },
     };
   }
-
+  componentDidMount = async () => {
+    let response = await Axios({
+      method: "GET",
+      data: {},
+      withCredentials: true,
+      url: url + "/api/check_login", // Should set to .ENV or DEFINE CONST
+    });
+    if (response.data.success) {
+      this.setState({
+        currentLoginUser: {
+          email: response.data.message.email,
+          password: response.data.message.password,
+          username: response.data.message.username,
+          address: response.data.message.address,
+          phone: response.data.message.phone,
+        },
+      });
+    }
+    console.log(this.state.currentLoginUser);
+  };
   componentDidUpdate = () => {
     console.log("Current global user variable: ", this.state.currentLoginUser);
   };
