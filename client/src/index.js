@@ -7,15 +7,18 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import UserProvider from "./context/User";
 import { BrowserRouter as Router } from "react-router-dom";
+import { CookiesProvider, useCookies } from "react-cookie";
 
 ReactDOM.render(
-  <UserProvider>
-    <React.StrictMode>
-      <Router>
-        <App />
-      </Router>
-    </React.StrictMode>
-  </UserProvider>,
+  <CookiesProvider>
+    <UserProvider>
+      <React.StrictMode>
+        <Router>
+          <App />
+        </Router>
+      </React.StrictMode>
+    </UserProvider>
+  </CookiesProvider>,
   document.getElementById("root")
 );
 

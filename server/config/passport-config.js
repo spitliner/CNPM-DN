@@ -26,9 +26,12 @@ passport.use('local.login', new LocalStrategy({
         if (!user) {
             return done(null, false);
         }
-        if (!user.validPassword(password)) {
-
-            return done(null, false);
+        try {
+            if (!user.validPassword(password)) {
+                return done(null, false);
+            }
+        } catch (err) {
+            return done(err);
         }
         return done(null, user);
     });

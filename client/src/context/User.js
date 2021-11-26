@@ -3,6 +3,8 @@ import { createContext, Component } from "react";
 import _ from "lodash";
 import { BrowserRouter as Router } from "react-router-dom";
 import Axios from "axios";
+import { withCookies, Cookies } from "react-cookie";
+import { instanceOf } from "prop-types";
 
 export const UserContext = createContext();
 
@@ -18,6 +20,9 @@ const emptyUser = {
 const url = "http://localhost:4000";
 
 class UserProvider extends Component {
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired,
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -38,7 +43,7 @@ class UserProvider extends Component {
       withCredentials: true,
       url: url + "/api/check_login", // Should set to .ENV or DEFINE CONST
     });
-    if (response.data.success) {
+    if (response.data.success && !this.state.email) {
       this.setState({
         currentLoginUser: {
           email: response.data.message.email,
@@ -104,6 +109,7 @@ class UserProvider extends Component {
         address: data.user.address,
       };
       this.setState({ currentLoginUser: user });
+      this.props.cookies.set("user", data.user.email, { path: "/" }); // set a cookie
     }
     return { message: response.data.message, success: response.data.success };
   };
@@ -116,6 +122,7 @@ class UserProvider extends Component {
       withCredentials: true,
       url: url + "/api/logout", // Should set to .ENV or DEFINE CONST
     });
+    this.props.cookies.remove("user"); // remove the cookie
     return response;
   };
 
@@ -139,4 +146,4 @@ class UserProvider extends Component {
 }
 
 // export default withRouter(UserProvider);
-export default UserProvider;
+export default withCookies(UserProvider);

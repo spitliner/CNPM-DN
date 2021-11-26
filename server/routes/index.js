@@ -7,22 +7,26 @@ var Reservation = require('../models/reservation.model');
 var ResetToken = require('../models/reset-token.model');
 var sendEmail = require('../config/email-config');
 router.post("/api/login", (req, res, next) => {
-    passport.authenticate("local.login", (err, user, info) => {
-        if (err) {
-            res.status(200).json({ message: err, success: false, user: null });
-        }
-        if (!user) {
-            res.status(200).json({ message: "Incorrect email or password!", success: false, user: null })
-        } else {
-            req.logIn(user, (err) => {
-                if (err) {
-                    res.status(200).json({ message: err, success: false, user: null })
-                } else {
-                    res.status(200).json({ message: "Successfully Authenticated!", success: true, user: req.user })
-                }
-            });
-        }
-    })(req, res, next);
+    try {
+        passport.authenticate("local.login", (err, user, info) => {
+            if (err) {
+                return res.status(200).json({ message: err, success: false, user: null });
+            }
+            if (!user) {
+                res.status(200).json({ message: "Incorrect email or password!", success: false, user: null })
+            } else {
+                req.logIn(user, (err) => {
+                    if (err) {
+                        res.status(200).json({ message: err, success: false, user: null })
+                    } else {
+                        res.status(200).json({ message: "Successfully Authenticated!", success: true, user: req.user })
+                    }
+                });
+            }
+        })(req, res, next);
+    } catch (err) {
+        res.status(200).json({ message: err, success: false, user: null });
+    }
 });
 router.post("/api/register", (req, res) => {
     try {

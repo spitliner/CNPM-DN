@@ -23,8 +23,13 @@ import "./icons/fontawesome";
 import ForgetPassword from "./pages/ForgerPassword";
 import ChangePassword from "./pages/ChangePassword";
 import ChangeInformation from "./pages/ChangeInformation";
+import { withCookies, Cookies } from "react-cookie";
+import { instanceOf } from "prop-types";
 
 class App extends Component {
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired,
+  };
   state = {
     menuItems: [
       {
@@ -279,125 +284,121 @@ class App extends Component {
       },
     ],
   };
-
   handleReservation = (message) => {
     console.log(message);
   };
 
   render = () => {
     return (
-      <UserProvider>
-        <CartProvider>
-          <UserContext.Consumer>
-            {({ currentLoginUser, logoutUser }) => {
-              return (
-                <div>
-                  <Navbar
-                    currentLoginUser={currentLoginUser}
-                    logoutUser={logoutUser}
-                    history={this.props.history}
-                  />
-                  );
-                  {/* A <Switch> looks through its children <Route>s and
+      <CartProvider>
+        <UserContext.Consumer>
+          {({ currentLoginUser, logoutUser }) => {
+            return (
+              <div>
+                <Navbar
+                  currentLoginUser={currentLoginUser}
+                  logoutUser={logoutUser}
+                  history={this.props.history}
+                />
+
+                {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-                  <Switch>
-                    <Route
-                      path="/menu/:id"
-                      render={(props) => {
-                        if (currentLoginUser.email)
-                          return <MenuDetail {...props} />;
-                        return <Redirect to="/login" />;
-                      }}
-                    />
-                    <Route
-                      path="/menu"
-                      render={(props) => {
-                        if (currentLoginUser.email)
-                          return (
-                            <Menu items={this.state.menuItems} {...props} />
-                          );
-                        return <Redirect to="/login" />;
-                      }}
-                    />
-                    <Route
-                      path="/account"
-                      render={(props) => {
-                        if (currentLoginUser.email)
-                          return <AccountInfo {...props} />;
-                        return <Redirect to="/login" />;
-                      }}
-                    />
-                    <Route
-                      path="/login"
-                      render={(props) => {
-                        if (currentLoginUser.email)
-                          return <Redirect to="/menu" />;
-                        return <Login {...props} loginUser={this.loginUser} />;
-                      }}
-                    />
-                    <Route
-                      path="/register"
-                      render={(props) => {
-                        if (currentLoginUser.email)
-                          return <Redirect to="/menu" />;
-                        return <Register {...props} />;
-                      }}
-                    />
-                    <Route
-                      path="/order"
-                      render={(props) => {
-                        if (currentLoginUser.email) return <Order {...props} />;
-                        return <Redirect to="/login" />;
-                      }}
-                    />
-                    <Route
-                      path="/reservation"
-                      render={(props) => {
-                        if (currentLoginUser.email)
-                          return (
-                            <Reservation
-                              {...props}
-                              onReservation={this.handleReservation}
-                            />
-                          );
-                        return <Redirect to="/login" />;
-                      }}
-                    />
-                    <Route
-                      path="/forget_password"
-                      render={(props) => {
-                        if (currentLoginUser.email)
-                          return <ForgetPassword {...props} />;
+                <Switch>
+                  <Route
+                    path="/menu/:id"
+                    render={(props) => {
+                      if (this.props.cookies.get("user"))
+                        return <MenuDetail {...props} />;
+                      return <Redirect to="/login" />;
+                    }}
+                  />
+                  <Route
+                    path="/menu"
+                    render={(props) => {
+                      if (this.props.cookies.get("user"))
+                        return <Menu items={this.state.menuItems} {...props} />;
+                      return <Redirect to="/login" />;
+                    }}
+                  />
+                  <Route
+                    path="/account"
+                    render={(props) => {
+                      if (this.props.cookies.get("user"))
+                        return <AccountInfo {...props} />;
+                      return <Redirect to="/login" />;
+                    }}
+                  />
+                  <Route
+                    path="/login"
+                    render={(props) => {
+                      if (this.props.cookies.get("user"))
                         return <Redirect to="/menu" />;
-                      }}
-                    />
-                    <Route
-                      path="/change_password"
-                      render={(props) => {
-                        if (currentLoginUser.email)
-                          return <ChangePassword {...props} />;
-                        return <Redirect to="/login" />;
-                      }}
-                    />
-                    <Route
-                      path="/change_information"
-                      render={(props) => {
-                        if (currentLoginUser.email)
-                          return <ChangeInformation {...props} />;
-                        return <Redirect to="/login" />;
-                      }}
-                    />
-                    <Redirect to="/menu" /> {/*Otherwise redirect to menu*/}
-                  </Switch>
-                  <Footer />
-                </div>
-              );
-            }}
-          </UserContext.Consumer>
-        </CartProvider>
-      </UserProvider>
+                      return <Login {...props} loginUser={this.loginUser} />;
+                    }}
+                  />
+                  <Route
+                    path="/register"
+                    render={(props) => {
+                      if (this.props.cookies.get("user"))
+                        return <Redirect to="/menu" />;
+                      return <Register {...props} />;
+                    }}
+                  />
+                  <Route
+                    path="/order"
+                    render={(props) => {
+                      if (this.props.cookies.get("user"))
+                        return <Order {...props} />;
+                      return <Redirect to="/login" />;
+                    }}
+                  />
+                  <Route
+                    path="/reservation"
+                    render={(props) => {
+                      if (this.props.cookies.get("user"))
+                        return (
+                          <Reservation
+                            {...props}
+                            onReservation={this.handleReservation}
+                          />
+                        );
+                      return <Redirect to="/login" />;
+                    }}
+                  />
+                  <Route
+                    path="/forget_password"
+                    render={(props) => {
+                      if (this.props.cookies.get("user"))
+                        return <Redirect to="/menu" />;
+                      return <ForgetPassword {...props} />;
+                    }}
+                  />
+                  <Route
+                    path="/change_password"
+                    render={(props) => {
+                      if (this.props.cookies.get("user"))
+                        return <ChangePassword {...props} />;
+                      return <Redirect to="/login" />;
+                    }}
+                  />
+                  <Route
+                    path="/change_information"
+                    render={(props) => {
+                      if (this.props.cookies.get("user"))
+                        return <ChangeInformation {...props} />;
+                      return <Redirect to="/login" />;
+                    }}
+                  />
+                  <Redirect to="/menu" /> {/*Otherwise redirect to menu*/}
+                </Switch>
+                <Footer />
+              </div>
+            );
+          }}
+        </UserContext.Consumer>
+      </CartProvider>
     );
   };
 }
 
-export default App;
+export default withCookies(App);
