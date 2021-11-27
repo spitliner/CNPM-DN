@@ -11,7 +11,11 @@ class ChangeInformationForm extends Form {
   constructor(props) {
     super(props);
     this.state = {
-      data: { username: "", phone: "", address: "" },
+      data: {
+        username: this.props.user.username,
+        phone: this.props.user.phone,
+        address: this.props.user.address,
+      },
       errors: {},
       notification: "",
     };
