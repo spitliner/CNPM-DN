@@ -203,8 +203,13 @@ const menuItems = [
 ];
 
 class OrderDish extends React.Component {
+  componentDidMount = () => {
+    console.log(this.props.cartItems);
+  };
+
   render() {
     const { cartItems, addItemToCart, reduceItemFromCart } = this.props;
+
     return (
       <div>
         {cartItems.map((dish) => {
@@ -252,48 +257,52 @@ class OrderMain extends React.Component {
     return (
       <CartContext.Consumer>
         {({ cartItems, addItemToCart, reduceItemFromCart, totalCost }) => {
-          return (
-            totalCost !== 0 && (
-              <div className="order">
-                <h1>Your Current Order</h1>
-                <div className="order_main">
-                  <div className="order_header">
-                    <div className="dish_id">Food Id</div>
-                    <div className="dish_image_display"></div>
-                    <div className="dish_name">Food Name</div>
-                    <div className="dish_btn"></div>
-                    <div className="dish_quanity">Quantities</div>
-                    <div className="dish_btn"></div>
-                    <div className="dish_price">Price Per Unit</div>
-                  </div>
-                  <OrderDish
-                    addItemToCart={addItemToCart}
-                    reduceItemFromCart={reduceItemFromCart}
-                    cartItems={cartItems}
-                  />
-                  <div className="order_header">
-                    <div className="dish_image_display"></div>
-                    <div className="dish_name"></div>
-                    <div className="dish_quanity">Totals Cost</div>
-                    <div className="dish_price">{totalCost.toFixed(2)}</div>
-                  </div>
-                  <div className="payment">
-                    <div className="payment_text">
-                      <h1>Finish Payment</h1>
+          if (totalCost === 0) {
+            return <h1 className="alert-message">Please make your order !</h1>;
+          } else {
+            return (
+              totalCost !== 0 && (
+                <div className="order">
+                  <h1>Your Current Order</h1>
+                  <div className="order_main">
+                    <div className="order_header">
+                      <div className="dish_id">Food Id</div>
+                      <div className="dish_image_display"></div>
+                      <div className="dish_name">Food Name</div>
+                      <div className="dish_btn"></div>
+                      <div className="dish_quanity">Quantities</div>
+                      <div className="dish_btn"></div>
+                      <div className="dish_price">Price Per Unit</div>
                     </div>
-                    <button
-                      className="confirm-btn"
-                      onClick={() => {
-                        this.props.history.push("/payment");
-                      }}
-                    >
-                      Proceed Payment
-                    </button>
+                    <OrderDish
+                      addItemToCart={addItemToCart}
+                      reduceItemFromCart={reduceItemFromCart}
+                      cartItems={cartItems}
+                    />
+                    <div className="order_header">
+                      <div className="dish_image_display"></div>
+                      <div className="dish_name"></div>
+                      <div className="dish_quanity">Totals Cost</div>
+                      <div className="dish_price">{totalCost.toFixed(2)}</div>
+                    </div>
+                    <div className="payment">
+                      <div className="payment_text">
+                        <h1>Finish Payment</h1>
+                      </div>
+                      <button
+                        className="confirm-btn"
+                        onClick={() => {
+                          this.props.history.push("/payment");
+                        }}
+                      >
+                        Proceed Payment
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )
-          );
+              )
+            );
+          }
         }}
       </CartContext.Consumer>
     );

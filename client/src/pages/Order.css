@@ -133,3 +133,10 @@
 .btn:hover {
   text-decoration: none;
 }
+
+.alert-message {
+  font-size: 300%;
+  text-align: center;
+  margin-top: 200px;
+  margin-bottom: 200px;
+}
