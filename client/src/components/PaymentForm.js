@@ -140,31 +140,35 @@ class PaymentForm extends Form {
 
   render() {
     return (
-      <div className="form-wrapper">
-        <h1 className="form-title"> Payment Info Page </h1>{" "}
-        <p className="notification">{this.state.notification}</p>
-        <form className="form-body" onSubmit={this.handleSumbit}>
-          {this.renderSelect(
-            "paymentType",
-            "Payment Type",
-            this.state.paymentType
-          )}{" "}
-          {this.renderSelect(
-            "takeAwayOrEatIn",
-            "Take Away Or Eat In",
-            this.state.takeAwayOrEatIn
-          )}{" "}
-          {this.renderInput(
-            "address",
-            "Address (Omit this field if you are eating in)"
-          )}{" "}
-          {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
-          {this.state.data.paymentType == "Online" &&
-            this.renderSelect("bank", "Bank", this.state.banks)}
-          {this.state.data.paymentType == "Online" &&
-            this.renderInput("creditCardNumber", "Credit Card Number")}
-          {this.renderButton("Finish Your Payment")}{" "}
-        </form>
+      <div className="form-background-4">
+        <div className="form-outer-dark">
+          <div className="form-wrapper">
+            <h1 className="form-title-light"> Payment Info Page </h1>{" "}
+            <p className="notification">{this.state.notification}</p>
+            <form className="form-body" onSubmit={this.handleSumbit}>
+              {this.renderSelect(
+                "paymentType",
+                "Payment Type",
+                this.state.paymentType
+              )}{" "}
+              {this.renderSelect(
+                "takeAwayOrEatIn",
+                "Take Away Or Eat In",
+                this.state.takeAwayOrEatIn
+              )}{" "}
+              {this.renderInput(
+                "address",
+                "Address (Omit this field if you are eating in)"
+              )}{" "}
+              {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
+              {this.state.data.paymentType == "Online" &&
+                this.renderSelect("bank", "Bank", this.state.banks)}
+              {this.state.data.paymentType == "Online" &&
+                this.renderInput("creditCardNumber", "Credit Card Number")}
+              {this.renderButton("Finish Your Payment")}{" "}
+            </form>
+          </div>
+        </div>
       </div>
     );
   }
