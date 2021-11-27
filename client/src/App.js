@@ -25,6 +25,7 @@ import ForgetPassword from "./pages/ForgerPassword";
 import ChangePassword from "./pages/ChangePassword";
 import ChangeInformation from "./pages/ChangeInformation";
 import Introduction from "./pages/Introduction";
+import Contact from "./pages/Contact.js";
 import { withCookies, Cookies } from "react-cookie";
 import { instanceOf } from "prop-types";
 
@@ -378,6 +379,12 @@ class App extends Component {
                     path="/introduction"
                     render={(props) => {
                       return <Introduction {...props} />;
+                    }}
+                  />
+                  <Route
+                    path="/contact"
+                    render={(props) => {
+                      return <Contact {...props} />;
                     }}
                   />
                   <Redirect to="/menu" /> {/*Otherwise redirect to menu*/}
