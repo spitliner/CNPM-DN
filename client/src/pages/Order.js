@@ -263,7 +263,7 @@ class OrderMain extends React.Component {
             return (
               totalCost !== 0 && (
                 <div className="order">
-                  <h1>Your Current Order</h1>
+                  <h1 className="form-title"> Payment Info Page </h1>
                   <div className="order_main">
                     <div className="order_header">
                       <div className="dish_id">Food Id</div>
