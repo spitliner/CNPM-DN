@@ -68,7 +68,14 @@ class Form extends React.Component {
     data[evt.currentTarget.name] = evt.currentTarget.value;
     this.setState({ data: data, errors });
   };
-
+  handleChangeNoValidate = (evt) => {
+    const input = evt.currentTarget;
+    const errors = { ...this.state.errors };
+    //const errorMessage = this.validateProperty(input);
+    const data = { ...this.state.data };
+    data[evt.currentTarget.name] = evt.currentTarget.value;
+    this.setState({ data: data, errors });
+  };
   renderButton(label) {
     return (
       <button disabled={false} className="btn-confirm">
@@ -91,7 +98,20 @@ class Form extends React.Component {
       />
     );
   }
+  renderInputNoChangeValidate(name, label, type = "text") {
+    const { data, errors } = this.state;
 
+    return (
+      <Input
+        type={type}
+        name={name}
+        error={errors[name]}
+        value={data[name]}
+        label={label}
+        onChange={this.handleChangeNoValidate}
+      />
+    );
+  }
   // renderTextarea(name, label, type = "") {
   //   const { data, errors } = this.state;
 

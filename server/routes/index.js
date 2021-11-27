@@ -5,6 +5,8 @@ var router = express.Router();
 var User = require('../models/user.model.js');
 var Reservation = require('../models/reservation.model');
 var ResetToken = require('../models/reset-token.model');
+var Voucher = require('../models/voucher.model');
+var ApplyVoucher = require('../models/apply-voucher.model')
 var sendEmail = require('../config/email-config');
 router.post("/api/login", (req, res, next) => {
     try {
@@ -184,6 +186,31 @@ router.get("/api/check_login", (req, res) => {
         if (req.isAuthenticated())
             return res.status(200).json({ success: true, message: req.user })
         return res.status(200).json({ success: false, message: {} })
+    } catch (err) {
+        return res.status(200).json({ success: false, message: err });
+    }
+});
+router.post("/api/voucher", (req, res) => {
+    try {
+        if (!req.isAuthenticated())
+            return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" })
+        Voucher.findOne({ 'voucherCode': req.body.voucherCode }, function(err, voucher) {
+            if (err) return res.status(200).json({ success: false, message: err });
+            if (!voucher) return res.status(200).json({ success: false, message: 'Voucher not found!' });
+            ApplyVoucher.findOne({ 'email': req.user.email }, function(err, applyVoucher) {
+                if (err) return res.status(200).json({ success: false, message: err });
+                if (applyVoucher && applyVoucher.voucherCode == voucher.voucherCode)
+                    return res.status(200).json({ success: true, message: "Apply voucher successfully!", discount: voucher.discount });
+                if (applyVoucher) applyVoucher.delete(); // apply only 1 voucher
+                var newApplyVoucher = new ApplyVoucher();
+                newApplyVoucher.email = req.user.email;
+                newApplyVoucher.voucherCode = req.body.voucherCode;
+                newApplyVoucher.save(function(err, result) {
+                    if (err) res.status(200).json({ success: false, message: err });
+                    else res.status(200).json({ success: true, message: "Apply voucher successfully!", discount: voucher.discount });
+                });
+            });
+        });
     } catch (err) {
         return res.status(200).json({ success: false, message: err });
     }

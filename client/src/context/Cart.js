@@ -12,6 +12,7 @@ class CartProvider extends Component {
     super(props);
     this.state = {
       cartItems: [],
+      discount: 0,
     };
   }
 
@@ -99,6 +100,13 @@ class CartProvider extends Component {
     return total;
   };
 
+  applyVoucher = (response) => {
+    if (response.data.discount != this.state.discount)
+      this.setState({ discount: response.data.discount });
+  };
+  getFinal = () => {
+    return this.getTotal() * (1 - this.state.discount / 100);
+  };
   submitCart = () => {
     console.log(this.state.cartItems);
   };
@@ -112,6 +120,9 @@ class CartProvider extends Component {
           reduceItemFromCart: this.reduceItemFromCart,
           removeItemFromCart: this.removeItemFromCart,
           totalCost: this.getTotal(),
+          applyVoucher: this.applyVoucher,
+          discount: this.state.discount,
+          finalCost: this.getFinal(),
         }}
       >
         {this.props.children}

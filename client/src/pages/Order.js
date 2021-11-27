@@ -3,7 +3,7 @@ import { CartContext } from "../context/Cart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Order.css";
 import "../icons/fontawesome";
-
+import VoucherForm from "../components/VoucherForm";
 const menuItems = [
   {
     id: 1,
@@ -219,7 +219,7 @@ class OrderDish extends React.Component {
                 <p>{dish.id}</p>
               </div>
               <div className="dish_image_display">
-                <img className="dish_image" source={dish.imgUrl} />
+                <img className="dish_image" src={dish.imgUrl} />
               </div>
               <div className="dish_name">
                 <p>{dish.name}</p>
@@ -256,7 +256,15 @@ class OrderMain extends React.Component {
 
     return (
       <CartContext.Consumer>
-        {({ cartItems, addItemToCart, reduceItemFromCart, totalCost }) => {
+        {({
+          cartItems,
+          addItemToCart,
+          reduceItemFromCart,
+          totalCost,
+          applyVoucher,
+          discount,
+          finalCost,
+        }) => {
           if (totalCost === 0) {
             return <h1 className="alert-message">Please make your order !</h1>;
           } else {
@@ -280,22 +288,44 @@ class OrderMain extends React.Component {
                       cartItems={cartItems}
                     />
                     <div className="order_header">
+                      <div className="dish_id"></div>
                       <div className="dish_image_display"></div>
                       <div className="dish_name"></div>
+                      <div className="dish_btn"></div>
                       <div className="dish_quanity">Totals Cost</div>
+                      <div className="dish_btn"></div>
                       <div className="dish_price">{totalCost.toFixed(2)}</div>
                     </div>
+
+                    <div className="order_header">
+                      <div className="dish_id"></div>
+                      <div className="dish_image_display"></div>
+                      <div className="dish_name"></div>
+                      <div className="dish_btn"></div>
+                      <div className="dish_quanity">Discount</div>
+                      <div className="dish_btn"></div>
+                      <div className="dish_price">- {discount} %</div>
+                    </div>
+
+                    <div className="order_header">
+                      <div className="dish_id"></div>
+                      <div className="dish_image_display"></div>
+                      <div className="dish_name"></div>
+                      <div className="dish_btn"></div>
+                      <div className="dish_quanity">Totals Cost</div>
+                      <div className="dish_btn"></div>
+                      <div className="dish_price">{finalCost.toFixed(2)}</div>
+                    </div>
+
+                    <VoucherForm applyVoucher={applyVoucher} />
                     <div className="payment">
-                      <div className="payment_text">
-                        <h1>Finish Payment</h1>
-                      </div>
                       <button
                         className="confirm-btn"
                         onClick={() => {
                           this.props.history.push("/payment");
                         }}
                       >
-                        Proceed Payment
+                        Finish Payment
                       </button>
                     </div>
                   </div>
@@ -313,7 +343,7 @@ class Order extends React.Component {
   render() {
     return (
       <CartContext.Consumer>
-        {({ cartItems, addItemToCart, reduceItemFromCart }) => {
+        {({ cartItems, addItemToCart, reduceItemFromCart, applyVoucher }) => {
           return (
             <div>
               <OrderMain history={this.props.history} cartItems={cartItems} />
