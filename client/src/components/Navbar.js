@@ -4,7 +4,14 @@ import Reservation from "../pages/Reservation";
 import "./Navbar.css";
 import { withRouter } from "react-router-dom";
 import Axios from "axios";
+import { withCookies, Cookies } from "react-cookie";
+import { instanceOf } from "prop-types";
+
 class Navbar extends React.Component {
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired,
+  };
+
   handleLogoutUser = async () => {
     const response = await this.props.logoutUser();
     console.log(response);
@@ -35,7 +42,7 @@ class Navbar extends React.Component {
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
-              {!(currentLoginUser.username === "") && (
+              {this.props.cookies.get("user") && (
                 <li>
                   <Link className="nav-link" to="/order">
                     <i className="bi bi-cart3"></i>
@@ -47,16 +54,18 @@ class Navbar extends React.Component {
                   Menu
                 </Link>
               </li>
-              <li>
-                <Link className="nav-link" to="/reservation">
-                  Reservation
-                </Link>
-              </li>
+              {this.props.cookies.get("user") && (
+                <li>
+                  <Link className="nav-link" to="/reservation">
+                    Reservation
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            {currentLoginUser.username === "" && (
+            {!this.props.cookies.get("user") && (
               <ul className="navbar-nav ml-auto">
                 <li>
                   <Link className="nav-link" to="/login">
@@ -70,7 +79,7 @@ class Navbar extends React.Component {
                 </li>
               </ul>
             )}{" "}
-            {!(currentLoginUser.username === "") && (
+            {this.props.cookies.get("user") && (
               <ul className="navbar-nav ml-auto">
                 <li>
                   <Link className="nav-link" to="/account">
@@ -86,37 +95,9 @@ class Navbar extends React.Component {
             )}
           </div>
         </nav>
-
-        <nav>
-          {/* <ul>
-          <li>
-            <Link to="/menu/1">
-              Menu Detail
-            </Link>
-          </li>
-          <li>
-            <Link to="/menu">Menu</Link>
-          </li>
-          <li>
-            <Link to="/account">Account</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
-          <li>
-            <Link to="/order">Order</Link>
-          </li>
-          <li>
-            <Link to="/reservation">Reservation</Link>
-          </li>
-        </ul> */}
-        </nav>
       </div>
     );
   }
 }
 
-export default withRouter(Navbar);
+export default withRouter(withCookies(Navbar));

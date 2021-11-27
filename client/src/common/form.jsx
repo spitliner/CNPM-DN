@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Input from "./input";
 import Select from "./select";
 import Textarea from "./textarea";
+import Joi from "joi";
 
 class Form extends React.Component {
   //
@@ -35,20 +36,18 @@ class Form extends React.Component {
   // Fire when input field has value change, passed in the target input field to get name, value to validate
   validateProperty = (input) => {
     // Computed properties [run-time var] in ES6
-    // const obj = { [input.name]: input.value };
-    // console.log(obj);
-    // const subSchema = this.schema.extract(input.name);
-    // console.log(subSchema);
-    // const result = subSchema.validate(obj);
-    // console.log("field result", result);
-    // const { error } = result;
-    // return error ? error.details[0].message : null;
+    const obj = { [input.name]: input.value };
+    const subSchema = this.schema.extract([input.name]);
+    const result = subSchema.validate(input.value);
+    const { error } = result;
+    return error ? error.details[0].message : null;
   };
 
   // Fire when form is submit
   handleSumbit = (evt) => {
     evt.preventDefault();
     const errors = this.validate();
+    console.log(errors);
     this.setState({ errors: errors || {} });
     if (errors) return;
     this.doSubmit();

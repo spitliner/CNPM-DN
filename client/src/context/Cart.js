@@ -5,36 +5,6 @@ import Axios from "axios";
 
 export const CartContext = createContext();
 
-const exampleCartItems = [
-  {
-    id: 23,
-    imgUrl:
-      "https://jandatri.com/wp-content/uploads/2019/02/Black-Forest-Cake-Slice-500x281.jpg",
-    name: "TIRAMISU CAKE",
-    category: "OTHER",
-    pricePU: 4.8,
-    quantity: 2,
-  },
-  {
-    id: 24,
-    imgUrl:
-      "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
-    name: "STRAWBERRY ICE-DREAM",
-    category: "OTHER",
-    pricePU: 4.8,
-    quantity: 1,
-  },
-  {
-    id: 25,
-    imgUrl:
-      "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
-    name: "STRAWBERRY ICE-DREAM",
-    category: "OTHER",
-    pricePU: 4.8,
-    quantity: 3,
-  },
-];
-
 const url = "http://localhost:4000";
 
 class CartProvider extends Component {

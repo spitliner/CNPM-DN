@@ -244,38 +244,43 @@ function PostItem(props) {
       <h2 className="post-Ingredient">Ingredient</h2>
       <p className="post-desc">{props.food_description}</p>
       <h3 className="post-price">Prices: &nbsp; {props.food_price}$</h3>
-      <button
-        onClick={() => {
-          props.addItemToCart(menuItems[props.id]);
-          props.history.push("/menu");
-        }}
-        className="post-button-ATC"
-      >
-        Add To Cart
-      </button>
+      {props.cookies.get("user") && (
+        <button
+          onClick={() => {
+            props.addItemToCart(menuItems[props.id]);
+            props.history.push("/menu");
+          }}
+          className="post-button-ATC"
+        >
+          Add To Cart
+        </button>
+      )}
     </div>
   );
 }
 
 class MenuDetail extends React.Component {
   render() {
-    const { history, match, location } = this.props;
+    const { history, match, location, cookies } = this.props;
 
     const id = match.params.id;
+
+    const itemIndex = menuItems.findIndex((item) => item.id == id);
 
     return (
       <CartContext.Consumer>
         {({ cartItems, addItemToCart, reduceItemFromCart }) => {
           return (
             <PostItem
-              key={menuItems[id].id}
+              key={menuItems[itemIndex].id}
               id={id}
-              food_name={menuItems[id].name}
-              image={menuItems[id].imgUrl}
-              food_description={menuItems[id].description}
-              food_price={menuItems[id].pricePU}
+              food_name={menuItems[itemIndex].name}
+              image={menuItems[itemIndex].imgUrl}
+              food_description={menuItems[itemIndex].description}
+              food_price={menuItems[itemIndex].pricePU}
               history={history}
               addItemToCart={addItemToCart}
+              cookies={this.props.cookies}
             />
           );
         }}

@@ -16,6 +16,7 @@ import Menu from "./pages/Menu";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Payment from "./pages/Payment";
 import UserProvider, { UserContext } from "./context/User";
 //import Axios from "axios";
 import CartProvider from "./context/Cart";
@@ -253,36 +254,6 @@ class App extends Component {
         description: "DESSERT",
       },
     ],
-
-    cartsItem: [
-      {
-        id: 23,
-        imgUrl:
-          "https://jandatri.com/wp-content/uploads/2019/02/Black-Forest-Cake-Slice-500x281.jpg",
-        name: "TIRAMISU CAKE",
-        category: "OTHER",
-        pricePU: 4.8,
-        quantity: 2,
-      },
-      {
-        id: 24,
-        imgUrl:
-          "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
-        name: "STRAWBERRY ICE-DREAM",
-        category: "OTHER",
-        pricePU: 4.8,
-        quantity: 1,
-      },
-      {
-        id: 25,
-        imgUrl:
-          "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
-        name: "STRAWBERRY ICE-DREAM",
-        category: "OTHER",
-        pricePU: 4.8,
-        quantity: 3,
-      },
-    ],
   };
   handleReservation = (message) => {
     console.log(message);
@@ -296,6 +267,7 @@ class App extends Component {
             return (
               <div>
                 <Navbar
+                  cookies={this.props.cookies}
                   currentLoginUser={currentLoginUser}
                   logoutUser={logoutUser}
                   history={this.props.history}
@@ -307,17 +279,21 @@ class App extends Component {
                   <Route
                     path="/menu/:id"
                     render={(props) => {
-                      if (this.props.cookies.get("user"))
-                        return <MenuDetail {...props} />;
-                      return <Redirect to="/login" />;
+                      return (
+                        <MenuDetail cookies={this.props.cookies} {...props} />
+                      );
                     }}
                   />
                   <Route
                     path="/menu"
                     render={(props) => {
-                      if (this.props.cookies.get("user"))
-                        return <Menu items={this.state.menuItems} {...props} />;
-                      return <Redirect to="/login" />;
+                      return (
+                        <Menu
+                          cookies={this.props.cookies}
+                          items={this.state.menuItems}
+                          {...props}
+                        />
+                      );
                     }}
                   />
                   <Route
@@ -349,6 +325,14 @@ class App extends Component {
                     render={(props) => {
                       if (this.props.cookies.get("user"))
                         return <Order {...props} />;
+                      return <Redirect to="/login" />;
+                    }}
+                  />
+                  <Route
+                    path="/payment"
+                    render={(props) => {
+                      if (this.props.cookies.get("user"))
+                        return <Payment {...props} />;
                       return <Redirect to="/login" />;
                     }}
                   />

@@ -11,7 +11,7 @@ class AccountInfo extends React.Component {
   };
   render() {
     return (
-      <UserContext>
+      <UserContext.Consumer>
         {({ currentLoginUser }) => {
           return (
             currentLoginUser.username !== "" && (
@@ -45,7 +45,7 @@ class AccountInfo extends React.Component {
             )
           );
         }}
-      </UserContext>
+      </UserContext.Consumer>
     );
   }
 }

@@ -1,14 +1,14 @@
 import React from "react";
 import { CartContext } from "../context/Cart";
 
-const MenuList = ({ items, history }) => {
+const MenuList = ({ items, history, cookies }) => {
   return (
     <CartContext.Consumer>
       {({ cartItems, addItemToCart, reduceItemFromCart }) => {
         return (
           <div className="section-center">
             {items.map((item) => {
-              const { id, name, imgUrl, desc, pricePU } = item;
+              const { id, name, imgUrl, description, pricePU } = item;
               return (
                 <div key={id} className="menu-item">
                   <img
@@ -20,17 +20,21 @@ const MenuList = ({ items, history }) => {
                     }}
                   />
                   <div className="item-info">
-                    <header>
-                      <h4> {name} </h4>
-                      <h4 className="price"> $ {pricePU} </h4>
-                    </header>
-                    <p className="item-text"> {desc} </p>
-                    <button
-                      className="cart"
-                      onClick={() => addItemToCart(item)}
-                    >
-                      Add to cart
-                    </button>
+                    <div className="sub-item-info">
+                      <header>
+                        <h4> {name} </h4>
+                        <div className="price"> $ {pricePU} </div>
+                      </header>
+                      <p className="item-text"> {description} </p>
+                      {cookies.get("user") && (
+                        <button
+                          className="cart"
+                          onClick={() => addItemToCart(item)}
+                        >
+                          Add to cart
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               );

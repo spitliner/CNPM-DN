@@ -113,15 +113,7 @@
   align-items: center;
 }
 
-.btn_width {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-}
-
-.btn {
+.confirm-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -135,6 +127,7 @@
   background: #e1651f;
   padding: 16px 28px 16px 28px;
   text-decoration: none;
+  border: none;
 }
 
 .btn:hover {

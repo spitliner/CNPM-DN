@@ -279,9 +279,16 @@ class OrderMain extends React.Component {
                   </div>
                   <div className="payment">
                     <div className="payment_text">
-                      <h1>Finish Online Payment</h1>
+                      <h1>Finish Payment</h1>
                     </div>
-                    <button className="btn btn_width">Proceed Payment</button>
+                    <button
+                      className="confirm-btn"
+                      onClick={() => {
+                        this.props.history.push("/payment");
+                      }}
+                    >
+                      Proceed Payment
+                    </button>
                   </div>
                 </div>
               </div>
@@ -300,7 +307,7 @@ class Order extends React.Component {
         {({ cartItems, addItemToCart, reduceItemFromCart }) => {
           return (
             <div>
-              <OrderMain cartItems={cartItems} />
+              <OrderMain history={this.props.history} cartItems={cartItems} />
             </div>
           );
         }}
@@ -310,49 +317,3 @@ class Order extends React.Component {
 }
 
 export default Order;
-
-{
-  /* <button
-                onClick={() => {
-                  addItemToCart(menuItems[0]);
-                }}
-              >
-                Add Item 0
-              </button>
-              <button
-                onClick={() => {
-                  addItemToCart(menuItems[1]);
-                }}
-              >
-                Add Item 1
-              </button>
-              <button
-                onClick={() => {
-                  addItemToCart(menuItems[2]);
-                }}
-              >
-                Add Item 2
-              </button>
-              <button
-                onClick={() => {
-                  reduceItemFromCart(menuItems[0]);
-                }}
-              >
-                Remove Item 0
-              </button>
-              <button
-                onClick={() => {
-                  reduceItemFromCart(menuItems[1]);
-                }}
-              >
-                Remove Item 1
-              </button>
-              <button
-                onClick={() => {
-                  reduceItemFromCart(menuItems[2]);
-                }}
-              >
-                Remove Item 2
-              </button>
-              <h1>Your Order</h1> */
-}
