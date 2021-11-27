@@ -46,21 +46,25 @@ class ChangePasswordForm extends Form {
   };
   render() {
     return (
-      <div className="form-wrapper">
-        <h1 className="form-title"> Change Password Page </h1>
-        <p className="notification">{this.state.notification}</p>
-        <form className="form-body" onSubmit={this.handleSumbit}>
-          {" "}
-          {this.renderInput("oldPassword", "Old Password", "password")}{" "}
-          {this.renderInput("newPassword", "New Password", "password")}{" "}
-          {this.renderInput(
-            "confirmNewPassword",
-            "Confirm New Password",
-            "password"
-          )}{" "}
-          {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
-          {this.renderButton("Confirm")}{" "}
-        </form>{" "}
+      <div className="form-background-2">
+        <div className="form-outer">
+          <div className="form-wrapper">
+            <h1 className="form-title"> Change Password Page </h1>
+            <p className="notification">{this.state.notification}</p>
+            <form className="form-body" onSubmit={this.handleSumbit}>
+              {" "}
+              {this.renderInput("oldPassword", "Old Password", "password")}{" "}
+              {this.renderInput("newPassword", "New Password", "password")}{" "}
+              {this.renderInput(
+                "confirmNewPassword",
+                "Confirm New Password",
+                "password"
+              )}{" "}
+              {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
+              {this.renderButton("Confirm")}{" "}
+            </form>{" "}
+          </div>
+        </div>
       </div>
     );
   }

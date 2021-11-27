@@ -89,35 +89,40 @@ class ForgetPasswordForm extends Form {
   };
   render() {
     return (
-      <div>
-        <div className="forget-password-form-wrapper">
-          <h1 className="forget-password-form-title"> Forget Password Page </h1>{" "}
-          <p className="notification">{this.state.notification}</p>
-          <form
-            className="forget-password-form-body"
-            onSubmit={this.handleSumbitEmail}
-          >
-            {" "}
-            {this.renderInput("email", "Email")}{" "}
-            {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
-            <button disabled={false} className="btn-confirm">
-              Get reset code
-            </button>
-          </form>{" "}
-        </div>
-        <div className="form-wrapper">
-          <form className="form-body" onSubmit={this.handleSumbit}>
-            {" "}
-            {this.renderInput("code", "Code")}{" "}
-            {this.renderInput("password", "Password", "password")}{" "}
-            {this.renderInput(
-              "confirmPassword",
-              "Confirm Password",
-              "password"
-            )}{" "}
-            {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
-            {this.renderButton("Confirm")}{" "}
-          </form>{" "}
+      <div className="form-background">
+        <div className="form-outer">
+          <div className="forget-password-form-wrapper">
+            <h1 className="forget-password-form-title">
+              {" "}
+              Forget Password Page{" "}
+            </h1>{" "}
+            <p className="notification">{this.state.notification}</p>
+            <form
+              className="forget-password-form-body"
+              onSubmit={this.handleSumbitEmail}
+            >
+              {" "}
+              {this.renderInput("email", "Email")}{" "}
+              {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
+              <button disabled={false} className="btn-confirm">
+                Get reset code
+              </button>
+            </form>{" "}
+          </div>
+          <div className="form-wrapper">
+            <form className="form-body" onSubmit={this.handleSumbit}>
+              {" "}
+              {this.renderInput("code", "Code")}{" "}
+              {this.renderInput("password", "Password", "password")}{" "}
+              {this.renderInput(
+                "confirmPassword",
+                "Confirm Password",
+                "password"
+              )}{" "}
+              {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
+              {this.renderButton("Confirm")}{" "}
+            </form>{" "}
+          </div>
         </div>
       </div>
     );

@@ -24,6 +24,7 @@ import "./icons/fontawesome";
 import ForgetPassword from "./pages/ForgerPassword";
 import ChangePassword from "./pages/ChangePassword";
 import ChangeInformation from "./pages/ChangeInformation";
+import Introduction from "./pages/Introduction";
 import { withCookies, Cookies } from "react-cookie";
 import { instanceOf } from "prop-types";
 
@@ -371,6 +372,12 @@ class App extends Component {
                       if (this.props.cookies.get("user"))
                         return <ChangeInformation {...props} />;
                       return <Redirect to="/login" />;
+                    }}
+                  />
+                  <Route
+                    path="/introduction"
+                    render={(props) => {
+                      return <Introduction {...props} />;
                     }}
                   />
                   <Redirect to="/menu" /> {/*Otherwise redirect to menu*/}

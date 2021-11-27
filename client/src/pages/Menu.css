@@ -1,187 +1,210 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: hsl(210, 36%, 96%);
-  color: hsl(209, 61%, 16%);
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: hsl(210, 36%, 96%);
+    color: hsl(209, 61%, 16%);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 h3 {
-  font-size: 1.25rem;
+    font-size: 1.25rem;
 }
 
 h4 {
-  font-family: Oleo Script Swash Caps;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 33px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 33px;
 }
 
 p {
-  margin-bottom: 1.25rem;
-  color: hsl(210, 22%, 49%);
+    margin-bottom: 1.25rem;
+    color: hsl(210, 22%, 49%);
 }
 
 .section {
-  width: 90vw;
-  margin: 0 auto;
-  max-width: 1170px;
+    width: 90vw;
+    margin: 0 auto;
+    max-width: 1170px;
 }
 
 @media screen and (min-width: 992px) {
-  .section {
-    width: 95vw;
-  }
+    .section {
+        width: 95vw;
+    }
 }
+
 .menu {
-  padding: 5rem 0;
+    padding: 5rem 0;
 }
+
 .title {
-  text-align: center;
-  margin-bottom: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: white;
 }
 
 .underline {
-  width: 6rem;
-  height: 0.25rem;
-  background: #c59d5f;
-  margin-left: auto;
-  margin-right: auto;
+    width: 6rem;
+    height: 0.25rem;
+    background: #c59d5f;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .btn-container {
-  margin-bottom: 4rem;
-  display: flex;
-  justify-content: center;
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: center;
 }
 
 .filter-btn {
-  background: transparent;
-  border-color: transparent;
-  font-size: 1rem;
-  text-transform: capitalize;
-  margin: 0 0.5rem;
-  letter-spacing: 1px;
-  padding: 0.375rem 0.75rem;
-  color: hsl(360, 71%, 66%);
-  cursor: pointer;
-  transition: all 0.3s linear;
-  border-radius: 0.25rem;
+    background: transparent;
+    border-color: transparent;
+    font-size: 1rem;
+    text-transform: capitalize;
+    margin: 0 0.5rem;
+    letter-spacing: 1px;
+    padding: 0.375rem 0.75rem;
+    color: black;
+    cursor: pointer;
+    transition: all 0.3s linear;
+    border-radius: 0.25rem;
+    font-size: 120%;
+    font-weight: bold;
 }
 
 .active {
-  border-bottom: 2px solid;
+    border-bottom: 4px solid;
 }
 
 .section-center {
-  width: 90vw;
-  margin: 0 auto;
-  max-width: 1170px;
-  display: grid;
-  gap: 3rem 2rem;
-  justify-items: center;
+    width: 90vw;
+    margin: 0 auto;
+    max-width: 1170px;
+    display: grid;
+    gap: 3rem 2rem;
+    justify-items: center;
 }
 
 .menu-item {
-  display: grid;
-  gap: 1rem 2rem;
-  max-width: 25rem;
+    display: grid;
+    gap: 1rem 2rem;
+    max-width: 25rem;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
 }
 
 .photo {
-  height: 210px;
-  width: 275px;
-  border: none;
-  display: block;
+    height: 210px;
+    width: 275px;
+    border: none;
+    display: block;
+    border-radius: 10px;
 }
 
 .logo {
-  object-fit: cover;
-  height: auto;
-  width: 200px;
-  border-radius: 0.25rem;
+    object-fit: cover;
+    height: auto;
+    width: 200px;
+    border-radius: 0.25rem;
 }
 
 .item-info header {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
-.item-info h4 {
-  margin-bottom: 0.5rem;
-}
-.price {
-  width: 47px;
-  height: 26px;
-  background: #e1651f;
 
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 160%;
-  text-align: center;
-  color: #ffffff;
+.item-info h4 {
+    margin-bottom: 0.5rem;
 }
+
+.price {
+    width: 47px;
+    height: 26px;
+    background: #e1651f;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 160%;
+    text-align: center;
+    color: #ffffff;
+    border-radius: 10px;
+    padding-top: 2px;
+}
+
 .item-text {
-  margin-bottom: 0;
-  padding-top: 10px;
-  padding-bottom: 5px;
+    margin-bottom: 0;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    color: black;
 }
 
 .sub-item-info {
-  padding-left: 15px;
-  padding-right: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 @media screen and (min-width: 768px) {
-  .menu-item {
-    display: grid;
-    padding-top: 50px;
-  }
-  .photo {
-    height: 210px;
-  }
+    .menu-item {
+        display: grid;
+    }
+    .photo {
+        height: 210px;
+    }
 }
+
 @media screen and (min-width: 1200px) {
-  .section-center {
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    grid-gap: 30.05px;
-  }
-  .photo {
-    height: 210px;
-  }
+    .section-center {
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        grid-gap: 30.05px;
+    }
+    .photo {
+        height: 210px;
+    }
 }
 
 .cart {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 4px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 10px;
+    background: rgba(232, 107, 38);
+    border-radius: 25px;
+    flex: none;
+    order: 3;
+    flex-grow: 0;
+    margin: 10px 0px;
+    border: none;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 160%;
+    color: white;
+}
 
-  background: rgba(232, 107, 38, 0.08);
-  border-radius: 25px;
+.background {
+    background-image: url("../images/b.png");
+    background-size: 150%;
+}
 
-  flex: none;
-  order: 3;
-  flex-grow: 0;
-  margin: 10px 0px;
-  border: none;
-
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 160%;
-  color: #e1651f;
+.welcome {
+    background-image: url("../images/d.jpg");
+    background-size: 100%;
+    color: white;
+    text-align: center;
+    align-items: center;
+    padding-top: 20%;
+    padding-bottom: 20%;
+    font-family: "Oleo Script Swash Caps", cursive;
+    font-size: 300%;
 }

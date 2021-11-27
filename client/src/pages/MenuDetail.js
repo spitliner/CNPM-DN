@@ -271,17 +271,20 @@ class MenuDetail extends React.Component {
       <CartContext.Consumer>
         {({ cartItems, addItemToCart, reduceItemFromCart }) => {
           return (
-            <PostItem
-              key={menuItems[itemIndex].id}
-              id={id}
-              food_name={menuItems[itemIndex].name}
-              image={menuItems[itemIndex].imgUrl}
-              food_description={menuItems[itemIndex].description}
-              food_price={menuItems[itemIndex].pricePU}
-              history={history}
-              addItemToCart={addItemToCart}
-              cookies={this.props.cookies}
-            />
+            <div>
+              <PostItem
+                key={menuItems[itemIndex].id}
+                id={id}
+                food_name={menuItems[itemIndex].name}
+                image={menuItems[itemIndex].imgUrl}
+                food_description={menuItems[itemIndex].description}
+                food_price={menuItems[itemIndex].pricePU}
+                history={history}
+                addItemToCart={addItemToCart}
+                cookies={this.props.cookies}
+              />
+              <div>Comment</div>
+            </div>
           );
         }}
       </CartContext.Consumer>

@@ -1,0 +1,19 @@
+.text-wrapper {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2% 2% 2% 2%;
+    border-radius: 20px;
+    color: white;
+    margin-bottom: 8%;
+    margin-top: 8%;
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: 120%;
+    text-align: justify;
+}
+
+.introduction-background {
+    background-image: url("../images/i.jpg");
+    background-size: 100%;
+    padding-bottom: 5%;
+    padding-top: 5%;
+}

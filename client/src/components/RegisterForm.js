@@ -56,20 +56,28 @@ class RegisterForm extends Form {
     const { onUserRegister } = this.props;
 
     return (
-      <div className="form-wrapper">
-        <h1 className="form-title"> Member Register Page </h1>{" "}
-        <p className="notification">{this.state.notification}</p>
-        <form className="form-body" onSubmit={this.handleSumbit}>
-          {" "}
-          {this.renderInput("email", "Email")}{" "}
-          {this.renderInput("username", "Name")}{" "}
-          {this.renderInput("password", "Password", "password")}{" "}
-          {this.renderInput("confirmPassword", "Confirm Password", "password")}{" "}
-          {this.renderInput("phone", "Phone")}{" "}
-          {this.renderInput("address", "Address")}{" "}
-          {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
-          {this.renderButton("Register")}{" "}
-        </form>{" "}
+      <div className="form-background">
+        <div className="form-outer">
+          <div className="form-wrapper">
+            <h1 className="form-title"> Member Register Page </h1>{" "}
+            <p className="notification">{this.state.notification}</p>
+            <form className="form-body" onSubmit={this.handleSumbit}>
+              {" "}
+              {this.renderInput("email", "Email")}{" "}
+              {this.renderInput("username", "Name")}{" "}
+              {this.renderInput("password", "Password", "password")}{" "}
+              {this.renderInput(
+                "confirmPassword",
+                "Confirm Password",
+                "password"
+              )}{" "}
+              {this.renderInput("phone", "Phone")}{" "}
+              {this.renderInput("address", "Address")}{" "}
+              {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
+              {this.renderButton("Register")}{" "}
+            </form>{" "}
+          </div>
+        </div>
       </div>
     );
   }

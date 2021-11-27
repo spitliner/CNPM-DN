@@ -55,6 +55,25 @@ class UserProvider extends Component {
       });
     }
   };
+  updateUserContext = async () => {
+    let response = await Axios({
+      method: "GET",
+      data: {},
+      withCredentials: true,
+      url: url + "/api/check_login", // Should set to .ENV or DEFINE CONST
+    });
+    if (response.data.success && !this.state.email) {
+      this.setState({
+        currentLoginUser: {
+          email: response.data.message.email,
+          password: response.data.message.password,
+          username: response.data.message.username,
+          address: response.data.message.address,
+          phone: response.data.message.phone,
+        },
+      });
+    }
+  };
   /*componentDidUpdate = () => {
     console.log("Current global user variable: ", this.state.currentLoginUser);
   };*/
@@ -136,6 +155,7 @@ class UserProvider extends Component {
             loginUser: this.loginUser,
             logoutUser: this.logoutUser,
             registerUser: this.registerUser,
+            updateUserContext: this.updateUserContext,
           }}
         >
           {this.props.children}

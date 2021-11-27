@@ -5,11 +5,12 @@ class ChangeInformation extends React.Component {
   render() {
     return (
       <UserContext.Consumer>
-        {({ currentLoginUser }) => {
+        {({ currentLoginUser, updateUserContext }) => {
           return (
             <ChangeInformationForm
               history={this.props.history}
               user={currentLoginUser}
+              updateUserContext={updateUserContext}
             />
           );
         }}

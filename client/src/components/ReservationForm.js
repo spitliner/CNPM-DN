@@ -53,17 +53,21 @@ class ReservationForm extends Form {
     const { onUserRegister } = this.props;
 
     return (
-      <div className="form-wrapper">
-        <h1 className="form-title">Make Your Reservation</h1>
-        <p className="notification">{this.state.notification}</p>
-        <form className="form-body" onSubmit={this.handleSumbit}>
-          {this.renderInput("nop", "Number of persons")}
-          {this.renderInput("date", "Date (YYYY/MM/DD)")}
-          {this.renderInput("time", "Time (HH:MM:SS)")}
-          {this.renderInput("message", "Message")}
-          {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}
-          {this.renderButton("Register")}
-        </form>
+      <div className="form-background-3">
+        <div className="form-outer">
+          <div className="form-wrapper">
+            <h1 className="form-title">Make Your Reservation</h1>
+            <p className="notification">{this.state.notification}</p>
+            <form className="form-body" onSubmit={this.handleSumbit}>
+              {this.renderInput("nop", "Number of persons")}
+              {this.renderInput("date", "Date (YYYY/MM/DD)")}
+              {this.renderInput("time", "Time (HH:MM:SS)")}
+              {this.renderInput("message", "Message")}
+              {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}
+              {this.renderButton("Register")}
+            </form>
+          </div>
+        </div>
       </div>
     );
   }

@@ -2,6 +2,16 @@ import React from "react";
 import "./Categories.css";
 
 const Categories = ({ categories, filterItems, activeCategory }) => {
+  var categoryImageUrls = {
+    ALL: "https://cdn-icons.flaticon.com/png/512/3272/premium/3272779.png?token=exp=1638035032~hmac=b372458aba404c529410e985c19b6f92",
+    PIZZA: "https://d29fhpw069ctt2.cloudfront.net/icon/image/59558/preview.svg",
+    BURGER:
+      "https://cdn0.iconfinder.com/data/icons/foody-icons/32/FoodyIcons_color-06-512.png",
+    TEA: "https://icon-library.com/images/tea-icon/tea-icon-12.jpg",
+    SOUP: "https://cdn-icons-png.flaticon.com/512/454/454570.png",
+    OTHER: "https://icon-library.com/images/135944452untitled-3-512.png",
+  };
+
   return (
     <div className="btn-container categories-wrapper">
       {" "}
@@ -16,6 +26,7 @@ const Categories = ({ categories, filterItems, activeCategory }) => {
             onClick={() => filterItems(category)}
           >
             {" "}
+            <img className="category-icon" src={categoryImageUrls[category]} />
             {category}{" "}
           </button>
         );

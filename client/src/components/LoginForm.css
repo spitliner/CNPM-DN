@@ -3,6 +3,7 @@
 .notification {
     text-align: center;
     color: red;
+    font-size: 120%;
 }
 
 .form-title {
@@ -15,7 +16,7 @@
 }
 
 .form-body {
-    width: 60%;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -35,4 +36,36 @@
 
 .form-wrapper>* {
     width: 100%;
+}
+
+.form-background {
+    background-image: url("../images/c.jpg");
+    background-size: 100%;
+    margin: 0%;
+    display: flex;
+}
+
+.form-background-2 {
+    background-image: url("../images/f.jpg");
+    background-size: 100%;
+    margin: 0%;
+    display: flex;
+}
+
+.form-background-3 {
+    background-image: url("../images/g.jpg");
+    background-size: 100%;
+    margin: 0%;
+    display: flex;
+}
+
+.form-outer {
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 2%;
+    border-radius: 20px;
 }

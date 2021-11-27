@@ -15,7 +15,7 @@ class AccountInfo extends React.Component {
         {({ currentLoginUser }) => {
           return (
             currentLoginUser.username !== "" && (
-              <div>
+              <div className="account-background">
                 <div className="account-info-wrapper">
                   <ul>
                     <li>
