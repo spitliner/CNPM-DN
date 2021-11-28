@@ -6,10 +6,16 @@ class Payment extends React.Component {
   render() {
     return (
       <CartContext.Consumer>
-        {({ cartItems }) => {
+        {({ cartItems, voucherCode, finalCost, totalCost }) => {
           return (
             <div>
-              <PaymentForm cartItems={cartItems} />
+              <PaymentForm
+                cartItems={cartItems}
+                voucherCode={voucherCode}
+                finalCost={finalCost}
+                totalCost={totalCost}
+                history={this.props.history}
+              />
             </div>
           );
         }}

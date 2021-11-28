@@ -9,32 +9,18 @@ import Axios from "axios";
 const Joi = JoiBase.extend(JoiDate); // extend Joi with Joi Date
 
 const url = "http://localhost:4000";
-class VoucherForm extends Form {
+class CommentForm extends Form {
   constructor(props) {
     super(props);
     this.state = {
-      data: { voucherCode: "" },
+      data: { comment: "" },
       errors: {},
       notification: "",
     };
   }
 
-  schema = Joi.object({
-    voucherCode: Joi.string().label("Voucher"),
-  });
   handleClick = async (evt) => {
     evt.preventDefault();
-    let response = await Axios({
-      method: "POST",
-      data: {
-        voucherCode: this.state.data.voucherCode,
-      },
-      withCredentials: true,
-      url: url + "/api/voucher", // Should set to .ENV or DEFINE CONST
-    });
-    this.setState({ notification: response.data.message });
-    console.log(response);
-    if (response.data.success) this.props.applyVoucher(response);
   };
   render() {
     return (
@@ -47,12 +33,12 @@ class VoucherForm extends Form {
           >
             {" "}
             {this.renderInputNoChangeValidate(
-              "voucherCode",
-              "Voucher code"
+              "comment",
+              "Input your comment here"
             )}{" "}
             {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
             <button disabled={false} className="btn-confirm">
-              Apply
+              Comment
             </button>
           </form>{" "}
         </div>
@@ -61,4 +47,4 @@ class VoucherForm extends Form {
   }
 }
 
-export default VoucherForm;
+export default CommentForm;

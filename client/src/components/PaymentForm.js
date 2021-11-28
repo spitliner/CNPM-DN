@@ -7,6 +7,7 @@ import Axios from "axios";
 
 const Joi = JoiBase.extend(JoiDate); // extend Joi with Joi Date
 
+const url = "http://localhost:4000";
 class PaymentForm extends Form {
   constructor(props) {
     super(props);
@@ -103,7 +104,9 @@ class PaymentForm extends Form {
       address: this.state.data.address,
       bank: this.state.data.bank,
       creditCardNumber: this.state.data.creditCardNumber,
-      cartItems: this.props.cartItems,
+      cartItems: this.props.cartItems.map((cartItem) => {
+        return { id: cartItem.id, quantity: cartItem.quantity };
+      }),
     };
 
     if (formData.paymentType == "Direct") {
@@ -121,21 +124,22 @@ class PaymentForm extends Form {
         return;
       }
     }
-
-    console.log(formData);
-
-    // const response = await Axios({
-    //   method: "POST",
-    //   withCredentials: true,
-    //   url: url + "/api/order/make", // Should set to .ENV or DEFINE CONST
-    // });
-
-    // if(response.data.success){
-    //   this.setState({
-    //    notification:
-    //    "Your Payment has succeeded, enjoy your meal",
-    // });
-    // }
+    console.log(formData.cartItems);
+    var response = await Axios({
+      method: "POST",
+      withCredentials: true,
+      data: {
+        ...formData,
+        voucherCode: this.props.voucherCode,
+        totalCost: this.props.totalCost,
+        finalCost: this.props.finalCost,
+      },
+      url: url + "/api/make_order", // Should set to .ENV or DEFINE CONST
+    });
+    alert(response.data.message);
+    if (response.data.success) {
+      this.props.history.replace("/menu");
+    }
   };
 
   render() {

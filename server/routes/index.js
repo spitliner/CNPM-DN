@@ -6,7 +6,7 @@ var User = require('../models/user.model.js');
 var Reservation = require('../models/reservation.model');
 var ResetToken = require('../models/reset-token.model');
 var Voucher = require('../models/voucher.model');
-var ApplyVoucher = require('../models/apply-voucher.model')
+var Order = require('../models/order.model')
 var Food = require('../models/food.model')
 var sendEmail = require('../config/email-config');
 router.post("/api/login", (req, res, next) => {
@@ -198,19 +198,7 @@ router.post("/api/voucher", (req, res) => {
         Voucher.findOne({ 'voucherCode': req.body.voucherCode }, function(err, voucher) {
             if (err) return res.status(200).json({ success: false, message: err });
             if (!voucher) return res.status(200).json({ success: false, message: 'Voucher not found!' });
-            ApplyVoucher.findOne({ 'email': req.user.email }, function(err, applyVoucher) {
-                if (err) return res.status(200).json({ success: false, message: err });
-                if (applyVoucher && applyVoucher.voucherCode == voucher.voucherCode)
-                    return res.status(200).json({ success: true, message: "Apply voucher successfully!", discount: voucher.discount });
-                if (applyVoucher) applyVoucher.delete(); // apply only 1 voucher
-                var newApplyVoucher = new ApplyVoucher();
-                newApplyVoucher.email = req.user.email;
-                newApplyVoucher.voucherCode = req.body.voucherCode;
-                newApplyVoucher.save(function(err, result) {
-                    if (err) res.status(200).json({ success: false, message: err });
-                    else res.status(200).json({ success: true, message: "Apply voucher successfully!", discount: voucher.discount });
-                });
-            });
+            return res.status(200).json({ success: true, message: "Apply voucher successfully!", discount: voucher.discount, voucherCode: voucher.voucherCode });
         });
     } catch (err) {
         return res.status(200).json({ success: false, message: err });
@@ -426,5 +414,27 @@ router.get("/api/get_all_foods", (req, res) => {
         if (err) return res.status(200).json({ success: false, message: "Failed to get foods!", menuItems: [] });
         res.status(200).json({ success: true, message: "Successfully get all foods!", menuItems: menuItems });
     });
+})
+router.post("/api/make_order", (req, res) => {
+    console.log(req.body);
+    if (!req.isAuthenticated())
+        return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
+    var order = new Order();
+    order.email = req.user.email;
+    order.paymentType = req.body.paymentType;
+    order.takeAwayOrEatIn = req.body.takeAwayOrEatIn;
+    order.address = req.body.address;
+    order.bank = req.body.bank;
+    order.creditCardNumber = req.body.creditCardNumber;
+    order.cartItems = req.body.cartItems;
+    order.voucherCode = req.body.voucherCode;
+    order.totalCost = req.body.totalCost;
+    order.finalCost = req.body.finalCost;
+
+    order.save((err, result) => {
+        if (err) return res.status(200).json({ success: false, message: err });
+        return res.status(200).json({ success: true, message: "Successfully make order!" });
+    })
+
 })
 module.exports = router;

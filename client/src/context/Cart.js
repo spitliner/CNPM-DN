@@ -13,6 +13,7 @@ class CartProvider extends Component {
     this.state = {
       cartItems: [],
       discount: 0,
+      voucherCode: "",
     };
   }
 
@@ -101,8 +102,12 @@ class CartProvider extends Component {
   };
 
   applyVoucher = (response) => {
-    if (response.data.discount != this.state.discount)
-      this.setState({ discount: response.data.discount });
+    if (response.data.voucherCode != this.state.voucherCode)
+      this.setState({
+        discount: response.data.discount,
+        voucherCode: response.data.voucherCode,
+      });
+    console.log(this.state);
   };
   getFinal = () => {
     return this.getTotal() * (1 - this.state.discount / 100);
@@ -122,6 +127,7 @@ class CartProvider extends Component {
           totalCost: this.getTotal(),
           applyVoucher: this.applyVoucher,
           discount: this.state.discount,
+          voucherCode: this.state.voucherCode,
           finalCost: this.getFinal(),
         }}
       >
