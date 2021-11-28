@@ -283,7 +283,7 @@ class MenuDetail extends React.Component {
                 addItemToCart={addItemToCart}
                 cookies={this.props.cookies}
               />
-              {cookies.get("user") && <CommentForm />}
+              {cookies.get("user") && <CommentForm foodID={id} />}
             </div>
           );
         }}

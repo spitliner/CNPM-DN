@@ -6,8 +6,9 @@ var User = require('../models/user.model.js');
 var Reservation = require('../models/reservation.model');
 var ResetToken = require('../models/reset-token.model');
 var Voucher = require('../models/voucher.model');
-var Order = require('../models/order.model')
-var Food = require('../models/food.model')
+var Order = require('../models/order.model');
+var Food = require('../models/food.model');
+var Feedback = require('../models/feedback.model');
 var sendEmail = require('../config/email-config');
 router.post("/api/login", (req, res, next) => {
     try {
@@ -436,5 +437,16 @@ router.post("/api/make_order", (req, res) => {
         return res.status(200).json({ success: true, message: "Successfully make order!" });
     })
 
-})
+});
+router.post("/api/feedback", (req, res) => {
+    if (!req.isAuthenticated())
+        return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
+    var feedback = new Feedback();
+    feedback.foodID = req.body.foodID;
+    feedback.feedback = req.body.feedback;
+    feedback.save((err, result) => {
+        if (err) return res.status(200).json({ success: false, message: err });
+        return res.status(200).json({ success: true, message: "Successfully send feedback!" });
+    })
+});
 module.exports = router;
