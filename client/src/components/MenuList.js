@@ -2,13 +2,30 @@ import React from "react";
 import { CartContext } from "../context/Cart";
 
 const MenuList = ({ items, history, cookies }) => {
+  var renderStar = (star) => {
+    star = Math.floor(star);
+    var yellowStar;
+    var whiteStar;
+    yellowStar = [...Array(star)].map((element, index) => (
+      <li className={"menu-list-star menu-list-selected"}></li>
+    ));
+    whiteStar = [...Array(5 - star)].map((element, index) => (
+      <li className={"menu-list-star"}></li>
+    ));
+    return (
+      <ul class="menu-list-ratings">
+        {yellowStar}
+        {whiteStar}
+      </ul>
+    );
+  };
   return (
     <CartContext.Consumer>
       {({ cartItems, addItemToCart, reduceItemFromCart }) => {
         return (
           <div className="section-center">
             {items.map((item) => {
-              const { id, name, imgUrl, description, pricePU } = item;
+              const { id, name, imgUrl, description, pricePU, star } = item;
               return (
                 <div key={id} className="menu-item">
                   <img
@@ -25,6 +42,7 @@ const MenuList = ({ items, history, cookies }) => {
                         <h4> {name} </h4>
                         <div className="price"> $ {pricePU} </div>
                       </header>
+                      <div>{renderStar(star)}</div>
                       <p className="item-text"> {description} </p>
                       {cookies.get("user") && (
                         <button

@@ -210,3 +210,29 @@ p {
     font-family: "Oleo Script Swash Caps", cursive;
     font-size: 300%;
 }
+
+.menu-list-ratings {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.menu-list-star {
+    position: relative;
+    line-height: 20px;
+    display: inline-block;
+    transition: color 0.2s ease;
+    color: #ebebeb;
+}
+
+.menu-list-star:before {
+    content: "\2605";
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+}
+
+.menu-list-star.menu-list-selected {
+    color: #ffc700;
+}
