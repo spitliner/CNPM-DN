@@ -9,6 +9,7 @@ var Voucher = require('../models/voucher.model');
 var Order = require('../models/order.model');
 var Food = require('../models/food.model');
 var Feedback = require('../models/feedback.model');
+var Star = require('../models/star.model');
 var sendEmail = require('../config/email-config');
 router.post("/api/login", (req, res, next) => {
     try {
@@ -209,7 +210,7 @@ router.get("/api/insert_foods", async(req, res) => {
     var items = [{
             id: 1,
             imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
-            name: "PIZZA MIXED",
+            name: "Pizza mixed",
             category: "PIZZA",
             pricePU: 4.8,
             description: "DESSERT",
@@ -217,7 +218,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 2,
             imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
-            name: "PIZZA MIXED",
+            name: "Pizza mixed",
             category: "PIZZA",
             pricePU: 4.8,
             description: "DESSERT",
@@ -225,7 +226,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 3,
             imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
-            name: "PIZZA MIXED",
+            name: "Pizza mixed",
             category: "PIZZA",
             pricePU: 4.8,
             description: "DESSERT",
@@ -233,7 +234,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 4,
             imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
-            name: "PIZZA MIXED",
+            name: "Pizza mixed",
             category: "PIZZA",
             pricePU: 4.8,
             description: "DESSERT",
@@ -241,7 +242,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 5,
             imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
-            name: "PIZZA MIXED",
+            name: "Pizza mixed",
             category: "PIZZA",
             pricePU: 4.8,
             description: "DESSERT",
@@ -249,7 +250,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 6,
             imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
-            name: "BURGER MIXED",
+            name: "Burger mixed",
             category: "BURGER",
             pricePU: 4.8,
             description: "DESSERT",
@@ -257,7 +258,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 7,
             imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
-            name: "BURGER MIXED",
+            name: "Burger mixed",
             category: "BURGER",
             pricePU: 4.8,
             description: "DESSERT",
@@ -265,7 +266,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 8,
             imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
-            name: "BURGER MIXED",
+            name: "Burger mixed",
             category: "BURGER",
             pricePU: 4.8,
             description: "DESSERT",
@@ -273,7 +274,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 9,
             imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
-            name: "BURGER MIXED",
+            name: "Burger mixed",
             category: "BURGER",
             pricePU: 4.8,
             description: "DESSERT",
@@ -281,7 +282,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 10,
             imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
-            name: "BURGER MIXED",
+            name: "Burger mixed",
             category: "BURGER",
             pricePU: 4.8,
             description: "DESSERT",
@@ -289,7 +290,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 11,
             imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
-            name: "SOUP MIXED",
+            name: "Soup mixed",
             category: "SOUP",
             pricePU: 4.8,
             description: "DESSERT",
@@ -297,7 +298,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 12,
             imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
-            name: "SOUP MIXED",
+            name: "Soup mixed",
             category: "SOUP",
             pricePU: 4.8,
             description: "DESSERT",
@@ -305,7 +306,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 13,
             imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
-            name: "SOUP MIXED",
+            name: "Soup mixed",
             category: "SOUP",
             pricePU: 4.8,
             description: "DESSERT",
@@ -313,7 +314,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 14,
             imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
-            name: "SOUP MIXED",
+            name: "Soup mixed",
             category: "SOUP",
             pricePU: 4.8,
             description: "DESSERT",
@@ -321,7 +322,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 15,
             imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
-            name: "SOUP MIXED",
+            name: "Soup mixed",
             category: "SOUP",
             pricePU: 4.8,
             description: "DESSERT",
@@ -329,7 +330,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 16,
             imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
-            name: "PEACH TEA",
+            name: "Peach tea",
             category: "TEA",
             pricePU: 4.8,
             description: "DESSERT",
@@ -337,7 +338,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 17,
             imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
-            name: "PEACH TEA",
+            name: "Peach tea",
             category: "TEA",
             pricePU: 4.8,
             description: "DESSERT",
@@ -345,7 +346,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 18,
             imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
-            name: "PEACH TEA",
+            name: "Peach tea",
             category: "TEA",
             pricePU: 4.8,
             description: "DESSERT",
@@ -353,7 +354,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 19,
             imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
-            name: "PEACH TEA",
+            name: "Peach tea",
             category: "TEA",
             pricePU: 4.8,
             description: "DESSERT",
@@ -361,7 +362,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 20,
             imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
-            name: "PEACH TEA",
+            name: "Peach tea",
             category: "TEA",
             pricePU: 4.8,
             description: "DESSERT",
@@ -369,7 +370,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 21,
             imgUrl: "https://hallmark.brightspotcdn.com/dims4/default/5beba82/2147483647/strip/true/crop/500x281+0+0/resize/1140x640!/quality/90/?url=http%3A%2F%2Fhallmark-channel-brightspot.s3.amazonaws.com%2Fa2%2F24%2Fc5371a577db4a441383a914b79b8%2Fhf-ep2111-product-cristina-cooks.jpg",
-            name: "CAKE",
+            name: "Cake",
             category: "OTHER",
             pricePU: 4.8,
             description: "DESSERT",
@@ -377,7 +378,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 22,
             imgUrl: "https://www.cookingpanda.com/wp-content/uploads/2021/04/0004_16x9_CandyCookieCake-500x281.jpg",
-            name: "COFFEE CAKE",
+            name: "Coffee cake",
             category: "OTHER",
             pricePU: 4.8,
             description: "DESSERT",
@@ -385,7 +386,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 23,
             imgUrl: "https://jandatri.com/wp-content/uploads/2019/02/Black-Forest-Cake-Slice-500x281.jpg",
-            name: "TIRAMISU CAKE",
+            name: "Tiramisu cake",
             category: "OTHER",
             pricePU: 4.8,
             description: "DESSERT",
@@ -393,7 +394,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 24,
             imgUrl: "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
-            name: "STRAWBERRY ICE-DREAM",
+            name: "Strawberry ice-cream",
             category: "OTHER",
             pricePU: 4.8,
             description: "DESSERT",
@@ -401,7 +402,7 @@ router.get("/api/insert_foods", async(req, res) => {
         {
             id: 25,
             imgUrl: "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
-            name: "STRAWBERRY ICE-DREAM",
+            name: "Strawberry ice-cream",
             category: "OTHER",
             pricePU: 4.8,
             description: "DESSERT",
@@ -441,13 +442,38 @@ router.post("/api/make_order", (req, res) => {
 router.post("/api/feedback", (req, res) => {
     if (!req.isAuthenticated())
         return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
-    var feedback = new Feedback();
-    feedback.foodID = req.body.foodID;
-    feedback.feedback = req.body.feedback;
-    feedback.email = req.user.email;
-    feedback.save((err, result) => {
-        if (err) return res.status(200).json({ success: false, message: err });
-        return res.status(200).json({ success: true, message: "Successfully send feedback!" });
-    })
+    console.log(req.body);
+    if (req.body.feedback) {
+        var feedback = new Feedback();
+        feedback.foodID = req.body.foodID;
+        feedback.feedback = req.body.feedback;
+        feedback.email = req.user.email;
+        feedback.save((err, result) => {
+            if (err) return res.status(200).json({ success: false, message: err });
+        })
+    }
+    if (req.body.star) {
+        Star.findOne({ foodID: req.body.foodID, email: req.user.email }, (err, result) => {
+            if (err) return res.status(200).json({ success: false, message: err });
+            if (result) result.delete();
+            var newStar = Star();
+            newStar.email = req.user.email;
+            newStar.star = req.body.star;
+            newStar.foodID = req.body.foodID;
+            newStar.save((err, result) => {
+                if (err) return res.status(200).json({ success: false, message: err });
+            })
+        })
+    }
+    return res.status(200).json({ success: true, message: "Successfully send feedback!" });
 });
+router.post("/api/get_star", (req, res) => {
+    if (!req.isAuthenticated())
+        return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
+    Star.findOne({ foodID: req.body.foodID, email: req.user.email }, (err, result) => {
+        if (err) return res.status(200).json({ success: false, message: err });
+        if (!result) return res.status(200).json({ success: false, message: "No star vote", star: 0 });
+        return res.status(200).json({ success: true, message: "Successfully get star", star: result.star });
+    })
+})
 module.exports = router;
