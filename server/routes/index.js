@@ -206,211 +206,7 @@ router.post("/api/voucher", (req, res) => {
         return res.status(200).json({ success: false, message: err });
     }
 });
-router.get("/api/insert_foods", async(req, res) => {
-    var items = [{
-            id: 1,
-            imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
-            name: "Pizza mixed",
-            category: "PIZZA",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 2,
-            imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
-            name: "Pizza mixed",
-            category: "PIZZA",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 3,
-            imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
-            name: "Pizza mixed",
-            category: "PIZZA",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 4,
-            imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
-            name: "Pizza mixed",
-            category: "PIZZA",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 5,
-            imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
-            name: "Pizza mixed",
-            category: "PIZZA",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 6,
-            imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
-            name: "Burger mixed",
-            category: "BURGER",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 7,
-            imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
-            name: "Burger mixed",
-            category: "BURGER",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 8,
-            imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
-            name: "Burger mixed",
-            category: "BURGER",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 9,
-            imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
-            name: "Burger mixed",
-            category: "BURGER",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 10,
-            imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
-            name: "Burger mixed",
-            category: "BURGER",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 11,
-            imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
-            name: "Soup mixed",
-            category: "SOUP",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 12,
-            imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
-            name: "Soup mixed",
-            category: "SOUP",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 13,
-            imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
-            name: "Soup mixed",
-            category: "SOUP",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 14,
-            imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
-            name: "Soup mixed",
-            category: "SOUP",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 15,
-            imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
-            name: "Soup mixed",
-            category: "SOUP",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 16,
-            imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
-            name: "Peach tea",
-            category: "TEA",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 17,
-            imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
-            name: "Peach tea",
-            category: "TEA",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 18,
-            imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
-            name: "Peach tea",
-            category: "TEA",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 19,
-            imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
-            name: "Peach tea",
-            category: "TEA",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 20,
-            imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
-            name: "Peach tea",
-            category: "TEA",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 21,
-            imgUrl: "https://hallmark.brightspotcdn.com/dims4/default/5beba82/2147483647/strip/true/crop/500x281+0+0/resize/1140x640!/quality/90/?url=http%3A%2F%2Fhallmark-channel-brightspot.s3.amazonaws.com%2Fa2%2F24%2Fc5371a577db4a441383a914b79b8%2Fhf-ep2111-product-cristina-cooks.jpg",
-            name: "Cake",
-            category: "OTHER",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 22,
-            imgUrl: "https://www.cookingpanda.com/wp-content/uploads/2021/04/0004_16x9_CandyCookieCake-500x281.jpg",
-            name: "Coffee cake",
-            category: "OTHER",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 23,
-            imgUrl: "https://jandatri.com/wp-content/uploads/2019/02/Black-Forest-Cake-Slice-500x281.jpg",
-            name: "Tiramisu cake",
-            category: "OTHER",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 24,
-            imgUrl: "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
-            name: "Strawberry ice-cream",
-            category: "OTHER",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-        {
-            id: 25,
-            imgUrl: "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
-            name: "Strawberry ice-cream",
-            category: "OTHER",
-            pricePU: 4.8,
-            description: "DESSERT",
-        },
-    ]
-    await Food.insertMany(items, { ordered: true });
-    res.status(200).json({ success: true, message: "Successfully!" })
-});
+
 router.get("/api/get_all_foods", (req, res) => {
     Food.find({}, (err, menuItems) => {
         if (err) return res.status(200).json({ success: false, message: "Failed to get foods!", menuItems: [] });
@@ -439,10 +235,9 @@ router.post("/api/make_order", (req, res) => {
     })
 
 });
-router.post("/api/feedback", (req, res) => {
+router.post("/api/feedback", async(req, res) => {
     if (!req.isAuthenticated())
         return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
-    console.log(req.body);
     if (req.body.feedback) {
         var feedback = new Feedback();
         feedback.foodID = req.body.foodID;
@@ -462,10 +257,28 @@ router.post("/api/feedback", (req, res) => {
             newStar.foodID = req.body.foodID;
             newStar.save((err, result) => {
                 if (err) return res.status(200).json({ success: false, message: err });
+                // Re-calculate star of food:
+                var newStar = 5;
+                Star.find({ foodID: req.body.foodID }, (err, starArray) => {
+                    if (err) return res.status(200).json({ success: false, message: err });
+                    starArray.forEach(element => {
+                        newStar += element.star;
+                    });
+                    newStar /= (starArray.length + 1);
+                    // Update star for food:
+                    Food.findOne({ id: req.body.foodID }, (err, food) => {
+                        if (err) return res.status(200).json({ success: false, message: err });
+                        food.star = newStar;
+                        food.save((err, result) => {
+                            if (err) return res.status(200).json({ success: false, message: err });
+                            return res.status(200).json({ success: true, message: "Successfully send feedback!" });
+                        });
+                    });
+                });
             })
-        })
+        });
     }
-    return res.status(200).json({ success: true, message: "Successfully send feedback!" });
+
 });
 router.post("/api/get_star", (req, res) => {
     if (!req.isAuthenticated())
@@ -475,5 +288,236 @@ router.post("/api/get_star", (req, res) => {
         if (!result) return res.status(200).json({ success: false, message: "No star vote", star: 0 });
         return res.status(200).json({ success: true, message: "Successfully get star", star: result.star });
     })
-})
+});
+// call this router by POSTMAN to insert data of food
+router.get("/api/insert_foods", async(req, res) => {
+    var items = [{
+            id: 1,
+            imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
+            name: "Pizza mixed",
+            category: "PIZZA",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 2,
+            imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
+            name: "Pizza mixed",
+            category: "PIZZA",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 3,
+            imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
+            name: "Pizza mixed",
+            category: "PIZZA",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 4,
+            imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
+            name: "Pizza mixed",
+            category: "PIZZA",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 5,
+            imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
+            name: "Pizza mixed",
+            category: "PIZZA",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 6,
+            imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
+            name: "Burger mixed",
+            category: "BURGER",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 7,
+            imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
+            name: "Burger mixed",
+            category: "BURGER",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 8,
+            imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
+            name: "Burger mixed",
+            category: "BURGER",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 9,
+            imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
+            name: "Burger mixed",
+            category: "BURGER",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 10,
+            imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
+            name: "Burger mixed",
+            category: "BURGER",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 11,
+            imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
+            name: "Soup mixed",
+            category: "SOUP",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 12,
+            imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
+            name: "Soup mixed",
+            category: "SOUP",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 13,
+            imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
+            name: "Soup mixed",
+            category: "SOUP",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 14,
+            imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
+            name: "Soup mixed",
+            category: "SOUP",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 15,
+            imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
+            name: "Soup mixed",
+            category: "SOUP",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 16,
+            imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
+            name: "Peach tea",
+            category: "TEA",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 17,
+            imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
+            name: "Peach tea",
+            category: "TEA",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 18,
+            imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
+            name: "Peach tea",
+            category: "TEA",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 19,
+            imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
+            name: "Peach tea",
+            category: "TEA",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 20,
+            imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
+            name: "Peach tea",
+            category: "TEA",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 21,
+            imgUrl: "https://hallmark.brightspotcdn.com/dims4/default/5beba82/2147483647/strip/true/crop/500x281+0+0/resize/1140x640!/quality/90/?url=http%3A%2F%2Fhallmark-channel-brightspot.s3.amazonaws.com%2Fa2%2F24%2Fc5371a577db4a441383a914b79b8%2Fhf-ep2111-product-cristina-cooks.jpg",
+            name: "Cake",
+            category: "OTHER",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 22,
+            imgUrl: "https://www.cookingpanda.com/wp-content/uploads/2021/04/0004_16x9_CandyCookieCake-500x281.jpg",
+            name: "Coffee cake",
+            category: "OTHER",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 23,
+            imgUrl: "https://jandatri.com/wp-content/uploads/2019/02/Black-Forest-Cake-Slice-500x281.jpg",
+            name: "Tiramisu cake",
+            category: "OTHER",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 24,
+            imgUrl: "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
+            name: "Strawberry ice-cream",
+            category: "OTHER",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+        {
+            id: 25,
+            imgUrl: "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
+            name: "Strawberry ice-cream",
+            category: "OTHER",
+            pricePU: 4.8,
+            description: "DESSERT",
+            star: 5,
+        },
+    ]
+    await Food.insertMany(items, { ordered: true });
+    res.status(200).json({ success: true, message: "Successfully!" })
+});
 module.exports = router;

@@ -7,5 +7,6 @@ var schema = new Schema({
     category: { type: String },
     pricePU: { type: Number },
     description: { type: String },
+    star: { type: Number },
 });
 module.exports = mongoose.model('food', schema)
