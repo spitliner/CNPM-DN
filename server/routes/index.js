@@ -7,6 +7,7 @@ var Reservation = require('../models/reservation.model');
 var ResetToken = require('../models/reset-token.model');
 var Voucher = require('../models/voucher.model');
 var ApplyVoucher = require('../models/apply-voucher.model')
+var Food = require('../models/food.model')
 var sendEmail = require('../config/email-config');
 router.post("/api/login", (req, res, next) => {
     try {
@@ -76,7 +77,7 @@ router.post("/api/change_password", (req, res) => {
             return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" })
         var email = req.user.email;
         if (!req.body.newPassword || !req.body.oldPassword)
-            return res.status(200).json({ success: false, message: "Some thing wrong!" });
+            return res.status(200).json({ success: false, message: "Something wrong!" });
         User.findOne({ 'email': email }, function(err, user) {
             if (err) return res.status(200).json({ success: false, message: err });
             if (!user.validPassword(req.body.oldPassword)) {
@@ -215,4 +216,215 @@ router.post("/api/voucher", (req, res) => {
         return res.status(200).json({ success: false, message: err });
     }
 });
+router.get("/api/insert_foods", async(req, res) => {
+    var items = [{
+            id: 1,
+            imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
+            name: "PIZZA MIXED",
+            category: "PIZZA",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 2,
+            imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
+            name: "PIZZA MIXED",
+            category: "PIZZA",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 3,
+            imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
+            name: "PIZZA MIXED",
+            category: "PIZZA",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 4,
+            imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
+            name: "PIZZA MIXED",
+            category: "PIZZA",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 5,
+            imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
+            name: "PIZZA MIXED",
+            category: "PIZZA",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 6,
+            imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
+            name: "BURGER MIXED",
+            category: "BURGER",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 7,
+            imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
+            name: "BURGER MIXED",
+            category: "BURGER",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 8,
+            imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
+            name: "BURGER MIXED",
+            category: "BURGER",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 9,
+            imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
+            name: "BURGER MIXED",
+            category: "BURGER",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 10,
+            imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
+            name: "BURGER MIXED",
+            category: "BURGER",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 11,
+            imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
+            name: "SOUP MIXED",
+            category: "SOUP",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 12,
+            imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
+            name: "SOUP MIXED",
+            category: "SOUP",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 13,
+            imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
+            name: "SOUP MIXED",
+            category: "SOUP",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 14,
+            imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
+            name: "SOUP MIXED",
+            category: "SOUP",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 15,
+            imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
+            name: "SOUP MIXED",
+            category: "SOUP",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 16,
+            imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
+            name: "PEACH TEA",
+            category: "TEA",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 17,
+            imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
+            name: "PEACH TEA",
+            category: "TEA",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 18,
+            imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
+            name: "PEACH TEA",
+            category: "TEA",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 19,
+            imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
+            name: "PEACH TEA",
+            category: "TEA",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 20,
+            imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
+            name: "PEACH TEA",
+            category: "TEA",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 21,
+            imgUrl: "https://hallmark.brightspotcdn.com/dims4/default/5beba82/2147483647/strip/true/crop/500x281+0+0/resize/1140x640!/quality/90/?url=http%3A%2F%2Fhallmark-channel-brightspot.s3.amazonaws.com%2Fa2%2F24%2Fc5371a577db4a441383a914b79b8%2Fhf-ep2111-product-cristina-cooks.jpg",
+            name: "CAKE",
+            category: "OTHER",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 22,
+            imgUrl: "https://www.cookingpanda.com/wp-content/uploads/2021/04/0004_16x9_CandyCookieCake-500x281.jpg",
+            name: "COFFEE CAKE",
+            category: "OTHER",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 23,
+            imgUrl: "https://jandatri.com/wp-content/uploads/2019/02/Black-Forest-Cake-Slice-500x281.jpg",
+            name: "TIRAMISU CAKE",
+            category: "OTHER",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 24,
+            imgUrl: "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
+            name: "STRAWBERRY ICE-DREAM",
+            category: "OTHER",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+        {
+            id: 25,
+            imgUrl: "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
+            name: "STRAWBERRY ICE-DREAM",
+            category: "OTHER",
+            pricePU: 4.8,
+            description: "DESSERT",
+        },
+    ]
+    await Food.insertMany(items, { ordered: true });
+    res.status(200).json({ success: true, message: "Successfully!" })
+});
+router.get("/api/get_all_foods", (req, res) => {
+    Food.find({}, (err, menuItems) => {
+        if (err) return res.status(200).json({ success: false, message: "Failed to get foods!", menuItems: [] });
+        res.status(200).json({ success: true, message: "Successfully get all foods!", menuItems: menuItems });
+    });
+})
 module.exports = router;
