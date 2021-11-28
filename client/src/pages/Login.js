@@ -3,6 +3,9 @@ import LoginForm from "../components/LoginForm";
 import { UserContext } from "../context/User";
 
 class Login extends React.Component {
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
   render() {
     return (
       <UserContext.Consumer>

@@ -20,12 +20,10 @@ const Menu = (props) => {
       ...new Set(props.items.map((item) => item.category)),
     ]);
   }, [props.items]);
-
   const filterItems = (category) => {
     setActiveCategory(category);
     if (category === "ALL") {
       setMenuItems(props.items);
-      console.log("MenuItem", menuItems);
       return;
     }
     const newItems = props.items.filter((item) => item.category === category);

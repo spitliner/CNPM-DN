@@ -9,6 +9,9 @@ class AccountInfo extends React.Component {
   handleChangeInformationButton = () => {
     this.props.history.push("/change_information");
   };
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
   render() {
     return (
       <UserContext.Consumer>

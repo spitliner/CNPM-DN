@@ -6,10 +6,6 @@ import "../icons/fontawesome";
 import VoucherForm from "../components/VoucherForm";
 
 class OrderDish extends React.Component {
-  componentDidMount = () => {
-    console.log(this.props.cartItems);
-  };
-
   render() {
     const { cartItems, addItemToCart, reduceItemFromCart } = this.props;
 
@@ -143,6 +139,9 @@ class OrderMain extends React.Component {
 }
 
 class Order extends React.Component {
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
   render() {
     return (
       <CartContext.Consumer>

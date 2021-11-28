@@ -57,6 +57,19 @@ class App extends Component {
       alert(response.data.message);
     }
   };
+  updateAllFoods = async () => {
+    let response = await Axios({
+      method: "GET",
+      data: {},
+      withCredentials: true,
+      url: url + "/api/get_all_foods", // Should set to .ENV or DEFINE CONST
+    });
+    if (response.data.success) {
+      this.setState({ menuItems: response.data.menuItems });
+    } else {
+      alert(response.data.message);
+    }
+  };
   render = () => {
     return (
       <CartProvider>
@@ -78,7 +91,12 @@ class App extends Component {
                     path="/menu/:id"
                     render={(props) => {
                       return (
-                        <MenuDetail cookies={this.props.cookies} {...props} />
+                        <MenuDetail
+                          cookies={this.props.cookies}
+                          updateAllFoods={this.updateAllFoods}
+                          {...props}
+                          menuItems={this.state.menuItems}
+                        />
                       );
                     }}
                   />

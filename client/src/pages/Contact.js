@@ -3,6 +3,9 @@ import { UserContext } from "../context/User";
 import "./Contact.css";
 
 class Contact extends React.Component {
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
   render() {
     return (
       <main>

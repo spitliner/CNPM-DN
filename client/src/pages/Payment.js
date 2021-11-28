@@ -3,6 +3,9 @@ import PaymentForm from "../components/PaymentForm";
 import { CartContext } from "../context/Cart";
 
 class Payment extends React.Component {
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
   render() {
     return (
       <CartContext.Consumer>

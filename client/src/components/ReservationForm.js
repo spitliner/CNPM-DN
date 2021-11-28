@@ -56,7 +56,7 @@ class ReservationForm extends Form {
       <div className="form-background-3">
         <div className="form-outer">
           <div className="form-wrapper">
-            <h1 className="form-title">Make Your Reservation</h1>
+            <h1 className="form-title-light">Make Your Reservation</h1>
             <p className="notification">{this.state.notification}</p>
             <form className="form-body" onSubmit={this.handleSumbit}>
               {this.renderInput("nop", "Number of persons")}

@@ -4,7 +4,9 @@ import { UserContext } from "../context/User";
 
 class Register extends React.Component {
   state = {};
-
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
   render() {
     return (
       <UserContext.Consumer>

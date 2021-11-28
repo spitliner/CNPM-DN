@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import ChangeInformationForm from "../components/ChangeInformationForm";
 import { UserContext } from "../context/User";
 class ChangeInformation extends React.Component {
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
   render() {
     return (
       <UserContext.Consumer>
