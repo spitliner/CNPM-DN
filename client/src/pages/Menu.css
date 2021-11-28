@@ -20,6 +20,7 @@ h4 {
     font-weight: normal;
     font-size: 24px;
     line-height: 33px;
+    font-family: "Oleo Script Swash Caps", cursive;
 }
 
 p {
@@ -47,6 +48,7 @@ p {
     text-align: center;
     margin-bottom: 2rem;
     color: white;
+    font-family: "Oleo Script Swash Caps", cursive;
 }
 
 .underline {
@@ -177,7 +179,7 @@ p {
     justify-content: center;
     align-items: center;
     padding: 4px 10px;
-    background: rgba(232, 107, 38);
+    background: #e1651f;
     border-radius: 25px;
     flex: none;
     order: 3;
@@ -194,7 +196,7 @@ p {
 
 .background {
     background-image: url("../images/b.png");
-    background-size: 150%;
+    background-size: 140%;
 }
 
 .welcome {

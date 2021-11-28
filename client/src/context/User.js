@@ -135,13 +135,13 @@ class UserProvider extends Component {
   logoutUser = async () => {
     // const logoutResponse = await fetch();
     this.setState({ currentLoginUser: emptyUser });
-    let response = await Axios({
+    this.props.cookies.remove("user"); // remove the cookie
+    var response = await Axios({
       method: "GET",
       data: {},
       withCredentials: true,
       url: url + "/api/logout", // Should set to .ENV or DEFINE CONST
     });
-    this.props.cookies.remove("user"); // remove the cookie
     return response;
   };
 

@@ -40,3 +40,30 @@ Cài trước mongodb và enable mongodb trước khi chạy: [Link install guid
 * Ngân hàng
 * Mã thẻ
 * Nút submit
+
+# Công việc
+
+## Đạt
+
+- Backend
+- Session và Cookie
+- Login
+- Register
+- Forget Password
+- Change Pasword
+- Change Information
+- Voucher
+- Star vote
+- Feedback
+- Contact
+- Introduction
+- Manage Order
+
+## Thịnh
+
+- Setup Front end
+- Food Detail
+- Navbar
+- Footer
+- Payment
+- Reservation

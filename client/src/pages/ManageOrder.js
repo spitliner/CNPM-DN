@@ -142,7 +142,7 @@ class OrderMain extends React.Component {
   }
 }
 
-class Order extends React.Component {
+class ManageOrder extends React.Component {
   render() {
     return (
       <CartContext.Consumer>
@@ -158,4 +158,4 @@ class Order extends React.Component {
   }
 }
 
-export default Order;
+export default ManageOrder;
