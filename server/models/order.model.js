@@ -10,6 +10,7 @@ var schema = new Schema({
     creditCardNumber: { type: String },
     voucherCode: { type: String },
     totalCost: { type: Number },
-    finalCost: { type: Number }
+    finalCost: { type: Number },
+    status: { type: String }
 });
 module.exports = mongoose.model('order', schema)

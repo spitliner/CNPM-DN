@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./MenuDetail.css";
 import { CartContext } from "../context/Cart";
-import CommentForm from "../components/CommentForm";
+import FeedbackForm from "../components/FeedbackForm";
 const menuItems = [
   {
     id: 1,
@@ -283,7 +283,7 @@ class MenuDetail extends React.Component {
                 addItemToCart={addItemToCart}
                 cookies={this.props.cookies}
               />
-              {cookies.get("user") && <CommentForm foodID={id} />}
+              {cookies.get("user") && <FeedbackForm foodID={id} />}
             </div>
           );
         }}

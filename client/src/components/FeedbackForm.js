@@ -27,7 +27,7 @@ class CommentForm extends Form {
       method: "POST",
       withCredentials: true,
       data: {
-        foodID: this.state.foodID,
+        foodID: this.state.data.foodID,
         feedback: this.state.data.feedback,
       },
       url: url + "/api/feedback", // Should set to .ENV or DEFINE CONST

@@ -16,7 +16,7 @@ class Navbar extends React.Component {
     const response = await this.props.logoutUser();
     console.log(response);
     if (!response.data.success) alert(response.data.message);
-    this.props.history.replace("/login");
+    this.props.history.push("/login");
   };
 
   render() {

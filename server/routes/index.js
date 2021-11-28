@@ -431,7 +431,7 @@ router.post("/api/make_order", (req, res) => {
     order.voucherCode = req.body.voucherCode;
     order.totalCost = req.body.totalCost;
     order.finalCost = req.body.finalCost;
-
+    order.status = "Waiting";
     order.save((err, result) => {
         if (err) return res.status(200).json({ success: false, message: err });
         return res.status(200).json({ success: true, message: "Successfully make order!" });
@@ -444,6 +444,7 @@ router.post("/api/feedback", (req, res) => {
     var feedback = new Feedback();
     feedback.foodID = req.body.foodID;
     feedback.feedback = req.body.feedback;
+    feedback.email = req.user.email;
     feedback.save((err, result) => {
         if (err) return res.status(200).json({ success: false, message: err });
         return res.status(200).json({ success: true, message: "Successfully send feedback!" });
