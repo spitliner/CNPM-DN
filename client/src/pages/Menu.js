@@ -3,21 +3,32 @@ import MenuList from "../components/MenuList";
 import Categories from "../components/Categories";
 import "./Menu.css";
 import image from "../images/b.png";
-const Menu = ({ items, history, cookies }) => {
-  const allCategories = ["ALL", ...new Set(items.map((item) => item.category))];
+const Menu = (props) => {
+  let allCategories = [
+    "ALL",
+    ...new Set(props.items.map((item) => item.category)),
+  ];
 
-  const [menuItems, setMenuItems] = useState(items);
+  const [menuItems, setMenuItems] = useState(props.items);
   const [activeCategory, setActiveCategory] = useState("ALL");
   const [categories, setCategories] = useState(allCategories);
+
+  React.useEffect(() => {
+    setMenuItems(props.items);
+    setCategories([
+      "ALL",
+      ...new Set(props.items.map((item) => item.category)),
+    ]);
+  }, [props.items]);
 
   const filterItems = (category) => {
     setActiveCategory(category);
     if (category === "ALL") {
-      setMenuItems(items);
+      setMenuItems(props.items);
       console.log("MenuItem", menuItems);
       return;
     }
-    const newItems = items.filter((item) => item.category === category);
+    const newItems = props.items.filter((item) => item.category === category);
     setMenuItems(newItems);
   };
   return (
@@ -37,7 +48,11 @@ const Menu = ({ items, history, cookies }) => {
             activeCategory={activeCategory}
             filterItems={filterItems}
           />{" "}
-          <MenuList cookies={cookies} history={history} items={menuItems} />{" "}
+          <MenuList
+            cookies={props.cookies}
+            history={props.history}
+            items={menuItems}
+          />{" "}
         </section>{" "}
       </div>
     </main>

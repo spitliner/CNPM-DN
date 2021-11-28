@@ -37,14 +37,14 @@ class App extends Component {
   };
   constructor(props) {
     super(props);
-    this.state = { menuItems: this.props.menuItems };
+    this.state = { menuItems: [] };
     console.log(this.state);
   }
 
   handleReservation = (message) => {
     console.log(message);
   };
-  /*componentDidMount = async () => {
+  componentDidMount = async () => {
     let response = await Axios({
       method: "GET",
       data: {},
@@ -56,7 +56,7 @@ class App extends Component {
     } else {
       alert(response.data.message);
     }
-  };*/
+  };
   render = () => {
     return (
       <CartProvider>
