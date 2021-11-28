@@ -39,7 +39,10 @@ function PostItem(props) {
       <h2 className="post-Ingredient">Ingredient</h2>
       <p className="post-desc">{props.food_description}</p>
       <h3 className="post-price">Prices: &nbsp; {props.food_price} $</h3>
-      <h3 className="post-price">Rating: &nbsp; {renderStar(props.star)}</h3>
+      <div className="food-rating-wrapper">
+        <h3 className="food-rating-title">Rating: </h3>
+        <div className="food-rating-star">{renderStar(props.star)}</div>
+      </div>
       {props.cookies.get("user") && (
         <button
           onClick={() => {
