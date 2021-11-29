@@ -63,7 +63,6 @@ class Form extends React.Component {
     } else {
       delete errors[input.name];
     }
-
     const data = { ...this.state.data };
     data[evt.currentTarget.name] = evt.currentTarget.value;
     this.setState({ data: data, errors });
@@ -98,6 +97,7 @@ class Form extends React.Component {
       />
     );
   }
+  renderDate(name, label, type = "date", start = new Date()) {}
   renderInputNoChangeValidate(name, label, type = "text") {
     const { data, errors } = this.state;
 

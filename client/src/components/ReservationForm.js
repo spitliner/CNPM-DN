@@ -18,14 +18,8 @@ class ReservationForm extends Form {
 
   schema = Joi.object({
     nop: Joi.number().integer().min(1).max(50).label("Number of Persons"),
-    date: Joi.date().format("YYYY/MM/DD").label("Date"),
-    time: Joi.string()
-      .required()
-      .regex(/^([0-9]{2})\:([0-9]{2}):([0-9]{2})$/)
-      .label("Time")
-      .messages({
-        "string.pattern.base": "Time format must be HH:MM:SS",
-      }),
+    date: Joi.date().required().label("Date"),
+    time: Joi.string().required().label("Time"),
     message: Joi.string().required().label("Message"),
   });
 
@@ -60,8 +54,8 @@ class ReservationForm extends Form {
             <p className="notification">{this.state.notification}</p>
             <form className="form-body" onSubmit={this.handleSumbit}>
               {this.renderInput("nop", "Number of persons")}
-              {this.renderInput("date", "Date (YYYY/MM/DD)")}
-              {this.renderInput("time", "Time (HH:MM:SS)")}
+              {this.renderInput("date", "Date (DD/MM/YYYY)", "date")}
+              {this.renderInput("time", "Time (HH:MM:SS)", "time")}
               {this.renderInput("message", "Message")}
               {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}
               {this.renderButton("Register")}
