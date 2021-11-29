@@ -13,6 +13,9 @@
 
 .account-info-wrapper ul {
     padding-left: 0%;
+    padding-right: 0%;
+    width: 100%;
+    margin: auto;
 }
 
 .account-info-wrapper li,
@@ -71,4 +74,16 @@
     padding: auto;
     flex-wrap: wrap;
     padding-bottom: 5%;
+}
+
+.information-icon {
+    width: 30%;
+    font-size: 120%;
+    text-align: right;
+    padding-right: 40px;
+}
+
+.information-content {
+    width: 70%;
+    text-align: left;
 }
