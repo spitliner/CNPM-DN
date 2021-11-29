@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 import Axios from "axios";
 import { withCookies, Cookies } from "react-cookie";
 import { instanceOf } from "prop-types";
-
+import icon from "../images/icon.png";
 class Navbar extends React.Component {
   static propTypes = {
     cookies: instanceOf(Cookies).isRequired,
@@ -24,7 +24,7 @@ class Navbar extends React.Component {
       <div>
         <nav className="navbar py-3 navbar-expand-lg navbar-dark bg-dark">
           <a className="navbar-brand" href="#">
-            Restaurant
+            <img src={icon} alt="" height="40" /> Cuc Cu Restaurant
           </a>
           <button
             className="navbar-toggler"
