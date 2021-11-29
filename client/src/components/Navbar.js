@@ -91,7 +91,7 @@ class Navbar extends React.Component {
               <ul className="navbar-nav ml-auto">
                 <li>
                   <Link className="nav-link" to="/account">
-                    Account
+                    {currentLoginUser.username}
                   </Link>
                 </li>
                 <li>

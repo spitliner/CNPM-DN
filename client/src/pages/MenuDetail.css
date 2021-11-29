@@ -11,7 +11,7 @@
     order: 0;
     align-self: stretch;
     flex-grow: 0;
-    margin: 18px 0px;
+    margin: 10px 0px;
 }
 
 .post-img {
@@ -178,4 +178,8 @@
 .food-rating-star {
     margin-top: 15px;
     margin-left: 10px;
+}
+
+.menu-detail-back-ground {
+    padding-top: 10px;
 }

@@ -70,7 +70,7 @@ class MenuDetail extends React.Component {
       <CartContext.Consumer>
         {({ cartItems, addItemToCart, reduceItemFromCart }) => {
           return (
-            <div>
+            <div className="menu-detail-back-ground">
               {menuItems.length && (
                 <PostItem
                   key={menuItems[itemIndex].id}
