@@ -17,12 +17,14 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    text-align: center;
 }
 
 .footer-item h1 {
     font-family: "Oleo Script Swash Caps", cursive;
     font-weight: 400;
     text-align: center;
+    justify-content: center;
 }
 
 .footer-item h1 {
@@ -31,4 +33,33 @@
 
 .footer-item * {
     width: 100%;
+    display: flex;
+}
+
+.footer-item ul {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.footer-item li {
+    width: 100%;
+    text-align: center;
+}
+
+.footer-item p {
+    justify-content: center;
+}
+
+.footer-item .footer-icon {
+    width: 40%;
+    text-align: right;
+    justify-content: right;
+    padding-right: 10%;
+}
+
+.footer-item .footer-information {
+    width: 60%;
+    text-align: left;
+    justify-content: left;
 }

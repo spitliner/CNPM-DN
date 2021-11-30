@@ -33,9 +33,9 @@ const Menu = (props) => {
     <main className="background">
       <div className="welcome">
         <div className="welcome-text">
-        Welcome to our restaurent!
-        <br />
-        Scroll down to the view menu
+          Welcome to our restaurent!
+          <br />
+          Scroll down to view the menu
         </div>
       </div>
       <div className="background">
