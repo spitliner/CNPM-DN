@@ -5,6 +5,8 @@ import JoiBase from "joi";
 import JoiDate from "@hapi/joi-date";
 import Axios from "axios";
 
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 const Joi = JoiBase.extend(JoiDate); // extend Joi with Joi Date
 
 class RegisterForm extends Form {
@@ -45,7 +47,21 @@ class RegisterForm extends Form {
     const response = await this.props.onUserRegister(this.state);
     console.log("Register response", response);
     if (response.success) {
-      this.props.history.replace("/login");
+      return confirmAlert({
+        title: "Notification!",
+        message: "Register successfully, do you want to login now?",
+        buttons: [
+          {
+            label: "Yes",
+            onClick: async () => this.props.history.replace("/login"),
+          },
+          {
+            label: "No",
+            onClick: async () =>
+              this.setState({ notification: response.message }),
+          },
+        ],
+      });
     } else {
       this.setState({ notification: response.message });
     }

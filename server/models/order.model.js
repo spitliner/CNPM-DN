@@ -11,6 +11,7 @@ var schema = new Schema({
     voucherCode: { type: String },
     totalCost: { type: Number },
     finalCost: { type: Number },
+    time: { type: Date },
     status: { type: String }
 });
 module.exports = mongoose.model('order', schema)

@@ -51,6 +51,19 @@ class ManageOrderFrame extends React.Component {
     if (!response.data.success) return alert(response.data.message);
     await this.updateUserOrders();
   };
+  renderCartItem = (cartItem) => {
+    var result = this.props.menuItems.find(
+      (element) => cartItem.id == element.id
+    );
+    if (!result) return <div />;
+    return (
+      <div className="popup-content-cart-item">
+        <div className="cart-item-name">{result.name}</div>
+        <div className="cart-item-price">Price: {result.pricePU}</div>
+        <div className="cart-item-quantity">Quantity: {cartItem.quantity}</div>
+      </div>
+    );
+  };
   render() {
     return (
       <div className="manage-order-background">
@@ -96,32 +109,52 @@ class ManageOrderFrame extends React.Component {
                         <button className="close" onClick={close}>
                           &times;
                         </button>
-                        <h3 className="popup-header">Order {index}</h3>
-                        <div>OrderID: {order._id}</div>
-                        <div>Payment type: {order.paymentType}</div>
-                        <div>Eat type: {order.takeAwayOrEatIn}</div>
-                        <div>Status: {order.status}</div>
-                        <div>Order time: {order.time}</div>
-                        {order.address ? (
-                          <div>Delivery Address: {order.address}</div>
-                        ) : (
-                          <div />
-                        )}
-                        {order.paymentType == "Online" ? (
-                          <div>Payment bank: {order.bank}</div>
-                        ) : (
-                          <div />
-                        )}
-                        {order.paymentType == "Online" ? (
-                          <div>
-                            Payment credit card: {order.creditCardNumber}
+                        <h3 className="popup-header">Order {index + 1}</h3>
+                        <div className="popup-content-wrapper">
+                          <div className="popup-content-information-wrapper">
+                            <h4 className="popup-content-header">
+                              Information
+                            </h4>
+                            <div className="popup-content-information">
+                              <div>OrderID: {order._id}</div>
+                              <div>Payment type: {order.paymentType}</div>
+                              <div>Eat type: {order.takeAwayOrEatIn}</div>
+                              <div>Status: {order.status}</div>
+                              <div>Order time: {order.time}</div>
+                              <div>Total cost: {order.totalCost}</div>
+                              <div>Final cost: {order.finalCost}</div>
+                              {order.voucherCode ? (
+                                <div>Voucher: {order.voucher}</div>
+                              ) : (
+                                <div />
+                              )}
+                              {order.address ? (
+                                <div>Delivery Address: {order.address}</div>
+                              ) : (
+                                <div />
+                              )}
+                              {order.paymentType == "Online" ? (
+                                <div>Payment bank: {order.bank}</div>
+                              ) : (
+                                <div />
+                              )}
+                              {order.paymentType == "Online" ? (
+                                <div>
+                                  Payment credit card: {order.creditCardNumber}
+                                </div>
+                              ) : (
+                                <div />
+                              )}
+                            </div>
                           </div>
-                        ) : (
-                          <div />
-                        )}
-                        <div>
-                          Cart
-                          <div></div>
+                          <div className="popup-content-cart">
+                            <h4 className="popup-content-header">Cart</h4>
+                            <div className="popup-content-cart-wrapper">
+                              {order.cartItems.map((cartItem) =>
+                                this.renderCartItem(cartItem)
+                              )}
+                            </div>
+                          </div>
                         </div>
                       </div>
                     )}

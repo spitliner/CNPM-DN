@@ -215,7 +215,6 @@ router.get("/api/get_all_foods", (req, res) => {
     });
 })
 router.post("/api/make_order", (req, res) => {
-    console.log(req.body);
     if (!req.isAuthenticated())
         return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
     var order = new Order();
@@ -229,6 +228,7 @@ router.post("/api/make_order", (req, res) => {
     order.voucherCode = req.body.voucherCode;
     order.totalCost = req.body.totalCost;
     order.finalCost = req.body.finalCost;
+    order.time = req.body.time;
     order.status = "Waiting";
     order.save((err, result) => {
         if (err) return res.status(200).json({ success: false, message: err });
@@ -286,9 +286,28 @@ router.post("/api/get_star", (req, res) => {
         return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
     Star.findOne({ foodID: req.body.foodID, email: req.user.email }, (err, result) => {
         if (err) return res.status(200).json({ success: false, message: err });
-        if (!result) return res.status(200).json({ success: false, message: "No star vote", star: 0 });
-        return res.status(200).json({ success: true, message: "Successfully get star", star: result.star });
+        if (!result) return res.status(200).json({ success: false, message: "No star vote!", star: 0 });
+        return res.status(200).json({ success: true, message: "Successfully get star!", star: result.star });
     })
+});
+router.get("/api/get_user_orders", (req, res) => {
+    if (!req.isAuthenticated())
+        return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
+    Order.find({ email: req.user.email }, (err, result) => {
+        if (err) return res.status(200).json({ success: false, message: err });
+        return res.status(200).json({ success: true, message: "Successfully get user orders!", orders: result });
+    });
+});
+router.post("/api/delete_user_order", (req, res) => {
+    if (!req.isAuthenticated())
+        return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
+    console.log(req.body.orderID);
+    Order.findOne({ _id: req.body.orderID }, async(err, result) => {
+        if (err) return res.status(200).json({ success: false, message: err });
+        if (!result) return res.status(200).json({ success: false, message: "Some thing wrong!" });
+        await result.delete();
+        return res.status(200).json({ success: true, message: "Successfully delete order!" });
+    });
 });
 // call this router by POSTMAN to insert data of food
 router.get("/api/insert_foods", async(req, res) => {
