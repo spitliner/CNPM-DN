@@ -3,7 +3,7 @@ import "./Categories.css";
 
 const Categories = ({ categories, filterItems, activeCategory }) => {
   var categoryImageUrls = {
-    ALL: "https://cdn-icons.flaticon.com/png/512/3272/premium/3272779.png?token=exp=1638035032~hmac=b372458aba404c529410e985c19b6f92",
+    ALL: "https://cdn-icons-png.flaticon.com/512/2362/2362268.png",
     PIZZA: "https://d29fhpw069ctt2.cloudfront.net/icon/image/59558/preview.svg",
     BURGER:
       "https://cdn0.iconfinder.com/data/icons/foody-icons/32/FoodyIcons_color-06-512.png",
@@ -26,7 +26,10 @@ const Categories = ({ categories, filterItems, activeCategory }) => {
             onClick={() => filterItems(category)}
           >
             {" "}
-            <img className="category-icon" src={categoryImageUrls[category]} />
+            <img
+              className="category-icon"
+              src={categoryImageUrls[category]}
+            />{" "}
             {category}{" "}
           </button>
         );

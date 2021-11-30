@@ -71,7 +71,7 @@ class MenuDetail extends React.Component {
         {({ cartItems, addItemToCart, reduceItemFromCart }) => {
           return (
             <div className="menu-detail-back-ground">
-              {menuItems.length && (
+              {menuItems.length ? (
                 <PostItem
                   key={menuItems[itemIndex].id}
                   id={id}
@@ -85,6 +85,8 @@ class MenuDetail extends React.Component {
                   cookies={this.props.cookies}
                   menuItems={menuItems}
                 />
+              ) : (
+                <div />
               )}
               {cookies.get("user") && (
                 <FeedbackForm

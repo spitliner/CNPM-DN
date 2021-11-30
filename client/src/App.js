@@ -29,6 +29,7 @@ import Contact from "./pages/Contact.js";
 import { withCookies, Cookies } from "react-cookie";
 import { instanceOf } from "prop-types";
 import Axios from "axios";
+import ManageOrder from "./pages/ManageOrder";
 const url = "http://localhost:4000";
 
 class App extends Component {
@@ -199,6 +200,12 @@ class App extends Component {
                     path="/contact"
                     render={(props) => {
                       return <Contact {...props} />;
+                    }}
+                  />
+                  <Route
+                    path="/manage_order"
+                    render={(props) => {
+                      return <ManageOrder {...props} />;
                     }}
                   />
                   <Redirect to="/menu" /> {/*Otherwise redirect to menu*/}
