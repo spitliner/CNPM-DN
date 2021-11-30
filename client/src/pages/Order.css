@@ -1,3 +1,22 @@
+@keyframes example {
+    from{
+      opacity: 0;
+      transform: scale(0.3);
+      filter: hue-rotate(180deg);
+    }
+    to{
+      opacity: 1;
+      transform: scale(1);
+      filter: hue-rotate(0deg);
+    }
+  }
+
+.form-title {
+    animation: example 700ms ease-in-out;
+    animation-fill-mode: backwards;
+    transition: transform .2s;
+}
+
 .order_header {
     display: flex;
     flex-direction: row;
@@ -16,6 +35,16 @@
     justify-content: space-between;
     margin: auto;
     font-weight: bold;
+
+    animation: example 700ms ease-in-out;
+    animation-fill-mode: backwards;
+    transition: transform .2s;
+    --stagger-delay:100ms;
+}
+
+.order_main
+{
+  animation-delay: calc(4*var(--stagger-delay));
 }
 
 .order_main>div {

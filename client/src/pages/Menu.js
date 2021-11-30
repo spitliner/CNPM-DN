@@ -32,9 +32,11 @@ const Menu = (props) => {
   return (
     <main className="background">
       <div className="welcome">
+        <div className="welcome-text">
         Welcome to our restaurent!
         <br />
         Scroll down to the view menu
+        </div>
       </div>
       <div className="background">
         <section className="menu section">

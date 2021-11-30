@@ -1,3 +1,20 @@
+.post-item {
+    --stagger-delay:100ms;
+  }
+  
+  @keyframes example {
+    from{
+      opacity: 0;
+      transform: scale(0.3);
+      filter: hue-rotate(180deg);
+    }
+    to{
+      opacity: 1;
+      transform: scale(1);
+      filter: hue-rotate(0deg);
+    }
+  }
+
 .post-name {
     font-family: Oleo Script Swash Caps;
     font-size: 48px;
@@ -12,6 +29,10 @@
     align-self: stretch;
     flex-grow: 0;
     margin: 10px 0px;
+
+    animation: example 700ms ease-out;
+    animation-fill-mode: backwards;
+    transition: transform .2s;
 }
 
 .post-img {
@@ -23,6 +44,10 @@
     margin-right: auto;
     display: block;
     border-radius: 25px;
+
+    animation: example 700ms ease-out;
+    animation-fill-mode: backwards;
+    transition: transform .2s;
 }
 
 .post-Ingredient {
@@ -38,6 +63,10 @@
     align-self: stretch;
     flex-grow: 0;
     margin: 18px 0px;
+
+    animation: example 700ms ease-out;
+    animation-fill-mode: backwards;
+    transition: transform .2s;
 }
 
 .post-desc {
@@ -54,6 +83,10 @@
     order: 1;
     flex-grow: 0;
     margin: 18px 340px 80px;
+
+    animation: example 700ms ease-out;
+    animation-fill-mode: backwards;
+    transition: transform .2s;
 }
 
 .post-price {
@@ -69,6 +102,10 @@
     align-self: stretch;
     flex-grow: 0;
     margin: 18px 0px;
+
+    animation: example 700ms ease-out;
+    animation-fill-mode: backwards;
+    transition: transform .2s;
 }
 
 .post-button-BTM {
@@ -94,6 +131,10 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 50px;
+
+    animation: example 700ms ease-out;
+    animation-fill-mode: backwards;
+    transition: transform .2s;
 }
 
 .post-button-ATC {
@@ -126,6 +167,10 @@
     margin-right: auto;
     margin-top: 60px;
     margin-bottom: 60px;
+
+    animation: example 700ms ease-out;
+    animation-fill-mode: backwards;
+    transition: transform .2s;
 }
 
 .menu-detail-ratings {
@@ -133,6 +178,10 @@
     margin: 0;
     padding: 0;
     width: 100%;
+
+    animation: example 700ms ease-out;
+    animation-fill-mode: backwards;
+    transition: transform .2s;
 }
 
 .menu-detail-star {
@@ -141,6 +190,10 @@
     display: inline-block;
     transition: color 0.2s ease;
     color: #ebebeb;
+
+    animation: example 700ms ease-out;
+    animation-fill-mode: backwards;
+    transition: transform .2s;
 }
 
 .menu-detail-star:before {
@@ -148,6 +201,10 @@
     width: 60px;
     height: 60px;
     font-size: 60px;
+
+    animation: example 700ms ease-out;
+    animation-fill-mode: backwards;
+    transition: transform .2s;
 }
 
 .menu-detail-star.menu-detail-selected {
@@ -158,6 +215,10 @@
     display: flex;
     flex: wrap;
     justify-content: center;
+
+    animation: example 700ms ease-out;
+    animation-fill-mode: backwards;
+    transition: transform .2s;
 }
 
 .food-rating-title {
@@ -173,6 +234,10 @@
     align-self: stretch;
     flex-grow: 0;
     margin: 18px 0px;
+
+    animation: example 700ms ease-out;
+    animation-fill-mode: backwards;
+    transition: transform .2s;
 }
 
 .food-rating-star {
