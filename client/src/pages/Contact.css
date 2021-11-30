@@ -1,22 +1,22 @@
 @keyframes example {
-    from{
-      opacity: 0;
-      transform: scale(0.3);
-      filter: hue-rotate(180deg);
+    from {
+        opacity: 0;
+        transform: scale(0.3);
+        filter: hue-rotate(180deg);
     }
-    to{
-      opacity: 1;
-      transform: scale(1);
-      filter: hue-rotate(0deg);
+    to {
+        opacity: 1;
+        transform: scale(1);
+        filter: hue-rotate(0deg);
     }
-  }
+}
 
 .contact-wrapper {
     display: flex;
     flex-wrap: wrap;
     height: auto;
     justify-content: center;
-    --stagger-delay:100ms;
+    --stagger-delay: 100ms;
 }
 
 .map {
@@ -29,10 +29,9 @@
     border-radius: 10px;
     margin-left: 5%;
     margin-right: 5%;
-
     animation: example 700ms ease-out;
     animation-fill-mode: backwards;
-    transition: transform .2s;
+    transition: transform 0.2s;
 }
 
 .contact-information {
@@ -50,20 +49,18 @@
     margin-right: 5%;
     font-size: 120%;
     color: white;
-
     animation: example 700ms ease-out;
     animation-fill-mode: backwards;
-    transition: transform .2s;
+    transition: transform 0.2s;
 }
 
-.map
-  {
-    animation-delay: calc(1*var(--stagger-delay));
-  }
-  .contact-information
-  {
-    animation-delay: calc(5*var(--stagger-delay));
-  }
+.map {
+    animation-delay: calc(1 * var(--stagger-delay));
+}
+
+.contact-information {
+    animation-delay: calc(5 * var(--stagger-delay));
+}
 
 .map iframe {
     border-radius: 10px;
@@ -84,7 +81,18 @@
 .contact-information ul li {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     width: 100%;
     font-size: 110%;
+}
+
+.contact-information-icon {
+    width: 20%;
+    font-size: 120%;
+    text-align: right;
+    padding-right: 40px;
+}
+
+.contact-information-content {
+    width: 70%;
+    text-align: left;
 }

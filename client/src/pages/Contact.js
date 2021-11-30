@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import { UserContext } from "../context/User";
 import "./Contact.css";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faClock,
+  faEnvelope,
+  faMapMarkerAlt,
+  faPhone,
+} from "@fortawesome/free-solid-svg-icons";
 class Contact extends React.Component {
   componentDidMount = () => {
     window.scrollTo(0, 0);
@@ -25,10 +31,38 @@ class Contact extends React.Component {
               <ul>
                 {" "}
                 <h3>Our Contact Information</h3>
-                <li>Phone: 12345678</li>
-                <li>Address: Ho Chi Minh City, Viet Nam</li>
-                <li>Timing: Everyday from 10am - 11pm</li>
-                <li>Email: dat.huynh11082001@hcmut.edu.vn</li>
+                <li>
+                  <div className="contact-information-icon">
+                    <FontAwesomeIcon icon={faPhone} />
+                  </div>
+                  <div ClassName="contact-information-content">
+                    Phone: 12345678
+                  </div>
+                </li>
+                <li>
+                  <div className="contact-information-icon">
+                    <FontAwesomeIcon icon={faMapMarkerAlt} />
+                  </div>
+                  <div ClassName="contact-information-content">
+                    Address: Ho Chi Minh City, Viet Nam
+                  </div>
+                </li>
+                <li>
+                  <div className="contact-information-icon">
+                    <FontAwesomeIcon icon={faClock} />
+                  </div>
+                  <div ClassName="contact-information-content">
+                    Timing: Everyday from 10am - 11pm
+                  </div>
+                </li>
+                <li>
+                  <div className="contact-information-icon">
+                    <FontAwesomeIcon icon={faEnvelope} />
+                  </div>
+                  <div ClassName="contact-information-content">
+                    Email: dat.huynh11082001@hcmut.edu.vn
+                  </div>
+                </li>
               </ul>
             </div>
           </div>

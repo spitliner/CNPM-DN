@@ -16,6 +16,9 @@ class AccountInfo extends React.Component {
   handleChangeInformationButton = () => {
     this.props.history.push("/change_information");
   };
+  handleManageOrderButton = () => {
+    this.props.history.push("/manage_order");
+  };
   componentDidMount = () => {
     window.scrollTo(0, 0);
   };
@@ -77,6 +80,12 @@ class AccountInfo extends React.Component {
                     onClick={this.handleChangeInformationButton}
                   >
                     Change Infomation
+                  </button>
+                  <button
+                    className="post-button-ATC"
+                    onClick={this.handleManageOrderButton}
+                  >
+                    Manage Order
                   </button>
                 </div>
               </div>
