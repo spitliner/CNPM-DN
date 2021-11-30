@@ -50,6 +50,7 @@ router.post("/api/register", (req, res) => {
                 newUser.username = req.body.username;
                 newUser.address = req.body.address;
                 newUser.phone = req.body.phone;
+                newUser.role = "Customer";
                 newUser.save((err, result) => {
                     if (err) {
                         res.status(200).json({ message: err, success: false });
