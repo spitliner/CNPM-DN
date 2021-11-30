@@ -40,6 +40,7 @@
 .btn-confirm:hover,
 .post-button-BTM:hover,
 .post-button-ATC:hover,
+.confirm-btn:hover,
 .nav-link:hover {
     -ms-transform: scale(1.2);
     -webkit-transform: scale(1.2);

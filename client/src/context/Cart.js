@@ -107,7 +107,6 @@ class CartProvider extends Component {
         discount: response.data.discount,
         voucherCode: response.data.voucherCode,
       });
-    console.log(this.state);
   };
   getFinal = () => {
     return this.getTotal() * (1 - this.state.discount / 100);

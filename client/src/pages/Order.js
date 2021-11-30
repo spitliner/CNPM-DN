@@ -65,7 +65,11 @@ class OrderMain extends React.Component {
           finalCost,
         }) => {
           if (totalCost === 0) {
-            return <h1 className="alert-message">Please make your order !</h1>;
+            return (
+              <h1 className="alert-message post-name">
+                Please make your order !
+              </h1>
+            );
           } else {
             return (
               totalCost !== 0 && (
@@ -73,7 +77,7 @@ class OrderMain extends React.Component {
                   <h1 className="form-title"> Payment Info Page </h1>
                   <div className="order_main">
                     <div className="order_header">
-                      <div className="dish_id">Food Id</div>
+                      <div className="dish_id">Food ID</div>
                       <div className="dish_image_display"></div>
                       <div className="dish_name">Food Name</div>
                       <div className="dish_btn"></div>
@@ -93,7 +97,7 @@ class OrderMain extends React.Component {
                       <div className="dish_btn"></div>
                       <div className="dish_quanity">Totals Cost</div>
                       <div className="dish_btn"></div>
-                      <div className="dish_price">{totalCost.toFixed(2)}</div>
+                      <div className="dish_price">{totalCost.toFixed(2)} $</div>
                     </div>
 
                     <div className="order_header">
@@ -111,9 +115,9 @@ class OrderMain extends React.Component {
                       <div className="dish_image_display"></div>
                       <div className="dish_name"></div>
                       <div className="dish_btn"></div>
-                      <div className="dish_quanity">Totals Cost</div>
+                      <div className="dish_quanity">Final Cost</div>
                       <div className="dish_btn"></div>
-                      <div className="dish_price">{finalCost.toFixed(2)}</div>
+                      <div className="dish_price">{finalCost.toFixed(2)} $</div>
                     </div>
 
                     <VoucherForm applyVoucher={applyVoucher} />

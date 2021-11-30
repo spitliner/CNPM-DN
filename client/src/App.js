@@ -39,7 +39,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { menuItems: [] };
-    console.log(this.state);
   }
 
   handleReservation = (message) => {
@@ -205,7 +204,12 @@ class App extends Component {
                   <Route
                     path="/manage_order"
                     render={(props) => {
-                      return <ManageOrder {...props} />;
+                      return (
+                        <ManageOrder
+                          {...props}
+                          menuItems={this.state.menuItems}
+                        />
+                      );
                     }}
                   />
                   <Redirect to="/menu" /> {/*Otherwise redirect to menu*/}

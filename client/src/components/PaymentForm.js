@@ -34,11 +34,11 @@ class PaymentForm extends Form {
       takeAwayOrEatIn: [
         {
           label: "Take Away",
-          value: "TakeAway",
+          value: "Take Away",
         },
         {
           label: "Eat In",
-          value: "EatIn",
+          value: "Eat In",
         },
       ],
       banks: [
@@ -73,7 +73,7 @@ class PaymentForm extends Form {
     takeAwayOrEatIn: Joi.string()
       .required()
       .label("Take Away or Eat In")
-      .valid("TakeAway", "EatIn")
+      .valid("Take Away", "Eat In")
       .messages({
         "string.domain": "Please choose take-away or eat-in",
       }),
@@ -133,6 +133,7 @@ class PaymentForm extends Form {
         voucherCode: this.props.voucherCode,
         totalCost: this.props.totalCost,
         finalCost: this.props.finalCost,
+        time: Date(),
       },
       url: url + "/api/make_order", // Should set to .ENV or DEFINE CONST
     });

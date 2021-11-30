@@ -45,7 +45,6 @@ class RegisterForm extends Form {
     const response = await this.props.onUserRegister(this.state);
     console.log("Register response", response);
     if (response.success) {
-      alert("Register success. Please login!");
       this.props.history.replace("/login");
     } else {
       this.setState({ notification: response.message });
