@@ -11,7 +11,7 @@ var schema = new Schema({
     voucherCode: { type: String },
     totalCost: { type: Number },
     finalCost: { type: Number },
-    time: { type: Date },
+    time: { type: String },
     status: { type: String },
     reason: { type: String }
 });

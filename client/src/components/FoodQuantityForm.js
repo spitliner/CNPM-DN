@@ -40,7 +40,7 @@ class FoodQuantityForm extends Form {
             {" "}
             {this.renderInput("quantity", "Quantity", "number")}{" "}
             {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
-            <button disabled={false} className="post-button-ATC">
+            <button disabled={false} className="popup-add-to-cart-button">
               Add to cart
             </button>
           </form>{" "}

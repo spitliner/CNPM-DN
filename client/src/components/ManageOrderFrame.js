@@ -62,7 +62,7 @@ class ManageOrderFrame extends React.Component {
           <img src={result.imgUrl}></img>
         </div>
         <div className="cart-item-name">{result.name}</div>
-        <div className="cart-item-price">Price: {result.pricePU}</div>
+        <div className="cart-item-price">Price: {result.pricePU} $</div>
         <div className="cart-item-quantity">Quantity: {cartItem.quantity}</div>
       </div>
     );
@@ -113,54 +113,137 @@ class ManageOrderFrame extends React.Component {
                         <button className="close" onClick={close}>
                           &times;
                         </button>
-                        <h3 className="popup-header">Order {index + 1}</h3>
+                        <h3 className="popup-header">Order Detail</h3>
                         <div className="popup-content-wrapper">
                           <div className="popup-content-information-wrapper">
                             <h4 className="popup-content-header">
                               Information
                             </h4>
                             <div className="popup-content-information">
-                              <div>OrderID: {order._id}</div>
-                              <div>Payment type: {order.paymentType}</div>
-                              <div>Eat type: {order.takeAwayOrEatIn}</div>
-                              <div>Order time: {order.time}</div>
-                              <div>Total cost: {order.totalCost}</div>
-                              <div>Final cost: {order.finalCost}</div>
-                              {order.voucherCode ? (
-                                <div>Voucher: {order.voucher}</div>
-                              ) : (
-                                <div />
-                              )}
-                              {order.address ? (
-                                <div>Delivery Address: {order.address}</div>
-                              ) : (
-                                <div />
-                              )}
-                              {order.paymentType == "Online" ? (
-                                <div>Payment bank: {order.bank}</div>
-                              ) : (
-                                <div />
-                              )}
-                              {order.paymentType == "Online" ? (
-                                <div>
-                                  Payment credit card: {order.creditCardNumber}
+                              <div className="popup-content-information-content-wrapper">
+                                <div className="popup-content-information-content-header">
+                                  OrderID
                                 </div>
-                              ) : (
-                                <div />
+                                <div className="popup-content-information-content">
+                                  {order._id}
+                                </div>
+                              </div>
+                              <div className="popup-content-information-content-wrapper">
+                                <div className="popup-content-information-content-header">
+                                  Payment type
+                                </div>
+                                <div className="popup-content-information-content">
+                                  {order.paymentType}
+                                </div>
+                              </div>
+                              <div className="popup-content-information-content-wrapper">
+                                <div className="popup-content-information-content-header">
+                                  Eat type
+                                </div>
+                                <div className="popup-content-information-content">
+                                  {order.takeAwayOrEatIn}
+                                </div>
+                              </div>
+                              <div className="popup-content-information-content-wrapper">
+                                <div className="popup-content-information-content-header">
+                                  Order time
+                                </div>
+                                <div className="popup-content-information-content">
+                                  {order.time}
+                                </div>
+                              </div>
+                              <div className="popup-content-information-content-wrapper">
+                                <div className="popup-content-information-content-header">
+                                  Total cost
+                                </div>
+                                <div className="popup-content-information-content">
+                                  {order.totalCost.toFixed(2)} $
+                                </div>
+                              </div>
+                              <div className="popup-content-information-content-wrapper">
+                                <div className="popup-content-information-content-header">
+                                  Final cost
+                                </div>
+                                <div className="popup-content-information-content">
+                                  {order.finalCost.toFixed(2)} $
+                                </div>
+                              </div>
+                              {order.voucherCode && (
+                                <div className="popup-content-information-content-wrapper">
+                                  <div className="popup-content-information-content-header">
+                                    Voucher
+                                  </div>
+                                  <div className="popup-content-information-content">
+                                    {order.voucher}
+                                  </div>
+                                </div>
                               )}
-                              <div>Status: {order.status}</div>
-                              <div>Reason: {order.reason}</div>
+                              {order.address && (
+                                <div className="popup-content-information-content-wrapper">
+                                  <div className="popup-content-information-content-header">
+                                    Delivery Address
+                                  </div>
+                                  <div className="popup-content-information-content">
+                                    {order.address}
+                                  </div>
+                                </div>
+                              )}
+                              {order.paymentType == "Online" && (
+                                <div className="popup-content-information-content-wrapper">
+                                  <div className="popup-content-information-content-header">
+                                    Payment bank
+                                  </div>
+                                  <div className="popup-content-information-content">
+                                    {order.bank}
+                                  </div>
+                                </div>
+                              )}
+                              {order.paymentType == "Online" && (
+                                <div className="popup-content-information-content-wrapper">
+                                  <div className="popup-content-information-content-header">
+                                    Payment credit card
+                                  </div>
+                                  <div className="popup-content-information-content">
+                                    {order.creditCardNumber}
+                                  </div>
+                                </div>
+                              )}
+                              <div className="popup-content-information-content-wrapper">
+                                <div className="popup-content-information-content-header">
+                                  Status
+                                </div>
+                                <div className="popup-content-information-content">
+                                  {order.status}
+                                </div>
+                              </div>
+                              {order.reason && (
+                                <div className="popup-content-information-content-wrapper">
+                                  <div className="popup-content-information-content-header">
+                                    Reason
+                                  </div>
+                                  <div className="popup-content-information-content">
+                                    {" "}
+                                    {order.reason}
+                                  </div>
+                                </div>
+                              )}
                             </div>
                           </div>
-                          <div className="popup-content-cart">
+                          <div className="popup-content-cart-wrapper">
                             <h4 className="popup-content-header">Cart</h4>
-                            <div className="popup-content-cart-wrapper">
+                            <div className="popup-content-cart">
                               {order.cartItems.map((cartItem) =>
                                 this.renderCartItem(cartItem)
                               )}
                             </div>
                           </div>
                         </div>
+                        <button
+                          className="popup-order-close-button"
+                          onClick={close}
+                        >
+                          Close
+                        </button>
                       </div>
                     )}
                   </Popup>

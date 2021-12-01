@@ -230,6 +230,7 @@ router.post("/api/make_order", (req, res) => {
     order.finalCost = req.body.finalCost;
     order.time = req.body.time;
     order.status = "Waiting";
+    console.log(req.body.time);
     order.save((err, result) => {
         if (err) return res.status(200).json({ success: false, message: err });
         return res.status(200).json({ success: true, message: "Successfully make order!" });
