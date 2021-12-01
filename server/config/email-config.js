@@ -10,14 +10,14 @@ const sendEmail = async(email, code) => {
                 pass: process.env.EMAIL_PASSWORD,
             },
         });
-        var subject = 'Reset code';
+        var subject = 'OTP code';
         var htmlContent = `
-        <font size="+1">Hello ${email}, this is your reset code:</font>
+        <font size="+1">Hello ${email}, this is your OTP code:</font>
         <hr>
         <center><h2>${code}</h2></center>
         <hr>
         <font size="+1">
-  		<p>Please input it and your new password in 3 minutes!<br>
+  		<p>Please input it in 3 minutes!<br>
         Thank you for using our service!
         </p>
         </font>

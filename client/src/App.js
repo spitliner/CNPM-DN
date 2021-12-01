@@ -30,6 +30,7 @@ import { withCookies, Cookies } from "react-cookie";
 import { instanceOf } from "prop-types";
 import Axios from "axios";
 import ManageOrder from "./pages/ManageOrder";
+import VerifyEmail from "./pages/VerifyEmail";
 const url = "http://localhost:4000";
 
 class App extends Component {
@@ -201,6 +202,14 @@ class App extends Component {
                           menuItems={this.state.menuItems}
                         />
                       );
+                    }}
+                  />
+                  <Route
+                    path="/verify_email"
+                    render={(props) => {
+                      if (this.props.cookies.get("user"))
+                        return <VerifyEmail {...props} />;
+                      return <Redirect to="/login" />;
                     }}
                   />
                   <Route

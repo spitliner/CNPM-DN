@@ -1,18 +1,19 @@
 import React, { Component } from "react";
-import ChangePasswordForm from "../components/ChangePasswordForm";
+import VerifyEmailForm from "../components/VerifyEmailForm";
 import { UserContext } from "../context/User";
-class ChangePassword extends React.Component {
+
+class VerifyEmail extends React.Component {
   componentDidMount = () => {
     window.scrollTo(0, 0);
   };
   render() {
     return (
       <UserContext.Consumer>
-        {({ logoutUser }) => {
+        {({ currentLoginUser, updateUserContext }) => {
           return (
-            <ChangePasswordForm
+            <VerifyEmailForm
               history={this.props.history}
-              logoutUser={logoutUser}
+              updateUserContext={updateUserContext}
             />
           );
         }}
@@ -21,4 +22,4 @@ class ChangePassword extends React.Component {
   }
 }
 
-export default ChangePassword;
+export default VerifyEmail;

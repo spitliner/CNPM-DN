@@ -5,7 +5,8 @@ import "./LoginForm.css";
 import JoiBase from "joi";
 import JoiDate from "@hapi/joi-date";
 import Axios from "axios";
-
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 const Joi = JoiBase.extend(JoiDate); // extend Joi with Joi Date
 
 const url = "http://localhost:4000";
@@ -83,8 +84,21 @@ class ForgetPasswordForm extends Form {
       url: url + "/api/check_reset_code", // Should set to .ENV or DEFINE CONST
     });
     if (response.data.success) {
-      alert(response.data.message);
-      this.props.history.replace("/login");
+      return confirmAlert({
+        title: "Notification!",
+        message: "Reset password successfully, do you want to login now?",
+        buttons: [
+          {
+            label: "Yes",
+            onClick: async () => this.props.history.replace("/login"),
+          },
+          {
+            label: "No",
+            onClick: async () =>
+              this.setState({ notification: response.message }),
+          },
+        ],
+      });
     } else this.setState({ notification: response.data.message });
   };
   render() {

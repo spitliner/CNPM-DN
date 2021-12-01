@@ -5,6 +5,7 @@ var router = express.Router();
 var User = require('../models/user.model.js');
 var Reservation = require('../models/reservation.model');
 var ResetToken = require('../models/reset-token.model');
+var VerifyToken = require('../models/verify-token.model');
 var Voucher = require('../models/voucher.model');
 var Order = require('../models/order.model');
 var Food = require('../models/food.model');
@@ -51,6 +52,7 @@ router.post("/api/register", (req, res) => {
                 newUser.address = req.body.address;
                 newUser.phone = req.body.phone;
                 newUser.role = "Customer";
+                newUser.verifyEmail = false;
                 newUser.save((err, result) => {
                     if (err) {
                         res.status(200).json({ message: err, success: false });
@@ -166,7 +168,7 @@ router.post("/api/check_reset_code", (req, res) => {
     try {
         ResetToken.findOne({ 'email': req.body.email }, function(err, resetToken) {
             if (err) return res.status(200).json({ success: false, message: err });
-            if (!resetToken) return res.status(200).json({ success: false, message: "Reset code not found, please get a new or another code!" });
+            if (!resetToken) return res.status(200).json({ success: false, message: "Reset code not found, please get a new code!" });
             if (req.body.code != resetToken.code) return res.status(200).json({ success: false, message: "Incorrect reset code!" });
             // Else set new password
             resetToken.delete(); // delete current token
@@ -178,6 +180,53 @@ router.post("/api/check_reset_code", (req, res) => {
                 user.save(function(err, result) {
                     if (err) res.status(200).json({ success: false, message: err });
                     else res.status(200).json({ success: true, message: "Successfully reset passwod!" });
+                })
+            })
+        });
+    } catch (err) {
+        return res.status(200).json({ success: false, message: err });
+    }
+});
+router.get("/api/get_verify_code", (req, res) => {
+    try {
+        if (!req.isAuthenticated())
+            return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
+        VerifyToken.findOne({ 'email': req.user.email }, function(err, verifyToken) {
+            if (err) return res.status(200).json({ success: false, message: err });
+            if (verifyToken) return res.status(200).json({ success: true, message: "Verify code has been sent and will expire in 3 minutes, please check your mail box!" });
+            // No reset token --> create one
+            var code = Math.floor(Math.random() * (999999 - 100000) + 10000);
+            var verifyToken = new VerifyToken();
+            verifyToken.email = req.user.email;
+            verifyToken.code = code;
+            verifyToken.save(async(err, result) => {
+                if (err) res.status(200).json({ success: false, message: err });
+                else {
+                    console.log(result);
+                    await sendEmail(req.user.email, code);
+                    res.status(200).json({ success: true, message: "Success! Verify code has been sent to your email, please input your reset code in 3 minutes!" });
+                }
+            });
+        });
+
+    } catch (err) {
+        return res.status(200).json({ success: false, message: err });
+    }
+});
+router.post("/api/check_verify_code", (req, res) => {
+    try {
+        VerifyToken.findOne({ 'email': req.user.email }, function(err, verifyToken) {
+            if (err) return res.status(200).json({ success: false, message: err });
+            if (!verifyToken) return res.status(200).json({ success: false, message: "Verify code not found, please get a new or another code!" });
+            if (req.body.code != verifyToken.code) return res.status(200).json({ success: false, message: "Incorrect verify code!" });
+            verifyToken.delete(); // delete current token
+            User.findOne({ 'email': req.user.email }, function(err, user) {
+                if (err) return res.status(200).json({ success: false, message: err });
+                if (!user) return res.status(200).json({ success: false, message: "Something wrong! User not found!" });
+                user.verifyEmail = true;
+                user.save(function(err, result) {
+                    if (err) res.status(200).json({ success: false, message: err });
+                    else res.status(200).json({ success: true, message: "Successfully verify email!" });
                 })
             })
         });
@@ -197,7 +246,7 @@ router.get("/api/check_login", (req, res) => {
 router.post("/api/voucher", (req, res) => {
     try {
         if (!req.isAuthenticated())
-            return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" })
+            return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
         Voucher.findOne({ 'voucherCode': req.body.voucherCode }, function(err, voucher) {
             if (err) return res.status(200).json({ success: false, message: err });
             if (!voucher) return res.status(200).json({ success: false, message: 'Voucher not found!' });

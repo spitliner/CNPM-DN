@@ -9,7 +9,8 @@ var schema = new Schema({
     password: { type: String, required: true },
     address: { type: String, required: true },
     phone: { type: String, required: true },
-    role: { type: String, require: true }
+    role: { type: String, require: true },
+    verifyEmail: { type: Boolean }
 });
 schema.methods.encryptPassword = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);

@@ -19,6 +19,9 @@ class AccountInfo extends React.Component {
   handleManageOrderButton = () => {
     this.props.history.push("/manage_order");
   };
+  handleVerifyEmailButton = () => {
+    this.props.history.push("/verify_email");
+  };
   componentDidMount = () => {
     window.scrollTo(0, 0);
   };
@@ -69,6 +72,14 @@ class AccountInfo extends React.Component {
                   </ul>
                 </div>
                 <div className="change-button-wrapper">
+                  {!currentLoginUser.verifyEmail && (
+                    <button
+                      className="post-button-ATC"
+                      onClick={this.handleVerifyEmailButton}
+                    >
+                      Verify your email
+                    </button>
+                  )}
                   <button
                     className="post-button-ATC"
                     onClick={this.handleChangePasswordButton}

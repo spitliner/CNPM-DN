@@ -4,7 +4,8 @@ import "./LoginForm.css";
 import JoiBase from "joi";
 import JoiDate from "@hapi/joi-date";
 import Axios from "axios";
-
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 const Joi = JoiBase.extend(JoiDate); // extend Joi with Joi Date
 const url = "http://localhost:4000";
 class ChangePasswordForm extends Form {
@@ -40,8 +41,17 @@ class ChangePasswordForm extends Form {
       url: url + "/api/change_password", // Should set to .ENV or DEFINE CONST
     });
     if (response.data.success) {
-      alert(response.data.message);
-      this.props.history.push("/account");
+      confirmAlert({
+        title: "Notification!",
+        message: "Change password successfully, please login again!",
+
+        buttons: [
+          {
+            label: "OK",
+          },
+        ],
+      });
+      this.props.logoutUser();
     } else this.setState({ notification: response.data.message });
   };
   render() {
