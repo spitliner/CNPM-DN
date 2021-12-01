@@ -47,7 +47,7 @@ class RegisterForm extends Form {
     const response = await this.props.onUserRegister(this.state);
     console.log("Register response", response);
     if (response.success) {
-      return confirmAlert({
+      confirmAlert({
         title: "Notification!",
         message: "Register successfully, do you want to login now?",
         buttons: [
@@ -62,6 +62,7 @@ class RegisterForm extends Form {
           },
         ],
       });
+      this.setState({ notification: response.message });
     } else {
       this.setState({ notification: response.message });
     }
