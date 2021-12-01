@@ -1,0 +1,17 @@
+.food-quantity-form-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 80%;
+    margin: auto;
+}
+
+.food-quantity-form-title {
+    font-family: "Oleo Script Swash Caps", cursive;
+    font-weight: 400;
+    font-size: 30px;
+    margin: 30px 0 20px 0;
+    text-align: center;
+    width: 100%;
+    color: black;
+}

@@ -11,11 +11,11 @@ class OrderDish extends React.Component {
 
     return (
       <div>
-        {cartItems.map((dish) => {
+        {cartItems.map((dish, index) => {
           return (
             <div key={dish.id} className="dish_display_box">
               <div className="dish_id">
-                <p>{dish.id}</p>
+                <p>{index + 1}</p>
               </div>
               <div className="dish_image_display">
                 <img className="dish_image" src={dish.imgUrl} />
@@ -77,7 +77,7 @@ class OrderMain extends React.Component {
                   <h1 className="form-title"> Payment Info Page </h1>
                   <div className="order_main">
                     <div className="order_header">
-                      <div className="dish_id">Food ID</div>
+                      <div className="dish_id">Food</div>
                       <div className="dish_image_display"></div>
                       <div className="dish_name">Food Name</div>
                       <div className="dish_btn"></div>

@@ -97,6 +97,21 @@ class Form extends React.Component {
       />
     );
   }
+  renderInputRange(name, label, type = "range", min) {
+    const { data, errors } = this.state;
+
+    return (
+      <Input
+        type={type}
+        name={name}
+        error={errors[name]}
+        value={data[name]}
+        label={label}
+        onChange={this.handleChange}
+        min={min}
+      />
+    );
+  }
   renderDate(name, label, type = "date", start = new Date()) {}
   renderInputNoChangeValidate(name, label, type = "text") {
     const { data, errors } = this.state;
