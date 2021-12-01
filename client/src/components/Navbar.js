@@ -90,6 +90,11 @@ class Navbar extends React.Component {
             {this.props.cookies.get("user") && (
               <ul className="navbar-nav ml-auto">
                 <li>
+                  <Link className="nav-link" to="/admin">
+                    Administrator
+                  </Link>
+                </li>
+                <li>
                   <Link className="nav-link" to="/account">
                     {currentLoginUser.username}
                   </Link>

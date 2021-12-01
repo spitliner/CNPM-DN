@@ -90,6 +90,7 @@ class MenuDetail extends React.Component {
                   history={history}
                   addItemToCart={addItemToCart}
                   cookies={this.props.cookies}
+                  menuItem={this.props.menuItems[itemIndex]}
                 />
               ) : (
                 <div />

@@ -212,6 +212,14 @@ class App extends Component {
                       );
                     }}
                   />
+                  <Route
+                    path="/admin"
+                    render={(props) => {
+                      if (this.props.cookies.get("admin"))
+                        return <div>ADMIN</div>;
+                      return <Redirect to="/menu" />;
+                    }}
+                  />
                   <Redirect to="/menu" /> {/*Otherwise redirect to menu*/}
                 </Switch>
                 <Footer />

@@ -301,12 +301,39 @@ router.get("/api/get_user_orders", (req, res) => {
 router.post("/api/delete_user_order", (req, res) => {
     if (!req.isAuthenticated())
         return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
-    console.log(req.body.orderID);
     Order.findOne({ _id: req.body.orderID }, async(err, result) => {
         if (err) return res.status(200).json({ success: false, message: err });
         if (!result) return res.status(200).json({ success: false, message: "Some thing wrong!" });
         await result.delete();
         return res.status(200).json({ success: true, message: "Successfully delete order!" });
+    });
+});
+// ADMIN ROUTER
+router.get("/api/admin/get_all_orders", (req, res) => {
+    if (!req.isAuthenticated())
+        return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
+    if (req.user.role != "Admin")
+        return res.status(200).json({ success: false, message: "You are not administrator!" });
+    Order.find({}, (err, orders) => {
+        if (err) return res.status(200).json({ success: false, message: err });
+        return res.status(200).json({ success: true, message: "Successfully get all orders", orders: orders });
+    });
+});
+router.post("/api/admin/set_user_order", (req, res) => {
+    if (!req.isAuthenticated())
+        return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
+    if (req.user.role != "Admin")
+        return res.status(200).json({ success: false, message: "You are not administrator!" });
+    // Need: status, orderID
+    Order.findOne({ _id: req.body.orderID }, (err, order) => {
+        if (err) return res.status(200).json({ success: false, message: err });
+        if (!order) return res.status(200).json({ success: false, message: "Order not found!" });
+        order.status = req.body.status;
+        order.reason = req.body.reason;
+        order.save((err, result) => {
+            if (err) return res.status(200).json({ success: false, message: err });
+            return res.status(200).json({ success: false, message: "Successfully set order status!" });
+        });
     });
 });
 // call this router by POSTMAN to insert data of food

@@ -79,7 +79,6 @@ class UserProvider extends Component {
   };*/
 
   registerUser = async ({ data }) => {
-    console.log("Context register user function", data);
     // Call the server
     let response = await Axios({
       method: "POST",
@@ -126,9 +125,12 @@ class UserProvider extends Component {
         phone: data.user.phone,
         token: data.user.password,
         address: data.user.address,
+        role: data.user.role,
       };
       this.setState({ currentLoginUser: user });
       this.props.cookies.set("user", data.user.email, { path: "/" }); // set a cookie
+      if (data.user.role == "Admin")
+        this.props.cookies.set("admin", data.user.email, { path: "/" });
     }
     return { message: response.data.message, success: response.data.success };
   };
@@ -136,6 +138,7 @@ class UserProvider extends Component {
     // const logoutResponse = await fetch();
     this.setState({ currentLoginUser: emptyUser });
     this.props.cookies.remove("user"); // remove the cookie
+    this.props.cookies.remove("admin"); // remove the cookie
     var response = await Axios({
       method: "GET",
       data: {},

@@ -23,6 +23,7 @@ class FoodQuantityForm extends Form {
     quantity: Joi.number().integer().min(1).label("Quantity"),
   });
   handleClick = async (evt) => {
+    console.log(this.props.menuItem, this.state.data.quantity);
     this.props.addItemToCart(this.props.menuItem, this.state.data.quantity);
     this.props.history.push("/menu");
   };

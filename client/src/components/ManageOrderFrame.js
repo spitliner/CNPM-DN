@@ -123,7 +123,6 @@ class ManageOrderFrame extends React.Component {
                               <div>OrderID: {order._id}</div>
                               <div>Payment type: {order.paymentType}</div>
                               <div>Eat type: {order.takeAwayOrEatIn}</div>
-                              <div>Status: {order.status}</div>
                               <div>Order time: {order.time}</div>
                               <div>Total cost: {order.totalCost}</div>
                               <div>Final cost: {order.finalCost}</div>
@@ -149,6 +148,8 @@ class ManageOrderFrame extends React.Component {
                               ) : (
                                 <div />
                               )}
+                              <div>Status: {order.status}</div>
+                              <div>Reason: {order.reason}</div>
                             </div>
                           </div>
                           <div className="popup-content-cart">

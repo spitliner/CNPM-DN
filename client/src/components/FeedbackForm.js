@@ -19,7 +19,6 @@ class CommentForm extends Form {
     };
   }
   componentDidMount = async () => {
-    console.log(this.state);
     var response = await Axios({
       method: "POST",
       data: {
@@ -29,7 +28,6 @@ class CommentForm extends Form {
       withCredentials: true,
       url: url + "/api/get_user_food_star", // Should set to .ENV or DEFINE CONST
     });
-    console.log(response);
     if (response.data.success) {
       var data = this.state.data;
       data.star = response.data.star;
@@ -38,7 +36,6 @@ class CommentForm extends Form {
   };
   handleClick = async (evt) => {
     evt.preventDefault();
-    console.log(this.state);
     if (!this.state.data.feedback && !this.state.data.star) return;
     var response = await Axios({
       method: "POST",
