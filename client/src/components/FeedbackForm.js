@@ -48,6 +48,7 @@ class CommentForm extends Form {
       url: url + "/api/feedback", // Should set to .ENV or DEFINE CONST
     });
     this.setState({ notification: response.data.message });
+    console.log(response);
     this.props.updateAllFoods();
   };
   setStar = (star) => {

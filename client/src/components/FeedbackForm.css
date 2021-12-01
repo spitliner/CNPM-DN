@@ -29,3 +29,11 @@
     transition: color 0.8s ease;
     color: #ffc700;
 }
+
+.star:hover {
+    -ms-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+    transition: 0.2;
+    transition: transform 0.2s;
+}

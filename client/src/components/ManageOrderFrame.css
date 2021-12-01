@@ -35,6 +35,9 @@
     font-size: 48px;
     margin-top: 10%;
     text-align: center;
+    animation: example 700ms ease-out;
+    animation-fill-mode: backwards;
+    transition: transform 0.2s;
 }
 
 .orders-list {

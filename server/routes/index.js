@@ -250,9 +250,9 @@ router.post("/api/feedback", async(req, res) => {
         })
     }
     if (req.body.star) {
-        Star.findOne({ foodID: req.body.foodID, email: req.user.email }, (err, result) => {
+        Star.findOne({ foodID: req.body.foodID, email: req.user.email }, async(err, result) => {
             if (err) return res.status(200).json({ success: false, message: err });
-            if (result) result.delete();
+            if (result) await result.delete();
             var newStar = Star();
             newStar.email = req.user.email;
             newStar.star = req.body.star;
@@ -268,7 +268,7 @@ router.post("/api/feedback", async(req, res) => {
                     });
                     newStar /= (starArray.length + 1);
                     // Update star for food:
-                    Food.findOne({ id: req.body.foodID }, (err, food) => {
+                    Food.findOne({ _id: req.body.foodID }, (err, food) => {
                         if (err) return res.status(200).json({ success: false, message: err });
                         food.star = newStar;
                         food.save((err, result) => {
