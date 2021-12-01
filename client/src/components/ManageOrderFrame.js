@@ -58,6 +58,9 @@ class ManageOrderFrame extends React.Component {
     if (!result) return <div />;
     return (
       <div className="popup-content-cart-item">
+        <div className="cart-item-image">
+          <img src={result.imgUrl}></img>
+        </div>
         <div className="cart-item-name">{result.name}</div>
         <div className="cart-item-price">Price: {result.pricePU}</div>
         <div className="cart-item-quantity">Quantity: {cartItem.quantity}</div>
