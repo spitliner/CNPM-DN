@@ -246,3 +246,12 @@
     overflow: auto;
     position: absolute;
 }
+
+.menu-detail-back-ground .forget-password-form-wrapper {
+    width: 50%;
+    margin: auto;
+}
+
+.menu-detail-back-ground .btn-confirm {
+    width: 20%;
+}
