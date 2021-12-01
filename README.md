@@ -67,4 +67,4 @@ Cài trước mongodb và enable mongodb trước khi chạy: [Link install guid
 - Footer
 - Payment
 - Reservation
-- Còn tiếp
+- Order Cart
