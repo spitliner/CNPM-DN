@@ -27,7 +27,7 @@ class CommentForm extends Form {
         someFUcking: 123,
       },
       withCredentials: true,
-      url: url + "/api/get_star", // Should set to .ENV or DEFINE CONST
+      url: url + "/api/get_user_food_star", // Should set to .ENV or DEFINE CONST
     });
     console.log(response);
     if (response.data.success) {

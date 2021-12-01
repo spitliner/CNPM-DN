@@ -281,7 +281,7 @@ router.post("/api/feedback", async(req, res) => {
     }
 
 });
-router.post("/api/get_star", (req, res) => {
+router.post("/api/get_user_food_star", (req, res) => {
     if (!req.isAuthenticated())
         return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
     Star.findOne({ foodID: req.body.foodID, email: req.user.email }, (err, result) => {
