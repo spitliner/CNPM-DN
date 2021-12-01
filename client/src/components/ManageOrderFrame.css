@@ -188,7 +188,6 @@
     font-family: Oleo Script Swash Caps;
     font-size: 30px;
     text-align: center;
-    border-bottom: 1px solid gray;
     margin-bottom: 0px;
 }
 
@@ -198,7 +197,12 @@
     border-bottom: 1px solid gray;
     border-left: 1px solid gray;
     border-right: 1px solid gray;
+    border-top: 1px solid gray;
+    border-radius: 10px;
     font-size: 120%;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 .popup-content-information-wrapper {
