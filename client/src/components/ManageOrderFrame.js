@@ -53,7 +53,7 @@ class ManageOrderFrame extends React.Component {
   };
   renderCartItem = (cartItem) => {
     var result = this.props.menuItems.find(
-      (element) => cartItem.id == element.id
+      (element) => cartItem._id == element._id
     );
     if (!result) return <div />;
     return (

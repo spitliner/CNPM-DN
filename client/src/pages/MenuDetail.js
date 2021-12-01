@@ -71,8 +71,8 @@ class MenuDetail extends React.Component {
   }
   render() {
     const { history, match, location, cookies, menuItems } = this.props;
-    const id = match.params.id;
-    const itemIndex = menuItems.findIndex((item) => item.id == id);
+    const _id = match.params._id;
+    const itemIndex = menuItems.findIndex((item) => item._id == _id);
     return (
       <CartContext.Consumer>
         {({ cartItems, addItemToCart, reduceItemFromCart }) => {
@@ -80,8 +80,8 @@ class MenuDetail extends React.Component {
             <div className="menu-detail-back-ground">
               {menuItems.length ? (
                 <PostItem
-                  key={menuItems[itemIndex].id}
-                  id={id}
+                  key={menuItems[itemIndex]._id}
+                  _id={_id}
                   food_name={menuItems[itemIndex].name}
                   image={menuItems[itemIndex].imgUrl}
                   food_description={menuItems[itemIndex].description}
@@ -97,7 +97,7 @@ class MenuDetail extends React.Component {
               )}
               {cookies.get("user") && (
                 <FeedbackForm
-                  foodID={id}
+                  foodID={_id}
                   updateAllFoods={this.props.updateAllFoods}
                 />
               )}

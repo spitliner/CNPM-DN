@@ -105,7 +105,7 @@ class PaymentForm extends Form {
       bank: this.state.data.bank,
       creditCardNumber: this.state.data.creditCardNumber,
       cartItems: this.props.cartItems.map((cartItem) => {
-        return { id: cartItem.id, quantity: cartItem.quantity };
+        return { _id: cartItem._id, quantity: cartItem.quantity };
       }),
     };
 

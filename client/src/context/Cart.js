@@ -24,7 +24,7 @@ class CartProvider extends Component {
   addItemToCart = (menuItem, itemQuantity = 1) => {
     let isItemExist = false;
     for (let cartItem of this.state.cartItems) {
-      if (menuItem.id === cartItem.id) {
+      if (menuItem._id === cartItem._id) {
         isItemExist = true;
         break;
       }
@@ -36,7 +36,7 @@ class CartProvider extends Component {
       this.setState({ cartItems: newCartItems });
     } else {
       const itemIndex = this.state.cartItems.findIndex(
-        (cartItem) => cartItem.id === menuItem.id
+        (cartItem) => cartItem._id === menuItem._id
       );
       let newCartItem = { ...this.state.cartItems[itemIndex] };
       newCartItem.quantity += itemQuantity;
@@ -53,7 +53,7 @@ class CartProvider extends Component {
   reduceItemFromCart = (menuItem) => {
     let isItemExist = false;
     for (let cartItem of this.state.cartItems) {
-      if (menuItem.id === cartItem.id) {
+      if (menuItem._id === cartItem._id) {
         isItemExist = true;
         break;
       }
@@ -64,7 +64,7 @@ class CartProvider extends Component {
     }
 
     const itemIndex = this.state.cartItems.findIndex(
-      (cartItem) => cartItem.id === menuItem.id
+      (cartItem) => cartItem._id === menuItem._id
     );
     let newCartItem = { ...this.state.cartItems[itemIndex] };
     newCartItem.quantity -= 1;
@@ -83,7 +83,7 @@ class CartProvider extends Component {
 
   removeItemFromCart = (menuItem) => {
     const itemIndex = this.state.cartItems.findIndex(
-      (cartItem) => cartItem.id === menuItem.id
+      (cartItem) => cartItem._id === menuItem._id
     );
     this.setState({
       cartItems: [

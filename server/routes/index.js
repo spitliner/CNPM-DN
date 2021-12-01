@@ -324,7 +324,7 @@ router.post("/api/admin/set_user_order", (req, res) => {
         return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
     if (req.user.role != "Admin")
         return res.status(200).json({ success: false, message: "You are not administrator!" });
-    // Need: status, orderID
+    // Need: status: Denied/Confirmed, orderID: order._id, reason: ""
     Order.findOne({ _id: req.body.orderID }, (err, order) => {
         if (err) return res.status(200).json({ success: false, message: err });
         if (!order) return res.status(200).json({ success: false, message: "Order not found!" });
@@ -332,239 +332,302 @@ router.post("/api/admin/set_user_order", (req, res) => {
         order.reason = req.body.reason;
         order.save((err, result) => {
             if (err) return res.status(200).json({ success: false, message: err });
-            return res.status(200).json({ success: false, message: "Successfully set order status!" });
+            return res.status(200).json({ success: true, message: "Successfully set order status!" });
+        });
+    });
+});
+router.post("/api/admin/delete_food", (req, res) => {
+    if (!req.isAuthenticated())
+        return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
+    if (req.user.role != "Admin")
+        return res.status(200).json({ success: false, message: "You are not administrator!" });
+    // Need: _id: food._id
+    Food.findOne({ _id: req.body._id }, (err, food) => {
+        if (err) return res.status(200).json({ success: false, message: err });
+        if (!food) return res.status(200).json({ success: false, message: "Food not found!" });
+        food.isDeleted = true;
+        food.save(err, result => {
+            if (err) return res.status(200).json({ success: false, message: err });
+            return res.status(200).json({ success: true, message: "Successfully delete food!" });
+        });
+    });
+});
+router.post("/api/admin/add_food", (req, res) => {
+    if (!req.isAuthenticated())
+        return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
+    if (req.user.role != "Admin")
+        return res.status(200).json({ success: false, message: "You are not administrator!" });
+    newFood = new Food();
+    newFood.imgUrl = req.body.imgUrl;
+    newFood.name = req.body.name;
+    newFood.category = req.body.category;
+    newFood.pricePU = req.body.pricePU;
+    newFood.description = req.body.description;
+    newFood.isDeleted = false;
+    newFood.star = 5;
+    newFood.save((err, result) => {
+        if (err) return res.status(200).json({ success: false, message: err });
+        return res.status(200).json({ success: true, message: "Successfully add food!" });
+    });
+});
+router.post("/api/admin/edit_food", (req, res) => {
+    if (!req.isAuthenticated())
+        return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
+    if (req.user.role != "Admin")
+        return res.status(200).json({ success: false, message: "You are not administrator!" });
+    Food.findOne({ _id: req.body._id }, (err, food) => {
+        if (err) return res.status(200).json({ success: false, message: err });
+        food.imgUrl = req.body.imgUrl;
+        food.name = req.body.name;
+        food.category = req.body.category;
+        food.pricePU = req.body.pricePU;
+        food.description = req.body.description;
+        food.save((err, result) => {
+            if (err) return res.status(200).json({ success: false, message: err });
+            return res.status(200).json({ success: true, message: "Successfully edit food!" });
         });
     });
 });
 // call this router by POSTMAN to insert data of food
-router.get("/api/insert_foods", async(req, res) => {
+router.get("/api/insert_data", async(req, res) => {
     var items = [{
-            id: 1,
             imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
             name: "Pizza mixed",
             category: "PIZZA",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 2,
             imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
             name: "Pizza mixed",
             category: "PIZZA",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 3,
             imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
             name: "Pizza mixed",
             category: "PIZZA",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 4,
             imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
             name: "Pizza mixed",
             category: "PIZZA",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 5,
             imgUrl: "https://media.ex-cdn.com/EXP/media.vntravellive.com/files/editor1/2018/12/07/5517-di-dau-de-tim-thay-pizza-ngon-nhat-105446.jpg",
             name: "Pizza mixed",
             category: "PIZZA",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 6,
             imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
             name: "Burger mixed",
             category: "BURGER",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 7,
             imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
             name: "Burger mixed",
             category: "BURGER",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 8,
             imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
             name: "Burger mixed",
             category: "BURGER",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 9,
             imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
             name: "Burger mixed",
             category: "BURGER",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 10,
             imgUrl: "http://farm1.staticflickr.com/955/41117503084_128499c414.jpg",
             name: "Burger mixed",
             category: "BURGER",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 11,
             imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
             name: "Soup mixed",
             category: "SOUP",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 12,
             imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
             name: "Soup mixed",
             category: "SOUP",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 13,
             imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
             name: "Soup mixed",
             category: "SOUP",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 14,
             imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
             name: "Soup mixed",
             category: "SOUP",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 15,
             imgUrl: "https://images.startsat60.com/wp-content/uploads/20150801171559/310715_pumpkin_soup-500x281.jpg",
             name: "Soup mixed",
             category: "SOUP",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 16,
             imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
             name: "Peach tea",
             category: "TEA",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 17,
             imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
             name: "Peach tea",
             category: "TEA",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 18,
             imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
             name: "Peach tea",
             category: "TEA",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 19,
             imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
             name: "Peach tea",
             category: "TEA",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 20,
             imgUrl: "https://nghekhachsan.com/upload/Ni-Anh-NKS/Nam-2019/Thang-11/cong-thuc-pha-tra-dao-01.jpg",
             name: "Peach tea",
             category: "TEA",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 21,
             imgUrl: "https://hallmark.brightspotcdn.com/dims4/default/5beba82/2147483647/strip/true/crop/500x281+0+0/resize/1140x640!/quality/90/?url=http%3A%2F%2Fhallmark-channel-brightspot.s3.amazonaws.com%2Fa2%2F24%2Fc5371a577db4a441383a914b79b8%2Fhf-ep2111-product-cristina-cooks.jpg",
             name: "Cake",
             category: "OTHER",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 22,
             imgUrl: "https://www.cookingpanda.com/wp-content/uploads/2021/04/0004_16x9_CandyCookieCake-500x281.jpg",
             name: "Coffee cake",
             category: "OTHER",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 23,
             imgUrl: "https://jandatri.com/wp-content/uploads/2019/02/Black-Forest-Cake-Slice-500x281.jpg",
             name: "Tiramisu cake",
             category: "OTHER",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 24,
             imgUrl: "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
             name: "Strawberry ice-cream",
             category: "OTHER",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
         {
-            id: 25,
             imgUrl: "https://i.ndtvimg.com/i/2016-04/granola-parfait-625_625x350_41459499249.jpg",
             name: "Strawberry ice-cream",
             category: "OTHER",
             pricePU: 4.8,
             description: "DESSERT",
             star: 5,
+            isDeleted: false
         },
     ]
     await Food.insertMany(items, { ordered: true });
+    var vouchers = [{
+            voucherCode: "123456789",
+            discount: 50
+        },
+        {
+            voucherCode: "987654321",
+            discount: 30
+        }
+    ]
+    await Voucher.insertMany(vouchers, { ordered: true });
+
     res.status(200).json({ success: true, message: "Successfully!" })
 });
 module.exports = router;

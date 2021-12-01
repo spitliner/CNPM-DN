@@ -45,17 +45,7 @@ class App extends Component {
     console.log(message);
   };
   componentDidMount = async () => {
-    let response = await Axios({
-      method: "GET",
-      data: {},
-      withCredentials: true,
-      url: url + "/api/get_all_foods", // Should set to .ENV or DEFINE CONST
-    });
-    if (response.data.success) {
-      this.setState({ menuItems: response.data.menuItems });
-    } else {
-      alert(response.data.message);
-    }
+    this.updateAllFoods();
   };
   updateAllFoods = async () => {
     let response = await Axios({
@@ -66,6 +56,7 @@ class App extends Component {
     });
     if (response.data.success) {
       this.setState({ menuItems: response.data.menuItems });
+      // filter
     } else {
       alert(response.data.message);
     }
@@ -88,7 +79,7 @@ class App extends Component {
             renders the first one that matches the current URL. */}
                 <Switch>
                   <Route
-                    path="/menu/:id"
+                    path="/menu/:_id"
                     render={(props) => {
                       return (
                         <MenuDetail

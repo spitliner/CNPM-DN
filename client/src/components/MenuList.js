@@ -33,7 +33,7 @@ const MenuList = ({ items, history, cookies }) => {
                     alt={name}
                     className="photo"
                     onClick={() => {
-                      history.push(`menu/${item.id}`);
+                      history.push(`menu/${item._id}`);
                     }}
                   />
                   <div className="item-info">
