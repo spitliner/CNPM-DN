@@ -164,7 +164,7 @@ class ManageOrderFrame extends React.Component {
                   </Popup>
                 </div>
                 <div className="order-id">{index + 1}</div>
-                <div className="order-cost">{order.finalCost} $</div>
+                <div className="order-cost">{order.finalCost.toFixed(2)} $</div>
                 <div className="order-status">{order.status}</div>
               </div>
             ))}
