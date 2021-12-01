@@ -161,6 +161,9 @@
     max-height: 80%;
     overflow: auto;
     position: absolute;
+    animation: example 400ms ease-out;
+    animation-fill-mode: backwards;
+    transition: transform 0.2s;
 }
 
 .manage-order-popup-content {

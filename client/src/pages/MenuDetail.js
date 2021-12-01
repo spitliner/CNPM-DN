@@ -56,10 +56,7 @@ function PostItem(props) {
               <button className="close" onClick={close}>
                 &times;
               </button>
-              <FoodQuantityForm
-                menuItem={props.menuItems[props.id]}
-                {...props}
-              />
+              <FoodQuantityForm {...props} />
             </div>
           )}
         </Popup>
@@ -93,7 +90,6 @@ class MenuDetail extends React.Component {
                   history={history}
                   addItemToCart={addItemToCart}
                   cookies={this.props.cookies}
-                  menuItems={menuItems}
                 />
               ) : (
                 <div />

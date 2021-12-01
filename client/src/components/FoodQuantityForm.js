@@ -30,19 +30,16 @@ class FoodQuantityForm extends Form {
     return (
       <div>
         <div className="food-quantity-form-wrapper">
-          <p className="food-quantity-form-title">
-            {" "}
-            {this.props.menuItem.name}{" "}
-          </p>
+          <p className="food-quantity-form-title"> {this.props.food_name} </p>
           <p className="notification">{this.state.notification}</p>
           <form
             className="forget-password-form-body"
             onSubmit={this.handleClick}
           >
             {" "}
-            {this.renderInput("quantity", "Quantity")}{" "}
+            {this.renderInput("quantity", "Quantity", "number")}{" "}
             {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
-            <button disabled={false} className="btn-confirm">
+            <button disabled={false} className="post-button-ATC">
               Add to cart
             </button>
           </form>{" "}
