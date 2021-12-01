@@ -100,6 +100,7 @@ class ManageOrderFrame extends React.Component {
                   )}
                   <Popup
                     modal
+                    className="manage-order-popup"
                     trigger={
                       <button className="delete-order-button-active">
                         {" "}

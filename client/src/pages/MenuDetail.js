@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import "./MenuDetail.css";
 import { CartContext } from "../context/Cart";
 import FeedbackForm from "../components/FeedbackForm";
-
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
+import FoodQuantityForm from "../components/FoodQuantityForm";
 function PostItem(props) {
   var renderStar = (star) => {
     star = Math.floor(star);
@@ -44,15 +46,20 @@ function PostItem(props) {
         <div className="food-rating-star">{renderStar(props.star)}</div>
       </div>
       {props.cookies.get("user") && (
-        <button
-          onClick={() => {
-            props.addItemToCart(props.menuItems[props.id]);
-            props.history.push("/menu");
-          }}
-          className="post-button-ATC"
+        <Popup
+          className="quantity-popup"
+          modal
+          trigger={<button className="post-button-ATC">Add To Cart</button>}
         >
-          Add To Cart
-        </button>
+          {(close) => (
+            <div>
+              <button className="close" onClick={close}>
+                &times;
+              </button>
+              <FoodQuantityForm {...props} />
+            </div>
+          )}
+        </Popup>
       )}
     </div>
   );
@@ -83,7 +90,6 @@ class MenuDetail extends React.Component {
                   history={history}
                   addItemToCart={addItemToCart}
                   cookies={this.props.cookies}
-                  menuItems={menuItems}
                 />
               ) : (
                 <div />

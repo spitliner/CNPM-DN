@@ -21,7 +21,7 @@ class CartProvider extends Component {
     console.log("Current Cart Context: ", this.state.cartItems);
   };*/
 
-  addItemToCart = (menuItem) => {
+  addItemToCart = (menuItem, itemQuantity = 1) => {
     let isItemExist = false;
     for (let cartItem of this.state.cartItems) {
       if (menuItem.id === cartItem.id) {
@@ -31,7 +31,7 @@ class CartProvider extends Component {
     }
 
     if (!isItemExist) {
-      let newCartItem = { ...menuItem, quantity: 1 };
+      let newCartItem = { ...menuItem, quantity: itemQuantity };
       let newCartItems = [...this.state.cartItems, newCartItem];
       this.setState({ cartItems: newCartItems });
     } else {
@@ -39,7 +39,7 @@ class CartProvider extends Component {
         (cartItem) => cartItem.id === menuItem.id
       );
       let newCartItem = { ...this.state.cartItems[itemIndex] };
-      newCartItem.quantity += 1;
+      newCartItem.quantity += itemQuantity;
       this.setState({
         cartItems: [
           ...this.state.cartItems.slice(0, itemIndex),

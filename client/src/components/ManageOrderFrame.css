@@ -158,11 +158,20 @@
     background: rgb(255, 255, 255);
     padding: 5px;
     border-radius: 10px;
+    max-height: 80%;
+    overflow: auto;
+    position: absolute;
+    animation: example 400ms ease-out;
+    animation-fill-mode: backwards;
+    transition: transform 0.2s;
 }
 
-[id^="popup-"] {
-    min-width: 80%;
+.manage-order-popup-content {
+    background: rgb(255, 255, 255);
+    padding: 5px;
+    border-radius: 10px;
     max-height: 80%;
+    min-width: 80%;
     overflow: auto;
     position: absolute;
 }
