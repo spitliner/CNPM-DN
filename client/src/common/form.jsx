@@ -132,6 +132,21 @@ class Form extends React.Component {
       />
     );
   }
+  renderTime(name, label, type = "time") {
+    const { data, errors } = this.state;
+    return (
+      <Input
+        type={type}
+        name={name}
+        error={errors[name]}
+        value={data[name]}
+        label={label}
+        onChange={this.handleChange}
+        min="10:00"
+        max="23:00"
+      />
+    );
+  }
   renderInputNoChangeValidate(name, label, type = "text") {
     const { data, errors } = this.state;
 

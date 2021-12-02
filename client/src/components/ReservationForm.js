@@ -4,6 +4,8 @@ import JoiBase from "joi";
 import JoiDate from "@hapi/joi-date";
 import "./RegisterForm.css";
 import Axios from "axios";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 const Joi = JoiBase.extend(JoiDate); // extend Joi with Joi Date
 const url = "http://localhost:4000";
 class ReservationForm extends Form {
@@ -38,7 +40,15 @@ class ReservationForm extends Form {
       url: url + "/api/reservation", // Should set to .ENV or DEFINE CONST
     });
     if (response.data.success) {
-      alert(response.data.message);
+      confirmAlert({
+        title: "Notification!",
+        message: "Reservation successfully!",
+        buttons: [
+          {
+            label: "OK",
+          },
+        ],
+      });
       this.props.history.push("/menu");
     } else this.setState({ notification: response.data.message });
   };
@@ -55,7 +65,7 @@ class ReservationForm extends Form {
             <form className="form-body" onSubmit={this.handleSumbit}>
               {this.renderInput("nop", "Number of persons")}
               {this.renderDate("date", "Date (DD/MM/YYYY)")}
-              {this.renderInput("time", "Time (HH:MM:SS)", "time")}
+              {this.renderTime("time", "Time (HH:MM:SS)")}
               {this.renderInput("message", "Message")}
               {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}
               {this.renderButton("Register")}

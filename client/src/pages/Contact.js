@@ -52,7 +52,7 @@ class Contact extends React.Component {
                     <FontAwesomeIcon icon={faClock} />
                   </div>
                   <div ClassName="contact-information-content">
-                    Timing: Everyday from 10am - 11pm
+                    Timing: Everyday from 10 AM - 11 PM
                   </div>
                 </li>
                 <li>
