@@ -146,7 +146,7 @@ router.post("/api/get_reset_code", (req, res) => {
                 if (err) return res.status(200).json({ success: false, message: err });
                 if (resetToken) return res.status(200).json({ success: true, message: "Reset code has been sent and will expire in 3 minutes, please check your mail box!" });
                 // No reset token --> create one
-                var code = Math.floor(Math.random() * (999999 - 100000) + 10000);
+                var code = Math.floor(Math.random() * (999999 - 100000) + 100000);
                 var resetToken = new ResetToken();
                 resetToken.email = req.body.email;
                 resetToken.code = code;
@@ -195,7 +195,7 @@ router.get("/api/get_verify_code", (req, res) => {
             if (err) return res.status(200).json({ success: false, message: err });
             if (verifyToken) return res.status(200).json({ success: true, message: "Verify code has been sent and will expire in 3 minutes, please check your mail box!" });
             // No reset token --> create one
-            var code = Math.floor(Math.random() * (999999 - 100000) + 10000);
+            var code = Math.floor(Math.random() * (999999 - 100000) + 100000);
             var verifyToken = new VerifyToken();
             verifyToken.email = req.user.email;
             verifyToken.code = code;
