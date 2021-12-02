@@ -343,7 +343,7 @@ router.get("/api/check_login", (req, res) => {
     return res.status(200).json({ success: false, message: err });
   }
 });
-router.post("/api/voucher", (req, res) => {
+router.post("/api/apply_voucher", (req, res) => {
   try {
     if (!req.isAuthenticated())
       return res.status(200).json({
@@ -558,6 +558,7 @@ router.post("/api/delete_user_reservation", (req, res) => {
       .json({ success: true, message: "Successfully delete reservation!" });
   });
 });
+router.post("/api/");
 // ADMIN ROUTER
 router.get("/api/admin/get_all_reservations", (req, res) => {
   if (!req.isAuthenticated())

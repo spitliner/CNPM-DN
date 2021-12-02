@@ -63,6 +63,7 @@ class OrderMain extends React.Component {
           applyVoucher,
           discount,
           finalCost,
+          removeVoucher,
         }) => {
           if (totalCost === 0) {
             return (
@@ -120,7 +121,10 @@ class OrderMain extends React.Component {
                       <div className="dish_price">{finalCost.toFixed(2)} $</div>
                     </div>
 
-                    <VoucherForm applyVoucher={applyVoucher} />
+                    <VoucherForm
+                      applyVoucher={applyVoucher}
+                      removeVoucher={removeVoucher}
+                    />
                     <div className="payment">
                       <button
                         className="confirm-btn"

@@ -108,6 +108,14 @@ class CartProvider extends Component {
         voucherCode: response.data.voucherCode,
       });
   };
+  removeVoucher = () => {
+    if (!this.state.voucherCode) return false;
+    this.setState({
+      discount: 0,
+      voucherCode: "",
+    });
+    return true;
+  };
   getFinal = () => {
     return this.getTotal() * (1 - this.state.discount / 100);
   };
@@ -128,6 +136,7 @@ class CartProvider extends Component {
           discount: this.state.discount,
           voucherCode: this.state.voucherCode,
           finalCost: this.getFinal(),
+          removeVoucher: this.removeVoucher,
         }}
       >
         {this.props.children}

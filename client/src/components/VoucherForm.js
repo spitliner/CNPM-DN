@@ -30,11 +30,16 @@ class VoucherForm extends Form {
         voucherCode: this.state.data.voucherCode,
       },
       withCredentials: true,
-      url: url + "/api/voucher", // Should set to .ENV or DEFINE CONST
+      url: url + "/api/apply_voucher", // Should set to .ENV or DEFINE CONST
     });
     this.setState({ notification: response.data.message });
     console.log(response);
     if (response.data.success) this.props.applyVoucher(response);
+  };
+  removeVoucher = async () => {
+    if (this.props.removeVoucher())
+      this.setState({ notification: "Remove voucher successfully!" });
+    else this.setState({ notification: "You have not applied any voucher!" });
   };
   render() {
     return (
@@ -51,10 +56,17 @@ class VoucherForm extends Form {
               "Voucher code"
             )}{" "}
             {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
-            <button disabled={false} className="btn-confirm">
+            <button disabled={false} className="remove-voucher-button">
               Apply
             </button>
           </form>{" "}
+          <button
+            disabled={false}
+            className="remove-voucher-button"
+            onClick={this.removeVoucher}
+          >
+            Remove Voucher
+          </button>
         </div>
       </div>
     );
