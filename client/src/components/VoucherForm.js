@@ -30,11 +30,15 @@ class VoucherForm extends Form {
         voucherCode: this.state.data.voucherCode,
       },
       withCredentials: true,
-      url: url + "/api/voucher", // Should set to .ENV or DEFINE CONST
+      url: url + "/api/apply_voucher", // Should set to .ENV or DEFINE CONST
     });
     this.setState({ notification: response.data.message });
     console.log(response);
     if (response.data.success) this.props.applyVoucher(response);
+  };
+  removeVoucher = async () => {
+    this.props.removeVoucher();
+    this.setState({ notification: "Remove voucher successfully!" });
   };
   render() {
     return (
@@ -55,6 +59,13 @@ class VoucherForm extends Form {
               Apply
             </button>
           </form>{" "}
+          <button
+            disabled={false}
+            className="remove-voucher-button"
+            onClick={this.removeVoucher}
+          >
+            Remove Voucher
+          </button>
         </div>
       </div>
     );

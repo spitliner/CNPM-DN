@@ -181,3 +181,32 @@
 .order_main .btn-confirm {
     width: 30%;
 }
+
+.remove-voucher-button {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    /* identical to box height */
+    text-align: center;
+    /* white */
+    color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 28px;
+    /* primary */
+    background: #e1651f;
+    border-radius: 39px;
+    border: none;
+    /* Inside Auto Layout */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    animation: example 700ms ease-out;
+    animation-fill-mode: backwards;
+    transition: transform 0.2s;
+    width: 30%;
+}
