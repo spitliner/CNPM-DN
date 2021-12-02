@@ -56,7 +56,7 @@ class VoucherForm extends Form {
               "Voucher code"
             )}{" "}
             {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
-            <button disabled={false} className="btn-confirm">
+            <button disabled={false} className="remove-voucher-button">
               Apply
             </button>
           </form>{" "}

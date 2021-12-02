@@ -210,3 +210,7 @@
     transition: transform 0.2s;
     width: 30%;
 }
+
+.forget-password-form-body .remove-voucher-button {
+    width: 30%;
+}
