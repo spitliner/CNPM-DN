@@ -122,7 +122,7 @@ class ManageOrderFrame extends React.Component {
                             <div className="popup-content-information">
                               <div className="popup-content-information-content-wrapper">
                                 <div className="popup-content-information-content-header">
-                                  OrderID
+                                  Order ID
                                 </div>
                                 <div className="popup-content-information-content">
                                   {order._id}
@@ -253,6 +253,14 @@ class ManageOrderFrame extends React.Component {
                 <div className="order-status">{order.status}</div>
               </div>
             ))}
+            <button
+              className="back-to-menu-button"
+              onClick={() => {
+                this.props.history.push("/menu");
+              }}
+            >
+              Back To Menu
+            </button>
           </div>
         ) : (
           <div className="alert-no-order">You do not have any order!</div>

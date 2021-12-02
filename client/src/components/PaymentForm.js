@@ -4,7 +4,8 @@ import "./PaymentForm.css";
 import JoiBase from "joi";
 import JoiDate from "@hapi/joi-date";
 import Axios from "axios";
-
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 const Joi = JoiBase.extend(JoiDate); // extend Joi with Joi Date
 
 const url = "http://localhost:4000";
@@ -40,6 +41,10 @@ class PaymentForm extends Form {
           label: "Eat In",
           value: "Eat In",
         },
+        {
+          label: "Delivery",
+          value: "Delivery",
+        },
       ],
       banks: [
         {
@@ -73,9 +78,9 @@ class PaymentForm extends Form {
     takeAwayOrEatIn: Joi.string()
       .required()
       .label("Take Away or Eat In")
-      .valid("Take Away", "Eat In")
+      .valid("Take Away", "Eat In", "Delivery")
       .messages({
-        "string.domain": "Please choose take-away or eat-in",
+        "string.domain": "Please choose take-away, delivery or eat-in",
       }),
     address: Joi.string().allow(null).allow("").label("Address"),
     bank: Joi.string().allow(null).allow("").label("Bank"),
@@ -91,7 +96,7 @@ class PaymentForm extends Form {
 
   doSubmit = async () => {
     const { takeAwayOrEatIn, paymentType, address } = this.state.data;
-    if (takeAwayOrEatIn == "TakeAway" && address == "") {
+    if (takeAwayOrEatIn == "Delivery" && address == "") {
       this.setState({
         notification: "You must give delivery address for take away order",
       });
@@ -137,10 +142,18 @@ class PaymentForm extends Form {
       },
       url: url + "/api/make_order", // Should set to .ENV or DEFINE CONST
     });
-    alert(response.data.message);
     if (response.data.success) {
+      confirmAlert({
+        title: "Notification!",
+        message: "Make order successfully!",
+        buttons: [
+          {
+            label: "OK",
+          },
+        ],
+      });
       this.props.history.replace("/menu");
-    }
+    } else this.setState({ notification: response.data.message });
   };
 
   render() {
@@ -158,13 +171,11 @@ class PaymentForm extends Form {
               )}{" "}
               {this.renderSelect(
                 "takeAwayOrEatIn",
-                "Take Away Or Eat In",
+                "Take Away, Delivery Or Eat In",
                 this.state.takeAwayOrEatIn
               )}{" "}
-              {this.renderInput(
-                "address",
-                "Address (Omit this field if you are eating in)"
-              )}{" "}
+              {this.state.data.takeAwayOrEatIn == "Delivery" &&
+                this.renderInput("address", "Address")}{" "}
               {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
               {this.state.data.paymentType == "Online" &&
                 this.renderSelect("bank", "Bank", this.state.banks)}

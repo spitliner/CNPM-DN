@@ -10,6 +10,7 @@ class ManageOrder extends React.Component {
           <ManageOrderFrame
             currentLoginUser={currentLoginUser}
             menuItems={this.props.menuItems}
+            history={this.props.history}
           />
         )}
       </UserContext.Consumer>

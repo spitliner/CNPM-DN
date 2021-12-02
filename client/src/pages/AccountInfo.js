@@ -77,7 +77,7 @@ class AccountInfo extends React.Component {
                       className="post-button-ATC"
                       onClick={this.handleVerifyEmailButton}
                     >
-                      Verify your email
+                      Verify Your Email
                     </button>
                   )}
                   <button

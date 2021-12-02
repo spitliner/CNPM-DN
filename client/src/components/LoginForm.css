@@ -3,7 +3,8 @@
 .notification {
     text-align: center;
     color: red;
-    font-size: 120%;
+    font-size: 130%;
+    font-weight: bold;
 }
 
 .form-title {

@@ -4,7 +4,8 @@ import "./RegisterForm.css";
 import JoiBase from "joi";
 import JoiDate from "@hapi/joi-date";
 import Axios from "axios";
-
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 const Joi = JoiBase.extend(JoiDate); // extend Joi with Joi Date
 const url = "http://localhost:4000";
 class ChangeInformationForm extends Form {
@@ -45,8 +46,17 @@ class ChangeInformationForm extends Form {
       url: url + "/api/change_information", // Should set to .ENV or DEFINE CONST
     });
     if (response.data.success) {
-      this.props.updateUserContext();
-      this.props.history.push("/account");
+      await this.props.updateUserContext();
+      confirmAlert({
+        title: "Notification!",
+        message: "Change account information successfully!",
+        buttons: [
+          {
+            label: "OK",
+          },
+        ],
+      });
+      this.props.history.replace("/account");
     } else this.setState({ notification: response.data.message });
   };
 

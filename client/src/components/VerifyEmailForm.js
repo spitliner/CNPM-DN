@@ -35,22 +35,16 @@ class ForgetPasswordForm extends Form {
     });
     if (response.data.success) {
       await this.props.updateUserContext();
-      return confirmAlert({
+      confirmAlert({
         title: "Notification!",
-        message:
-          "Verify email successfully, do you want to go back to account page?",
+        message: "Verify email successfully!",
         buttons: [
           {
-            label: "Yes",
-            onClick: async () => this.props.history.replace("/account"),
-          },
-          {
-            label: "No",
-            onClick: async () =>
-              this.setState({ notification: response.message }),
+            label: "OK",
           },
         ],
       });
+      this.props.history.replace("/account");
     } else this.setState({ notification: response.data.message });
   };
   getCode = async () => {
@@ -60,15 +54,14 @@ class ForgetPasswordForm extends Form {
       withCredentials: true,
       url: url + "/api/get_verify_code", // Should set to .ENV or DEFINE CONST
     });
-    if (response.data.success) {
-    } else this.setState({ notification: response.data.message });
+    this.setState({ notification: response.data.message });
   };
   render() {
     return (
-      <div className="form-background">
+      <div className="form-background-4">
         <div className="form-outer">
-          <div className="forget-password-form-wrapper">
-            <h1 className="forget-password-form-title">Verify Email Page</h1>{" "}
+          <div className="form-wrapper">
+            <h1 className="form-title">Verify Email Page</h1>{" "}
             <p className="notification">{this.state.notification}</p>
             <form
               className="forget-password-form-body"
@@ -89,10 +82,7 @@ class ForgetPasswordForm extends Form {
                 Get code
               </button>
             </form>{" "}
-            <form
-              className="forget-password-form-body"
-              onSubmit={this.handleSumbit}
-            >
+            <form className="form-body" onSubmit={this.handleSumbit}>
               {this.renderButton("Confirm")}{" "}
             </form>
             {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
