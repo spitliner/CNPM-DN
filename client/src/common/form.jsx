@@ -112,7 +112,26 @@ class Form extends React.Component {
       />
     );
   }
-  renderDate(name, label, type = "date", start = new Date()) {}
+  renderDate(name, label, type = "date") {
+    const { data, errors } = this.state;
+    var minDate = new Date();
+    var maxDate = new Date();
+    maxDate.setDate(maxDate.getDate() + 30);
+    minDate = minDate.toISOString().slice(0, 10);
+    maxDate = maxDate.toISOString().slice(0, 10);
+    return (
+      <Input
+        type={type}
+        name={name}
+        error={errors[name]}
+        value={data[name]}
+        label={label}
+        onChange={this.handleChange}
+        min={minDate}
+        max={maxDate}
+      />
+    );
+  }
   renderInputNoChangeValidate(name, label, type = "text") {
     const { data, errors } = this.state;
 

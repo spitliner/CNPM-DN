@@ -54,7 +54,7 @@ class ReservationForm extends Form {
             <p className="notification">{this.state.notification}</p>
             <form className="form-body" onSubmit={this.handleSumbit}>
               {this.renderInput("nop", "Number of persons")}
-              {this.renderInput("date", "Date (DD/MM/YYYY)", "date")}
+              {this.renderDate("date", "Date (DD/MM/YYYY)")}
               {this.renderInput("time", "Time (HH:MM:SS)", "time")}
               {this.renderInput("message", "Message")}
               {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}
