@@ -37,8 +37,9 @@ class VoucherForm extends Form {
     if (response.data.success) this.props.applyVoucher(response);
   };
   removeVoucher = async () => {
-    this.props.removeVoucher();
-    this.setState({ notification: "Remove voucher successfully!" });
+    if (this.props.removeVoucher())
+      this.setState({ notification: "Remove voucher successfully!" });
+    else this.setState({ notification: "You have not applied any voucher!" });
   };
   render() {
     return (

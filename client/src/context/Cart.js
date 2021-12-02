@@ -109,10 +109,12 @@ class CartProvider extends Component {
       });
   };
   removeVoucher = () => {
+    if (!this.state.voucherCode) return false;
     this.setState({
       discount: 0,
       voucherCode: "",
     });
+    return true;
   };
   getFinal = () => {
     return this.getTotal() * (1 - this.state.discount / 100);
