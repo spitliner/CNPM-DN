@@ -230,7 +230,7 @@ class ManageOrderFrame extends React.Component {
                             </div>
                           </div>
                           <div className="popup-content-cart-wrapper">
-                            <h4 className="popup-content-header">Cart</h4>
+                            <h4 className="popup-content-cart-header">Cart</h4>
                             <div className="popup-content-cart">
                               {order.cartItems.map((cartItem) =>
                                 this.renderCartItem(cartItem)

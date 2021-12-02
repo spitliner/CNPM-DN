@@ -221,7 +221,6 @@
 
 .popup-content-information-wrapper {
     width: 100%;
-    border-bottom: 1px solid gray;
 }
 
 .popup-content-information {
@@ -258,6 +257,12 @@
 .popup-content-header {
     text-align: center;
     margin-bottom: 0px;
+}
+
+.popup-content-cart-header {
+    text-align: center;
+    margin-bottom: 0px;
+    border-top: 1px solid gray;
 }
 
 .popup-content-cart {

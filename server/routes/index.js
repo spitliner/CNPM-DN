@@ -202,7 +202,6 @@ router.get("/api/get_verify_code", (req, res) => {
             verifyToken.save(async(err, result) => {
                 if (err) res.status(200).json({ success: false, message: err });
                 else {
-                    console.log(result);
                     await sendEmail(req.user.email, code);
                     res.status(200).json({ success: true, message: "Success! Verify code has been sent to your email, please input your reset code in 3 minutes!" });
                 }
@@ -280,7 +279,6 @@ router.post("/api/make_order", (req, res) => {
     order.time = req.body.time;
     order.status = "Waiting";
     order.reason = "";
-    console.log(req.body.time);
     order.save((err, result) => {
         if (err) return res.status(200).json({ success: false, message: err });
         return res.status(200).json({ success: true, message: "Successfully make order!" });
@@ -357,6 +355,24 @@ router.post("/api/delete_user_order", (req, res) => {
         if (!result) return res.status(200).json({ success: false, message: "Some thing wrong!" });
         await result.delete();
         return res.status(200).json({ success: true, message: "Successfully delete order!" });
+    });
+});
+router.get("/api/get_user_reservations", (req, res) => {
+    if (!req.isAuthenticated())
+        return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
+    Reservation.find({ email: req.user.email }, (err, result) => {
+        if (err) return res.status(200).json({ success: false, message: err });
+        return res.status(200).json({ success: true, message: "Successfully get user reservations!", reservations: result });
+    });
+});
+router.post("/api/delete_user_reservation", (req, res) => {
+    if (!req.isAuthenticated())
+        return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
+    Reservation.findOne({ _id: req.body.reservationID }, async(err, result) => {
+        if (err) return res.status(200).json({ success: false, message: err });
+        if (!result) return res.status(200).json({ success: false, message: "Some thing wrong!" });
+        await result.delete();
+        return res.status(200).json({ success: true, message: "Successfully delete reservation!" });
     });
 });
 // ADMIN ROUTER

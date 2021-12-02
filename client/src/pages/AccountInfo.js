@@ -22,6 +22,9 @@ class AccountInfo extends React.Component {
   handleVerifyEmailButton = () => {
     this.props.history.push("/verify_email");
   };
+  handleManageReservationButton = () => {
+    this.props.history.push("/manage_reservation");
+  };
   componentDidMount = () => {
     window.scrollTo(0, 0);
   };
@@ -97,6 +100,12 @@ class AccountInfo extends React.Component {
                     onClick={this.handleManageOrderButton}
                   >
                     Manage Order
+                  </button>
+                  <button
+                    className="post-button-ATC"
+                    onClick={this.handleManageReservationButton}
+                  >
+                    Manage Reservation
                   </button>
                 </div>
               </div>
