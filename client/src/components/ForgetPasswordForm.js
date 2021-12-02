@@ -84,7 +84,7 @@ class ForgetPasswordForm extends Form {
       url: url + "/api/check_reset_code", // Should set to .ENV or DEFINE CONST
     });
     if (response.data.success) {
-      return confirmAlert({
+      confirmAlert({
         title: "Notification!",
         message: "Reset password successfully, do you want to login now?",
         buttons: [
@@ -99,6 +99,7 @@ class ForgetPasswordForm extends Form {
           },
         ],
       });
+      this.setState({ notification: response.message });
     } else this.setState({ notification: response.data.message });
   };
   render() {
