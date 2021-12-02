@@ -99,7 +99,7 @@ class ForgetPasswordForm extends Form {
           },
         ],
       });
-      this.setState({ notification: response.message });
+      this.setState({ notification: response.data.message });
     } else this.setState({ notification: response.data.message });
   };
   render() {
