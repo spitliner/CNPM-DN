@@ -376,6 +376,16 @@ router.post("/api/delete_user_reservation", (req, res) => {
     });
 });
 // ADMIN ROUTER
+router.get("/api/admin/get_all_reservations", (req, res) => {
+    if (!req.isAuthenticated())
+        return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
+    if (req.user.role != "Admin")
+        return res.status(200).json({ success: false, message: "You are not administrator!" });
+    Reservation.find({}, (err, reservations) => {
+        if (err) return res.status(200).json({ success: false, message: err });
+        return res.status(200).json({ success: true, message: "Successfully get all reservationrs!", reservations: reservations });
+    });
+})
 router.get("/api/admin/get_all_orders", (req, res) => {
     if (!req.isAuthenticated())
         return res.status(200).json({ success: false, message: "Incorrect flow! You are not logged in!" });
@@ -383,7 +393,7 @@ router.get("/api/admin/get_all_orders", (req, res) => {
         return res.status(200).json({ success: false, message: "You are not administrator!" });
     Order.find({}, (err, orders) => {
         if (err) return res.status(200).json({ success: false, message: err });
-        return res.status(200).json({ success: true, message: "Successfully get all orders", orders: orders });
+        return res.status(200).json({ success: true, message: "Successfully get all orders!", orders: orders });
     });
 });
 router.post("/api/admin/set_user_order", (req, res) => {
