@@ -5,19 +5,26 @@ import FeedbackForm from "../components/FeedbackForm";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import FoodQuantityForm from "../components/FoodQuantityForm";
+
+/**
+ * if props.match == null, PostItem is contained in Admin EditMenuForm popup
+ * else, PostItem is contained in Customer MenuDetail
+ */
 function PostItem(props) {
+  const { match } = props;
+
   var renderStar = (star) => {
     star = Math.floor(star);
     var yellowStar;
     var whiteStar;
     yellowStar = [...Array(star)].map((element, index) => (
-      <li className={"menu-detail-star menu-detail-selected"}></li>
+      <li key={index} className={"menu-detail-star menu-detail-selected"}></li>
     ));
     whiteStar = [...Array(5 - star)].map((element, index) => (
-      <li className={"menu-detail-star"}></li>
+      <li key={index + 10} className={"menu-detail-star"}></li>
     ));
     return (
-      <ul class="menu-detail-ratings">
+      <ul className="menu-detail-ratings">
         {yellowStar}
         {whiteStar}
       </ul>
@@ -26,15 +33,17 @@ function PostItem(props) {
   return (
     <div className="post-item">
       <h2 className="post-name"> {props.food_name}</h2>
-      <button
-        class="post-button-BTM"
-        type="submit"
-        onClick={() => {
-          props.history.push("/menu");
-        }}
-      >
-        Back To Menu
-      </button>
+      {props.match && (
+        <button
+          className="post-button-BTM"
+          type="submit"
+          onClick={() => {
+            props.history.push("/admin/menu");
+          }}
+        >
+          Back To Menu
+        </button>
+      )}
       <div>
         <img className="post-img" src={props.image} />
       </div>
@@ -45,7 +54,7 @@ function PostItem(props) {
         <h3 className="food-rating-title">Rating: </h3>
         <div className="food-rating-star">{renderStar(props.star)}</div>
       </div>
-      {props.cookies.get("user") && (
+      {props.cookies.get("user") && props.match && (
         <Popup
           className="quantity-popup"
           modal
@@ -66,12 +75,17 @@ function PostItem(props) {
 }
 
 class MenuDetail extends React.Component {
-  componentDidMount() {
-    window.scrollTo(0, 0);
-  }
+  // componentDidMount() {
+  //   window.scrollTo(0, 0);
+  // }
   render() {
     const { history, match, location, cookies, menuItems } = this.props;
-    const _id = match.params._id;
+    let _id = null;
+    if (match) {
+      _id = match.params._id;
+    } else {
+      _id = this.props._id;
+    }
     const itemIndex = menuItems.findIndex((item) => item._id == _id);
     return (
       <CartContext.Consumer>
@@ -91,11 +105,12 @@ class MenuDetail extends React.Component {
                   addItemToCart={addItemToCart}
                   cookies={this.props.cookies}
                   menuItem={this.props.menuItems[itemIndex]}
+                  match={this.props.match}
                 />
               ) : (
                 <div />
               )}
-              {cookies.get("user") && (
+              {cookies.get("user") && !this.props._id && (
                 <FeedbackForm
                   foodID={_id}
                   updateAllFoods={this.props.updateAllFoods}

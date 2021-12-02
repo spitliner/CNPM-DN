@@ -1,0 +1,23 @@
+.admin-welcome {
+  background-image: url("../images/l.jpg");
+  background-size: 100%;
+  text-align: center;
+  align-items: center;
+  padding-top: 20%;
+  padding-bottom: 20%;
+  font-family: "Oleo Script Swash Caps", cursive;
+  font-size: 300%;
+}
+
+.admin-welcome-text {
+  animation: example 1200ms ease-in-out;
+  animation-fill-mode: backwards;
+  transition: transform 0.2s;
+}
+
+.admin-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: antiquewhite;
+  font-family: "Oleo Script Swash Caps", cursive;
+}

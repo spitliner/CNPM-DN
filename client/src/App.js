@@ -18,7 +18,6 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Payment from "./pages/Payment";
 import UserProvider, { UserContext } from "./context/User";
-//import Axios from "axios";
 import CartProvider from "./context/Cart";
 import "./icons/fontawesome";
 import ForgetPassword from "./pages/ForgerPassword";
@@ -32,6 +31,9 @@ import Axios from "axios";
 import ManageOrder from "./pages/ManageOrder";
 import ManageReservation from "./pages/ManageReservation";
 import VerifyEmail from "./pages/VerifyEmail";
+
+import AdminCenter from "./pages/AdminCenter";
+import AdminMenu from "./pages/AdminMenu";
 
 const url = "http://localhost:4000";
 
@@ -82,6 +84,7 @@ class App extends Component {
             renders the first one that matches the current URL. */}
                 <Switch>
                   <Route
+                    exact
                     path="/menu/:_id"
                     render={(props) => {
                       return (
@@ -95,6 +98,7 @@ class App extends Component {
                     }}
                   />
                   <Route
+                    exact
                     path="/menu"
                     render={(props) => {
                       return (
@@ -107,6 +111,29 @@ class App extends Component {
                     }}
                   />
                   <Route
+                    exact
+                    path="/admin/menu"
+                    render={(props) => {
+                      if (
+                        this.props.cookies.get("user") &&
+                        this.props.cookies.get("admin")
+                      ) {
+                        return (
+                          <AdminMenu
+                            cookies={this.props.cookies}
+                            updateAllFoods={this.updateAllFoods}
+                            {...props}
+                            items={this.state.menuItems}
+                          />
+                        );
+                      } else {
+                        alert("You are not Administrator");
+                        this.props.history.push("/menu");
+                      }
+                    }}
+                  />
+                  <Route
+                    exact
                     path="/account"
                     render={(props) => {
                       if (this.props.cookies.get("user"))
@@ -115,6 +142,7 @@ class App extends Component {
                     }}
                   />
                   <Route
+                    exact
                     path="/login"
                     render={(props) => {
                       if (this.props.cookies.get("user"))
@@ -123,6 +151,7 @@ class App extends Component {
                     }}
                   />
                   <Route
+                    exact
                     path="/register"
                     render={(props) => {
                       if (this.props.cookies.get("user"))
@@ -131,6 +160,7 @@ class App extends Component {
                     }}
                   />
                   <Route
+                    exact
                     path="/order"
                     render={(props) => {
                       if (this.props.cookies.get("user"))
@@ -139,6 +169,7 @@ class App extends Component {
                     }}
                   />
                   <Route
+                    exact
                     path="/payment"
                     render={(props) => {
                       if (this.props.cookies.get("user"))
@@ -147,6 +178,7 @@ class App extends Component {
                     }}
                   />
                   <Route
+                    exact
                     path="/reservation"
                     render={(props) => {
                       if (this.props.cookies.get("user"))
@@ -160,6 +192,7 @@ class App extends Component {
                     }}
                   />
                   <Route
+                    exact
                     path="/forget_password"
                     render={(props) => {
                       if (this.props.cookies.get("user"))
@@ -168,6 +201,7 @@ class App extends Component {
                     }}
                   />
                   <Route
+                    exact
                     path="/change_password"
                     render={(props) => {
                       if (this.props.cookies.get("user"))
@@ -176,6 +210,7 @@ class App extends Component {
                     }}
                   />
                   <Route
+                    exact
                     path="/change_information"
                     render={(props) => {
                       if (this.props.cookies.get("user"))
@@ -184,18 +219,21 @@ class App extends Component {
                     }}
                   />
                   <Route
+                    exact
                     path="/introduction"
                     render={(props) => {
                       return <Introduction {...props} />;
                     }}
                   />
                   <Route
+                    exact
                     path="/contact"
                     render={(props) => {
                       return <Contact {...props} />;
                     }}
                   />
                   <Route
+                    exact
                     path="/manage_order"
                     render={(props) => {
                       return (
@@ -207,6 +245,7 @@ class App extends Component {
                     }}
                   />
                   <Route
+                    exact
                     path="/verify_email"
                     render={(props) => {
                       if (this.props.cookies.get("user"))
@@ -215,6 +254,7 @@ class App extends Component {
                     }}
                   />
                   <Route
+                    exact
                     path="/manage_reservation"
                     render={(props) => {
                       if (this.props.cookies.get("user"))
@@ -223,10 +263,11 @@ class App extends Component {
                     }}
                   />
                   <Route
+                    exact
                     path="/admin"
                     render={(props) => {
                       if (this.props.cookies.get("admin"))
-                        return <div>ADMIN</div>;
+                        return <AdminCenter {...props} />;
                       return <Redirect to="/menu" />;
                     }}
                   />

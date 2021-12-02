@@ -18,32 +18,26 @@ class Footer extends React.Component {
           <h1>Contact</h1>
           <ul>
             <li>
-              <p>
-                <div className="footer-icon">
-                  <FontAwesomeIcon icon={faPhoneAlt} />
-                </div>
-                <div className="footer-information">Call: 123456789</div>
-              </p>
+              <div className="footer-icon">
+                <FontAwesomeIcon icon={faPhoneAlt} />
+              </div>
+              <div className="footer-information">Call: 123456789</div>
             </li>
             <li>
-              <p>
-                <div className="footer-icon">
-                  <FontAwesomeIcon icon={faClock} />
-                </div>
-                <div className="footer-information">
-                  Timing: Everyday from 10am - 11pm
-                </div>
-              </p>
+              <div className="footer-icon">
+                <FontAwesomeIcon icon={faClock} />
+              </div>
+              <div className="footer-information">
+                Timing: Everyday from 10am - 11pm
+              </div>
             </li>
             <li>
-              <p>
-                <div className="footer-icon">
-                  <FontAwesomeIcon icon={faMapMarkerAlt} />
-                </div>
-                <div className="footer-information">
-                  Address: Ho Chi Minh City, Viet Nam{" "}
-                </div>
-              </p>
+              <div className="footer-icon">
+                <FontAwesomeIcon icon={faMapMarkerAlt} />
+              </div>
+              <div className="footer-information">
+                Address: Ho Chi Minh City, Viet Nam{" "}
+              </div>
             </li>
           </ul>
         </div>

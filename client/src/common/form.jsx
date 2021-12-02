@@ -47,7 +47,6 @@ class Form extends React.Component {
   handleSumbit = (evt) => {
     evt.preventDefault();
     const errors = this.validate();
-    console.log(errors);
     this.setState({ errors: errors || {} });
     if (errors) return;
     this.doSubmit();
