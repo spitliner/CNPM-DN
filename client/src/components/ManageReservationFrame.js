@@ -110,6 +110,14 @@ class ManageReservationFrame extends React.Component {
                               </div>
                               <div className="popup-content-information-content-wrapper">
                                 <div className="popup-content-information-content-header">
+                                  User Email
+                                </div>
+                                <div className="popup-content-information-content">
+                                  {reservation.email}
+                                </div>
+                              </div>
+                              <div className="popup-content-information-content-wrapper">
+                                <div className="popup-content-information-content-header">
                                   Date
                                 </div>
                                 <div className="popup-content-information-content">

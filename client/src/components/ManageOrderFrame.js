@@ -130,6 +130,14 @@ class ManageOrderFrame extends React.Component {
                               </div>
                               <div className="popup-content-information-content-wrapper">
                                 <div className="popup-content-information-content-header">
+                                  User Email
+                                </div>
+                                <div className="popup-content-information-content">
+                                  {order.email}
+                                </div>
+                              </div>
+                              <div className="popup-content-information-content-wrapper">
+                                <div className="popup-content-information-content-header">
                                   Payment type
                                 </div>
                                 <div className="popup-content-information-content">
