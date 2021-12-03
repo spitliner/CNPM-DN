@@ -48,7 +48,7 @@ function PostItem(props) {
         <img className="post-img" src={props.image} />
       </div>
       <h2 className="post-Ingredient">Ingredient</h2>
-      <p className="post-desc">{props.food_description}</p>
+      <div className="post-desc">{props.food_description}</div>
       <h3 className="post-price">Prices: &nbsp; {props.food_price} $</h3>
       <div className="food-rating-wrapper">
         <h3 className="food-rating-title">Rating: </h3>

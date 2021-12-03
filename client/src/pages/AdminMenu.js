@@ -1,9 +1,11 @@
 import React, { Component, useState } from "react";
 import AdminMenuList from "../components/AdminMenuList";
+import EditMenuForm from "../components/EditMenuForm";
 import Categories from "../components/Categories";
 import "./Menu.css";
 import "./AdminMenu.css";
-import image from "../images/b.png";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 
 const AdminMenu = (props) => {
   let allCategories = [
@@ -21,6 +23,7 @@ const AdminMenu = (props) => {
       "ALL",
       ...new Set(props.items.map((item) => item.category)),
     ]);
+    setActiveCategory("ALL");
   }, [props.items]);
 
   const filterItems = (category) => {
@@ -40,7 +43,25 @@ const AdminMenu = (props) => {
           Restaurant Menu
           <br></br>
           Last edit at 2/12/2021
+          <br></br>
         </div>
+        <Popup
+          className="create-menu-popup"
+          modal
+          trigger={<button className="add-dish-btn">Add New Dish</button>}
+        >
+          {(close) => (
+            <div className="create-menu-pop-up-body">
+              <div className="create-menu-popup-form">
+                <EditMenuForm
+                  history={props.history}
+                  menuItems={menuItems}
+                  categories={categories}
+                />
+              </div>
+            </div>
+          )}
+        </Popup>
       </div>
       <div className="background">
         <section className="menu section">
@@ -54,6 +75,7 @@ const AdminMenu = (props) => {
             filterItems={filterItems}
           />{" "}
           <AdminMenuList
+            updateAllFoods={props.updateAllFoods}
             cookies={props.cookies}
             history={props.history}
             items={menuItems}

@@ -39,11 +39,12 @@ const MenuList = ({ items, history, cookies }) => {
                   <div className="item-info">
                     <div className="sub-item-info">
                       <header>
-                        <h4> {name} </h4>
+                        <div className="dish-name">
+                          <h4> {name} </h4>
+                        </div>
                         <div className="price"> $ {pricePU} </div>
                       </header>
                       <div>{renderStar(star)}</div>
-                      <p className="item-text"> {description} </p>
                       {cookies.get("user") && (
                         <button
                           className="cart"

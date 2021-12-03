@@ -128,7 +128,7 @@ class App extends Component {
                         );
                       } else {
                         alert("You are not Administrator");
-                        this.props.history.push("/menu");
+                        props.history.push("/menu");
                       }
                     }}
                   />

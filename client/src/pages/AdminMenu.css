@@ -1,4 +1,50 @@
+.add-dish-btn {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 60%;
+  /* or 38px */
+  /* primary */
+  color: white;
+  background-color: rgba(202, 104, 39, 1);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  /* background: rgba(232, 107, 38, 0.15); */
+  border-radius: 10px;
+  border: none;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0px;
+  margin: 10px 0px;
+  border: none;
+  width: 20%;
+  
+  animation: admin-menu-example 1200ms ease-in-out;
+  animation-fill-mode: backwards;
+  transition: transform 0.2s;
+}
+
+@keyframes admin-menu-example {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+    filter: hue-rotate(180deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: hue-rotate(0deg);
+  }
+}
+
 .admin-welcome {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   background-image: url("../images/l.jpg");
   background-size: 100%;
   text-align: center;
@@ -13,6 +59,7 @@
   animation: example 1200ms ease-in-out;
   animation-fill-mode: backwards;
   transition: transform 0.2s;
+  width: 100%;
 }
 
 .admin-title {
@@ -20,4 +67,36 @@
   margin-bottom: 2rem;
   color: antiquewhite;
   font-family: "Oleo Script Swash Caps", cursive;
+}
+
+.create-menu-popup-content {
+  min-width: 90%;
+  min-height: 90%;
+  background-size: 100%;
+  background-image: url("../images/i.jpg");
+}
+
+.create-menu-pop-up-body {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.create-menu-popup-dish-detail {
+  font-family: Oleo Script Swash Caps;
+  font-size: 30px;
+  text-align: center;
+  padding-top: 10px;
+  width: 40%;
+  margin: 5px;
+  border-radius: 10px;
+  background-color: rgba(200, 200, 200, 0.8);
+}
+
+.create-menu-popup-form {
+  font-family: Oleo Script Swash Caps;
+  font-size: 16px;
+  text-align: center;
+  padding-top: 10px;
+  width: 50%;
 }

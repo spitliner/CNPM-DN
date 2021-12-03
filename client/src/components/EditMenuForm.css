@@ -1,3 +1,11 @@
+.edit-menu-form-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin: auto;
+}
+
 .edit-menu-form-title {
   font-family: "Oleo Script Swash Caps", cursive;
   color: white;
@@ -5,5 +13,17 @@
   font-size: 48px;
   margin: 30px 0 20px 0;
   text-align: center;
+  width: 100%;
+}
+
+.edit-menu-form-outer {
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  justify-content: center;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding: 2%;
+  border-radius: 20px;
   width: 100%;
 }

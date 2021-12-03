@@ -661,7 +661,8 @@ router.post("/api/admin/add_food", (req, res) => {
     return res
       .status(200)
       .json({ success: false, message: "You are not administrator!" });
-  newFood = new Food();
+  console.log(req.body);
+  var newFood = new Food();
   newFood.imgUrl = req.body.imgUrl;
   newFood.name = req.body.name;
   newFood.category = req.body.category;
@@ -669,12 +670,16 @@ router.post("/api/admin/add_food", (req, res) => {
   newFood.description = req.body.description;
   newFood.isDeleted = false;
   newFood.star = 5;
-  newFood.save((err, result) => {
-    if (err) return res.status(200).json({ success: false, message: err });
-    return res
-      .status(200)
-      .json({ success: true, message: "Successfully add food!" });
-  });
+  try {
+    newFood.save((err, result) => {
+      if (err) return res.status(200).json({ success: false, message: err });
+      return res
+        .status(200)
+        .json({ success: true, message: "Successfully add food!" });
+    });
+  } catch (err) {
+    return res.status(200).json({ success: false, message: err });
+  }
 });
 router.post("/api/admin/edit_food", (req, res) => {
   if (!req.isAuthenticated())

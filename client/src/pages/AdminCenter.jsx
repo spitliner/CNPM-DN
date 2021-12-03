@@ -8,6 +8,7 @@ import {
   faMapMarkedAlt,
   faPhone,
   faUser,
+  faEdit,
 } from "@fortawesome/free-solid-svg-icons";
 
 class AdminCenter extends React.Component {
@@ -30,7 +31,7 @@ class AdminCenter extends React.Component {
                 <div className="account-info-wrapper">
                   <ul>
                     <li>
-                      <h1>Admininstrator Center</h1>
+                      <h1>Admininstration Center</h1>
                     </li>
                     <li>
                       <div className="information-icon">
@@ -42,26 +43,10 @@ class AdminCenter extends React.Component {
                     </li>
                     <li>
                       <div className="information-icon">
-                        <FontAwesomeIcon icon={faEnvelope} />
+                        <FontAwesomeIcon icon={faEdit} />
                       </div>
                       <div className="information-content">
-                        Email: {currentLoginUser.email}
-                      </div>
-                    </li>
-                    <li>
-                      <div className="information-icon">
-                        <FontAwesomeIcon icon={faPhone} />
-                      </div>
-                      <div className="information-content">
-                        Phone number: {currentLoginUser.phone}
-                      </div>
-                    </li>
-                    <li>
-                      <div className="information-icon">
-                        <FontAwesomeIcon icon={faMapMarkedAlt} />
-                      </div>
-                      <div className="information-content">
-                        Address: {currentLoginUser.address}
+                        Last Edit: 3/12/2021
                       </div>
                     </li>
                   </ul>

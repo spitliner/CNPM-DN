@@ -97,22 +97,39 @@ class EditMenuForm extends Form {
   };
 
   doSubmit = async () => {
-    console.log(this.state.data);
-    const formData = {
-      ...this.state.data,
-      _id: this.props._id,
-    };
-    const response = await Axios({
-      method: "POST",
-      data: {
-        ...formData,
-      },
-      withCredentials: true,
-      url: url + "/api/admin/edit_food", // Should set to .ENV or DEFINE CONST
-    });
-    console.log(response);
-    if (response.data.success) {
-      this.props.history.go(0);
+    if (this.props._id) {
+      const formData = {
+        ...this.state.data,
+        _id: this.props._id,
+      };
+      const response = await Axios({
+        method: "POST",
+        data: {
+          ...formData,
+        },
+        withCredentials: true,
+        url: url + "/api/admin/edit_food", // Should set to .ENV or DEFINE CONST
+      });
+      console.log(response);
+      if (response.data.success) {
+        this.props.history.go(0);
+      }
+    } else {
+      const formData = {
+        ...this.state.data,
+      };
+      const response = await Axios({
+        method: "POST",
+        data: {
+          ...formData,
+        },
+        withCredentials: true,
+        url: url + "/api/admin/add_food", // Should set to .ENV or DEFINE CONST
+      });
+      console.log(response);
+      if (response.data.success) {
+        this.props.history.go(0);
+      }
     }
   };
 
@@ -122,19 +139,31 @@ class EditMenuForm extends Form {
     return (
       <div>
         <div>
-          <div className="form-wrapper">
-            <h1 className="edit-menu-form-title"> Edit Menu Form </h1>{" "}
-            <p className="notification">{this.state.notification}</p>
-            <form className="form-body" onSubmit={this.handleSumbit}>
-              {" "}
-              {this.renderInput("name", "Name")}{" "}
-              {this.renderSelect("category", "Category", this.state.categories)}{" "}
-              {this.renderInput("pricePU", "Price Per Unit")}{" "}
-              {this.renderInput("description", "Food Description")}{" "}
-              {this.renderInput("imgUrl", "Image URL")}{" "}
-              {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
-              {this.renderButton("Edit Food")}{" "}
-            </form>{" "}
+          <div className="edit-menu-form-wrapper">
+            <div className="edit-menu-form-outer">
+              {this.props._id && (
+                <h1 className="edit-menu-form-title"> Edit Dish Form </h1>
+              )}
+              {!this.props._id && (
+                <h1 className="edit-menu-form-title"> Create Dish Form </h1>
+              )}
+              <p className="notification">{this.state.notification}</p>
+              <form className="form-body" onSubmit={this.handleSumbit}>
+                {" "}
+                {this.renderInput("name", "Name")}{" "}
+                {this.renderSelect(
+                  "category",
+                  "Category",
+                  this.state.categories
+                )}{" "}
+                {this.renderInput("pricePU", "Price Per Unit")}{" "}
+                {this.renderInput("description", "Food Description")}{" "}
+                {this.renderInput("imgUrl", "Image URL")}{" "}
+                {/* Since this.validateProperty has setState({}), every time some input in form changed, the form rerender, this.validate() fires to return updated value */}{" "}
+                {this.props._id && this.renderButton("Edit Dish")}{" "}
+                {!this.props._id && this.renderButton("Create New Dish")}{" "}
+              </form>{" "}
+            </div>
           </div>
         </div>
       </div>
