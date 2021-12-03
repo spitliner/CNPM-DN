@@ -44,30 +44,40 @@ const AdminMenu = (props) => {
           <br></br>
           Last edit at 2/12/2021
           <br></br>
+          <button
+            className="back-to-menu-button"
+            onClick={() => {
+              props.history.push("/admin");
+            }}
+          >
+            Back To Administration Center
+          </button>
         </div>
-        <Popup
-          className="create-menu-popup"
-          modal
-          trigger={<button className="add-dish-btn">Add New Dish</button>}
-        >
-          {(close) => (
-            <div className="create-menu-pop-up-body">
-              <div className="create-menu-popup-form">
-                <EditMenuForm
-                  history={props.history}
-                  menuItems={menuItems}
-                  categories={categories}
-                />
-              </div>
-            </div>
-          )}
-        </Popup>
       </div>
       <div className="background">
         <section className="menu section">
           <div className="admin-title">
-            <h2> Current Restaurant Menu List </h2>
-            <div className="underline"> </div>{" "}
+            <div>
+              <h2> Current Restaurant Menu List </h2>
+              <div className="underline"> </div>{" "}
+            </div>
+            <Popup
+              className="create-menu-popup"
+              modal
+              trigger={<button className="add-dish-btn">Add New Dish</button>}
+            >
+              {(close) => (
+                <div className="create-menu-pop-up-body">
+                  <div className="create-menu-popup-form">
+                    <EditMenuForm
+                      history={props.history}
+                      menuItems={menuItems}
+                      categories={categories}
+                    />
+                  </div>
+                </div>
+              )}
+            </Popup>
           </div>
           <Categories
             categories={categories}

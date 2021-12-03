@@ -131,6 +131,21 @@ class Form extends React.Component {
       />
     );
   }
+
+  renderDateNoRestriction(name, label, type = "date") {
+    const { data, errors } = this.state;
+    return (
+      <Input
+        type={type}
+        name={name}
+        error={errors[name]}
+        value={data[name]}
+        label={label}
+        onChange={this.handleChange}
+      />
+    );
+  }
+
   renderTime(name, label, type = "time") {
     const { data, errors } = this.state;
     return (
