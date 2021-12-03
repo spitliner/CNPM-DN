@@ -49,7 +49,6 @@ class ManageReservationFrame extends React.Component {
       withCredentials: true,
       url: url + "/api/delete_user_reservation", // Should set to .ENV or DEFINE CONST
     });
-    if (!response.data.success) return alert(response.data.message);
     await this.updateUserReservations();
   };
 
