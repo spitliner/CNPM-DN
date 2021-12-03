@@ -64,8 +64,6 @@ class App extends Component {
     if (response.data.success) {
       this.setState({ menuItems: response.data.menuItems });
       // filter
-    } else {
-      alert(response.data.message);
     }
   };
   render = () => {
@@ -129,8 +127,7 @@ class App extends Component {
                           />
                         );
                       } else {
-                        alert("You are not Administrator");
-                        props.history.push("/menu");
+                        return <Redirect to="/menu" />;
                       }
                     }}
                   />
@@ -262,8 +259,7 @@ class App extends Component {
                           />
                         );
                       } else {
-                        alert("You are not Administrator");
-                        props.history.push("/menu");
+                        return <Redirect to="/menu" />;
                       }
                     }}
                   />
