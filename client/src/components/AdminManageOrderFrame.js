@@ -1,17 +1,21 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import "./ManageOrderFrame.css";
+import "./AdminManageOrderFrame.css";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
+
+import FilterDateForm from "./FilterDateForm";
 const url = "http://localhost:4000";
 
-class ManageOrderFrame extends React.Component {
+class AdminManageOrderFrame extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { orders: [] };
+    this.state = { orders: [], fullOrders: [] };
   }
+
   componentDidMount = async () => {
     this.updateUserOrders();
   };
@@ -20,20 +24,42 @@ class ManageOrderFrame extends React.Component {
     var response = await Axios({
       method: "GET",
       withCredentials: true,
-      url: url + "/api/get_user_orders", // Should set to .ENV or DEFINE CONST
+      url: url + "/api/admin/get_all_orders", // Should set to .ENV or DEFINE CONST
     });
     if (!response.data.success) return alert(response.data.message);
+    this.setState({ fullOrders: response.data.orders });
     this.setState({ orders: response.data.orders });
   };
 
-  showConfirmDialog = (index) => {
+  filterUserOrders = (dateFormat) => {
+    console.log("Filter Date", dateFormat.trim(" ").split("-"));
+    let filterYear, filterMonth, filterDate;
+    [filterYear, filterMonth, filterDate] = dateFormat.trim(" ").split("-");
+    console.log("Filter", filterYear, filterMonth, filterDate);
+    let filteredItemsList = [];
+    for (let item of this.state.fullOrders) {
+      const time = new Date(item.time);
+      console.log("time", time.getDate(), time.getMonth(), time.getFullYear());
+      if (
+        time.getDate() == filterDate &&
+        time.getMonth() + 1 == filterMonth &&
+        time.getFullYear() == filterYear
+      ) {
+        filteredItemsList.push({ ...item });
+      }
+    }
+
+    this.setState({ orders: filteredItemsList });
+  };
+
+  showConfirmDialog = (order) => {
     return confirmAlert({
-      title: "Warning!",
-      message: "Are you sure to delete this order?",
+      title: "Confirm Order!",
+      message: "Are you sure to confirm this order?",
       buttons: [
         {
           label: "Yes",
-          onClick: async () => await this.deleteOrder(index),
+          onClick: async () => await this.confirmOrder(order),
         },
         {
           label: "No",
@@ -42,26 +68,59 @@ class ManageOrderFrame extends React.Component {
     });
   };
 
-  deleteOrder = async (index) => {
+  showDenyDialog = (order) => {
+    return confirmAlert({
+      title: "Deny Order!",
+      message: "Are you sure to deny this order?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: async () => await this.denyOrder(order),
+        },
+        {
+          label: "No",
+        },
+      ],
+    });
+  };
+
+  confirmOrder = async (order) => {
     var response = await Axios({
       method: "POST",
       data: {
-        orderID: this.state.orders[index]._id,
+        orderID: order._id,
+        status: "Confirm",
+        reason: "",
       },
       withCredentials: true,
-      url: url + "/api/delete_user_order", // Should set to .ENV or DEFINE CONST
+      url: url + "/api/admin/set_user_order", // Should set to .ENV or DEFINE CONST
     });
     if (!response.data.success) return alert(response.data.message);
     await this.updateUserOrders();
   };
-  
-  renderCartItem = (cartItem) => {
+
+  denyOrder = async (order) => {
+    var response = await Axios({
+      method: "POST",
+      data: {
+        orderID: order._id,
+        status: "Deny",
+        reason: "",
+      },
+      withCredentials: true,
+      url: url + "/api/admin/set_user_order", // Should set to .ENV or DEFINE CONST
+    });
+    if (!response.data.success) return alert(response.data.message);
+    await this.updateUserOrders();
+  };
+
+  renderCartItem = (cartItem, subIndex) => {
     var result = this.props.menuItems.find(
       (element) => cartItem._id == element._id
     );
-    if (!result) return <div />;
+    if (!result) return <div key={subIndex} />;
     return (
-      <div className="popup-content-cart-item">
+      <div key={result._id} className="popup-content-cart-item">
         <div className="cart-item-image">
           <img src={result.imgUrl}></img>
         </div>
@@ -75,38 +134,81 @@ class ManageOrderFrame extends React.Component {
     return (
       <div className="manage-order-background">
         <div className="manage-order-title">
-          Manage Your Orders
+          All Customer Orders
           <div className="underline"> </div>
         </div>
 
+        <button
+          className="back-to-menu-button"
+          onClick={() => {
+            this.props.history.push("/admin");
+          }}
+        >
+          Back To Administration Center
+        </button>
+
+        <FilterDateForm filterItemsList={this.filterUserOrders} />
+
+        <button
+          className="back-to-menu-button"
+          onClick={async () => {
+            await this.updateUserOrders();
+          }}
+        >
+          Reload User Orders
+        </button>
+
         {this.state.orders.length ? (
-          <div className="orders-list">
+          <div className="admin-orders-list">
             <div className="orders-list-header">
-              <div className="delete-order-button">Action</div>
-              <div className="order-id">Order</div>
-              <div className="order-cost">Cost</div>
-              <div className="order-status">Status</div>
+              <div className="admin-order-customer-email">Customer Email</div>
+              <div className="admin-order-id">Order Id</div>
+              <div className="admin-order-cost">Cost</div>
+              <div className="admin-order-status">Status</div>
+              <div className="admin-delete-order-button">Action</div>
             </div>
             {this.state.orders.map((order, index) => (
-              <div className="order-frame">
-                <div className="delete-order-button">
+              <div key={index} className="order-frame">
+                <div className="admin-order-customer-email">{order.email}</div>
+                <div className="admin-order-id">
+                  {order._id.length > 10
+                    ? order._id.substr(0, 10) + "..."
+                    : order._id}
+                </div>
+                <div className="admin-order-cost">
+                  {order.finalCost.toFixed(2)} $
+                </div>
+                <div className="admin-order-status">{order.status}</div>
+                <div className="admin-delete-order-button">
                   {order.status == "Waiting" ? (
                     <button
-                      className="delete-order-button-active"
-                      onClick={() => this.showConfirmDialog(index)}
+                      className="admin-confirm-order-button-active"
+                      onClick={() => this.showConfirmDialog(order)}
                     >
-                      Cancel
+                      Confirm
                     </button>
                   ) : (
-                    <button className="delete-order-button-not-active">
-                      Cancel
+                    <button className="admin-order-button-not-active">
+                      Confirm
+                    </button>
+                  )}
+                  {order.status == "Waiting" ? (
+                    <button
+                      className="admin-deny-order-button-active"
+                      onClick={() => this.showDenyDialog(order)}
+                    >
+                      Deny
+                    </button>
+                  ) : (
+                    <button className="admin-order-button-not-active">
+                      Deny
                     </button>
                   )}
                   <Popup
                     modal
                     className="manage-order-popup"
                     trigger={
-                      <button className="delete-order-button-active">
+                      <button className="admin-detail-button-active">
                         {" "}
                         Detail
                       </button>
@@ -244,8 +346,8 @@ class ManageOrderFrame extends React.Component {
                           <div className="popup-content-cart-wrapper">
                             <h4 className="popup-content-cart-header">Cart</h4>
                             <div className="popup-content-cart">
-                              {order.cartItems.map((cartItem) =>
-                                this.renderCartItem(cartItem)
+                              {order.cartItems.map((cartItem, subIndex) =>
+                                this.renderCartItem(cartItem, subIndex)
                               )}
                             </div>
                           </div>
@@ -260,19 +362,8 @@ class ManageOrderFrame extends React.Component {
                     )}
                   </Popup>
                 </div>
-                <div className="order-id">{index + 1}</div>
-                <div className="order-cost">{order.finalCost.toFixed(2)} $</div>
-                <div className="order-status">{order.status}</div>
               </div>
             ))}
-            <button
-              className="back-to-menu-button"
-              onClick={() => {
-                this.props.history.push("/menu");
-              }}
-            >
-              Back To Menu
-            </button>
           </div>
         ) : (
           <div className="alert-no-order">You do not have any order!</div>
@@ -281,4 +372,4 @@ class ManageOrderFrame extends React.Component {
     );
   }
 }
-export default ManageOrderFrame;
+export default AdminManageOrderFrame;

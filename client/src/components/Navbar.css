@@ -7,6 +7,10 @@
   align-items: center;
 }
 
+.log-out-nav-link:hover {
+  cursor: pointer;
+}
+
 a.nav-link:hover {
   cursor: pointer;
 }

@@ -31,6 +31,7 @@ import Axios from "axios";
 import ManageOrder from "./pages/ManageOrder";
 import ManageReservation from "./pages/ManageReservation";
 import ManageReservationAd from "./pages/ManageReservationAd";
+import AdminManageOrder from "./pages/AdminManageOrder";
 import VerifyEmail from "./pages/VerifyEmail";
 
 import AdminCenter from "./pages/AdminCenter";
@@ -243,6 +244,27 @@ class App extends Component {
                           menuItems={this.state.menuItems}
                         />
                       );
+                    }}
+                  />
+                  <Route
+                    exact
+                    path="/admin/manage_order"
+                    render={(props) => {
+                      if (
+                        this.props.cookies.get("user") &&
+                        this.props.cookies.get("admin")
+                      ) {
+                        return (
+                          <AdminManageOrder
+                            cookies={this.props.cookies}
+                            {...props}
+                            menuItems={this.state.menuItems}
+                          />
+                        );
+                      } else {
+                        alert("You are not Administrator");
+                        props.history.push("/menu");
+                      }
                     }}
                   />
                   <Route

@@ -120,8 +120,8 @@ class UserProvider extends Component {
     }
     return { message: response.data.message, success: response.data.success };
   };
+
   logoutUser = async () => {
-    // const logoutResponse = await fetch();
     this.setState({ currentLoginUser: emptyUser });
     this.props.cookies.remove("user"); // remove the cookie
     this.props.cookies.remove("admin"); // remove the cookie
@@ -131,11 +131,11 @@ class UserProvider extends Component {
       withCredentials: true,
       url: url + "/api/logout", // Should set to .ENV or DEFINE CONST
     });
+    console.log("Logout Response: ", response);
     return response;
   };
 
   render = () => {
-    // const {} = this.props;
     return (
       <Router>
         <UserContext.Provider

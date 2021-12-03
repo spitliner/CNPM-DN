@@ -7,6 +7,7 @@ import Axios from "axios";
 import { withCookies, Cookies } from "react-cookie";
 import { instanceOf } from "prop-types";
 import icon from "../images/icon.png";
+
 class Navbar extends React.Component {
   static propTypes = {
     cookies: instanceOf(Cookies).isRequired,
@@ -104,9 +105,9 @@ class Navbar extends React.Component {
                   </Link>
                 </li>
                 <li>
-                  <a className="nav-link" onClick={this.handleLogoutUser}>
+                  <div className="nav-link log-out-nav-link" onClick={this.handleLogoutUser}>
                     Logout
-                  </a>
+                  </div>
                 </li>
               </ul>
             )}
