@@ -17,6 +17,9 @@ class AdminCenter extends React.Component {
   handleEditMenuButton = () => {
     this.props.history.push("/admin/menu");
   };
+  handleManageAllReservationButton = () => {
+    this.props.history.push("/admin/manage_reservation_ad");
+  };
   componentDidMount = () => {
     window.scrollTo(0, 0);
   };
@@ -80,6 +83,12 @@ class AdminCenter extends React.Component {
                     onClick={this.handleEditMenuButton}
                   >
                     Edit Restaurant Menu
+                  </button>
+                  <button
+                    className="post-button-ATC"
+                    onClick={this.handleManageAllReservationButton}
+                  >
+                    Manage All Reservations
                   </button>
                 </div>
               </div>

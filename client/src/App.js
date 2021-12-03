@@ -30,6 +30,7 @@ import { instanceOf } from "prop-types";
 import Axios from "axios";
 import ManageOrder from "./pages/ManageOrder";
 import ManageReservation from "./pages/ManageReservation";
+import ManageReservationAd from "./pages/ManageReservationAd";
 import VerifyEmail from "./pages/VerifyEmail";
 
 import AdminCenter from "./pages/AdminCenter";
@@ -259,6 +260,15 @@ class App extends Component {
                     render={(props) => {
                       if (this.props.cookies.get("user"))
                         return <ManageReservation {...props} />;
+                      return <Redirect to="/menu" />;
+                    }}
+                  />
+                  <Route
+                    exact
+                    path="/admin/manage_reservation_ad"
+                    render={(props) => {
+                      if (this.props.cookies.get("user"))
+                        return <ManageReservationAd {...props} />;
                       return <Redirect to="/menu" />;
                     }}
                   />
