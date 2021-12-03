@@ -21,7 +21,6 @@ class ManageReservationFrame extends React.Component {
       withCredentials: true,
       url: url + "/api/get_user_reservations", // Should set to .ENV or DEFINE CONST
     });
-    if (!response.data.success) return alert(response.data.message);
     this.setState({ reservations: response.data.reservations });
     console.log(this.state);
   };

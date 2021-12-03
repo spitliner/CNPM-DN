@@ -15,7 +15,6 @@ class Navbar extends React.Component {
 
   handleLogoutUser = async () => {
     const response = await this.props.logoutUser();
-    if (!response.data.success) alert(response.data.message);
     this.props.history.push("/login");
   };
 
@@ -105,7 +104,10 @@ class Navbar extends React.Component {
                   </Link>
                 </li>
                 <li>
-                  <div className="nav-link log-out-nav-link" onClick={this.handleLogoutUser}>
+                  <div
+                    className="nav-link log-out-nav-link"
+                    onClick={this.handleLogoutUser}
+                  >
                     Logout
                   </div>
                 </li>

@@ -26,7 +26,6 @@ class AdminManageOrderFrame extends React.Component {
       withCredentials: true,
       url: url + "/api/admin/get_all_orders", // Should set to .ENV or DEFINE CONST
     });
-    if (!response.data.success) return alert(response.data.message);
     this.setState({ fullOrders: response.data.orders });
     this.setState({ orders: response.data.orders });
   };
@@ -95,7 +94,6 @@ class AdminManageOrderFrame extends React.Component {
       withCredentials: true,
       url: url + "/api/admin/set_user_order", // Should set to .ENV or DEFINE CONST
     });
-    if (!response.data.success) return alert(response.data.message);
     await this.updateUserOrders();
   };
 
@@ -110,7 +108,6 @@ class AdminManageOrderFrame extends React.Component {
       withCredentials: true,
       url: url + "/api/admin/set_user_order", // Should set to .ENV or DEFINE CONST
     });
-    if (!response.data.success) return alert(response.data.message);
     await this.updateUserOrders();
   };
 

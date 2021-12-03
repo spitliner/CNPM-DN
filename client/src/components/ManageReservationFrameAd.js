@@ -25,7 +25,6 @@ class ManageReservationFrame extends React.Component {
       withCredentials: true,
       url: url + "/api/admin/get_all_reservations", // Should set to .ENV or DEFINE CONST
     });
-    if (!response.data.success) return alert(response.data.message);
     this.setState({ fullReservations: response.data.reservations });
     this.setState({ reservations: response.data.reservations });
   };
@@ -75,7 +74,6 @@ class ManageReservationFrame extends React.Component {
       withCredentials: true,
       url: url + "/api/delete_user_reservation", // Should set to .ENV or DEFINE CONST
     });
-    if (!response.data.success) return alert(response.data.message);
     await this.updateUserReservations();
   };
 

@@ -60,7 +60,6 @@ const AdminMenuList = ({
       withCredentials: true,
       url: url + "/api/admin/delete_food", // Should set to .ENV or DEFINE CONST
     });
-    if (!response.data.success) return alert(response.data.message);
     await updateAllFoods();
   };
 
