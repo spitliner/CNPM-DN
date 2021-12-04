@@ -36,7 +36,7 @@ class ManageReservationFrame extends React.Component {
     let filteredItemsList = [];
     for (let item of this.state.fullReservations) {
       let itemYear, itemMonth, itemDate;
-      [itemYear, itemMonth, itemDate] = item.date.trim(" ").split("/");
+      [itemYear, itemMonth, itemDate] = item.date.trim(" ").split("-");
       if (
         itemDate == filterDate &&
         itemMonth == filterMonth &&
@@ -213,7 +213,7 @@ class ManageReservationFrame extends React.Component {
           </div>
         ) : (
           <div className="alert-no-reservation">
-            You do not have any reservation!
+            No Reservation Has Been Made By Any Customers!
           </div>
         )}
       </div>

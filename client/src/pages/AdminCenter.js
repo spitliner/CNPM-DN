@@ -12,9 +12,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 class AdminCenter extends React.Component {
-  handleVerifyEmailButton = () => {
-    this.props.history.push("/verify_email");
-  };
   handleEditMenuButton = () => {
     this.props.history.push("/admin/menu");
   };
@@ -58,14 +55,6 @@ class AdminCenter extends React.Component {
                   </ul>
                 </div>
                 <div className="change-button-wrapper">
-                  {!currentLoginUser.verifyEmail && (
-                    <button
-                      className="post-button-ATC"
-                      onClick={this.handleVerifyEmailButton}
-                    >
-                      Verify Your Email
-                    </button>
-                  )}
                   <button
                     className="post-button-ATC"
                     onClick={this.handleEditMenuButton}
