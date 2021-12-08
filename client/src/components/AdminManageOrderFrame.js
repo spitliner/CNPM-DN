@@ -363,7 +363,9 @@ class AdminManageOrderFrame extends React.Component {
             ))}
           </div>
         ) : (
-          <div className="alert-no-order">You do not have any order!</div>
+          <div className="alert-no-order">
+            No Order Has Been Made By Any Customers!
+          </div>
         )}
       </div>
     );

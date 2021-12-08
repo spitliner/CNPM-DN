@@ -18,6 +18,8 @@ Cài trước mongodb và enable mongodb trước khi chạy: [Link install guid
 
 # Note:
 
+## Insert Data: Gọi localhost:4000/insert_data
+
 ## Client:
 
 - Gọi API cho reservation
@@ -58,6 +60,8 @@ Cài trước mongodb và enable mongodb trước khi chạy: [Link install guid
 - Contact
 - Introduction
 - Manage Order
+- Manage Reservation
+- Verity Email
 
 ## Thịnh
 
@@ -69,4 +73,4 @@ Cài trước mongodb và enable mongodb trước khi chạy: [Link install guid
 - Order Cart
 - Admin Edit Menu
 - Admin Manage Order
-- Admin Data Filter Order Reservation 
+- Admin Data Filter Order Reservation
