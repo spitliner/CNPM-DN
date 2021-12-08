@@ -112,6 +112,7 @@ class UserProvider extends Component {
         token: data.user.password,
         address: data.user.address,
         role: data.user.role,
+        verifyEmail: data.user.verifyEmail
       };
       this.setState({ currentLoginUser: user });
       this.props.cookies.set("user", data.user.email, { path: "/" }); // set a cookie

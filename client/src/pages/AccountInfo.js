@@ -32,6 +32,7 @@ class AccountInfo extends React.Component {
     return (
       <UserContext.Consumer>
         {({ currentLoginUser }) => {
+          console.log(currentLoginUser);
           return (
             currentLoginUser.username !== "" && (
               <div className="account-background">
