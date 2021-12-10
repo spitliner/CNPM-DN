@@ -5,19 +5,6 @@ import Axios from "axios";
 import './stats.css'
 const url = "http://localhost:4000";
 
-const exp = [
-    {notes: 'Game was played', date: '2017-10-04T20:24:30+00:00', sport: 'hockey', owner: 'steve', players: '10', game_id: 1},
-    { notes: 'Game was played', date: '2017-12-04T12:35:30+00:00', sport: 'lacrosse', owner: 'steve', players: '6', game_id: 2 },
-    { notes: 'Game was played', date: '2017-1-14T20:32:30+00:00', sport: 'hockey', owner: 'steve', players: '4', game_id: 3 },
-    { notes: 'Game was played', date: '2017-5-04T10:12:30+00:00', sport: 'hockey', owner: 'henry', players: '10', game_id: 4 },
-    { notes: 'Game was played', date: '2017-10-14T20:34:30+00:00', sport: 'soccer', owner: 'john', players: '12', game_id: 5 },
-    {notes: 'Game was played', date: '2017-10-05T20:24:30+00:00', sport: 'hockey', owner: 'steve', players: '10', game_id: 1},
-    { notes: 'Game was played', date: '2018-10-04T12:35:30+00:00', sport: 'lacrosse', owner: 'steve', players: '6', game_id: 2 },
-    { notes: 'Game was played', date: '2018-10-14T20:32:30+00:00', sport: 'hockey', owner: 'steve', players: '4', game_id: 3 },
-    { notes: 'Game was played', date: '2018-11-04T10:12:30+00:00', sport: 'hockey', owner: 'henry', players: '10', game_id: 4 },
-    { notes: 'Game was played', date: '2018-11-14T20:34:30+00:00', sport: 'soccer', owner: 'john', players: '12', game_id: 5 }
-];
-
 function groupData(orderList) {
     orderList.sort((a, b) => {
         if (a.date > b.date) {
