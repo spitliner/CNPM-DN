@@ -55,7 +55,7 @@ class AdminCenter extends React.Component {
                     </li>
                   </ul>
                 </div>
-                <RenderStat/>
+                <RenderStat />
                 <div className="change-button-wrapper">
                   <button
                     className="post-button-ATC"
