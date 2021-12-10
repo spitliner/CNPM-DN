@@ -37,8 +37,8 @@ function groupData(orderList) {
     let time = element.time[1].split("/");
     console.log(time);
     var year = time[2];
-    var day = time[1];
-    var month = time[0];
+    var day = time[0];
+    var month = time[1];
     console.log(year, day, month);
     if (!orderMap.get(year)) {
       orderMap.set(year, new Map());
