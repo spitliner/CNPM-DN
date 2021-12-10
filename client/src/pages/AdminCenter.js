@@ -10,6 +10,7 @@ import {
   faUser,
   faEdit,
 } from "@fortawesome/free-solid-svg-icons";
+import RenderStat from "../components/stat";
 
 class AdminCenter extends React.Component {
   handleEditMenuButton = () => {
@@ -54,6 +55,7 @@ class AdminCenter extends React.Component {
                     </li>
                   </ul>
                 </div>
+                <RenderStat/>
                 <div className="change-button-wrapper">
                   <button
                     className="post-button-ATC"
